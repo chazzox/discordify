@@ -17,5 +17,8 @@ module.exports = class SpotifyDiscord {
 		const reactTargetDom = document.getElementById('discordSpotifyTarget');
 		BdApi.ReactDOM.render(BdApi.React.createElement('p', null, 'hello world from react'), reactTargetDom);
 	}
-	stop() {}
+	stop() {
+		const reactTargetDom = document.getElementById('discordSpotifyTarget');
+		reactTargetDom.remove();
+	}
 };
