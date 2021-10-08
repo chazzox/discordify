@@ -42,13 +42,12 @@ function createDom() {
 	document.getElementsByClassName(sidebarContainerClass)[0].append(sidebarWrapperEl);
 }
 
-function destoryDom() {
+function destroyDom() {
 	document.getElementById(sidebarWrapperId).remove();
 	document.getElementById(toolBarWrapperId).remove();
 }
 function render() {
-	const Sidebar = React.createElement('p', null, 'hello world', App);
-	ReactDOM.render(() => App, document.getElementById(toolBarWrapperId));
+	ReactDOM.render(App, document.getElementById(toolBarWrapperId));
 }
 
 module.exports = class SpotifyDiscord {
@@ -60,6 +59,6 @@ module.exports = class SpotifyDiscord {
 		render();
 	}
 	stop() {
-		destoryDom();
+		destroyDom();
 	}
 };
