@@ -2,71 +2,64 @@
  * @name SpotifyDiscord
  * @author Pinpal and Chazzox
  * @description Spotify but inside discord
- * @version 0.0.1
+ * @version 0.0.1q
  * @website https://github.com/PINPAL/spotifyDiscord#readme
  * @source https://github.com/PINPAL/spotifyDiscord
  */
 
+// Now we dont need to to BdApi when accessing react
+const { React, ReactDOM } = BdApi;
+
 // container ids
-const sidebarContainerId = 'container-2lgZY8';
-const toolbarContainerId = 'toolbar-1t6TWx';
+const sidebarContainerClass = 'container-2lgZY8';
+const toolbarContainerClass = 'toolbar-1t6TWx';
 
 // wrapper ids
-const sidebarId = 'discordSpotifySidebar';
-const toolBarId = 'discordSpotifyToolbar';
+const sidebarWrapperId = 'discordSpotifySidebar';
+const toolBarWrapperId = 'discordSpotifyToolbar';
 
-let hide = false;
-
-function addSideBar() {
-	const reactTarget = document.createElement('div');
-	reactTarget.id = sidebarId;
-	document.getElementsByClassName(sidebarContainerId)[0].append(reactTarget);
-	const reactTargetDom = document.getElementById(sidebarId);
-	BdApi.ReactDOM.render(
-		BdApi.React.createElement(
-			BdApi.React.Fragment,
-			null,
-			!hide ? BdApi.React.createElement('h1', null, 'hello world') : null
-		),
-		reactTargetDom
+const App = () => {
+	const [isHidden, setIsHidden] = React.useState(true);
+	return React.createElement(
+		'button',
+		{
+			onClick: () => {
+				setIsHidden(!isHidden);
+			}
+		},
+		'toggle ',
+		isHidden ? 'hidden' : 'show'
 	);
+};
+
+function createDom() {
+	const toolbarWrapperEl = document.createElement('div');
+	toolbarWrapperEl.id = toolBarWrapperId;
+	document.getElementsByClassName(toolbarContainerClass)[0].append(toolbarWrapperEl);
+
+	const sidebarWrapperEl = document.createElement('div');
+	sidebarWrapperEl.id = sidebarWrapperId;
+	document.getElementsByClassName(sidebarContainerClass)[0].append(sidebarWrapperEl);
 }
 
-function addToolbar() {
-	const reactToolbarEl = document.createElement('div');
-	reactToolbarEl.id = toolBarId;
-	document.getElementsByClassName(toolbarContainerId)[0].append(reactToolbarEl);
-	const reactTargetDom = document.getElementById(toolBarId);
-	BdApi.ReactDOM.render(
-		BdApi.React.createElement(
-			'button',
-			{
-				onClick: () => {
-					hide = false;
-				}
-			},
-			'toggle'
-		),
-		reactTargetDom
-	);
+function destoryDom() {
+	document.getElementById(sidebarWrapperId).remove();
+	document.getElementById(toolBarWrapperId).remove();
 }
-
-function callback() {
-	BdApi.onRemoved(document.getElementById(toolBarId), () => {
-		addToolbar();
-		callback();
-	});
+function render() {
+	const Sidebar = React.createElement('p', null, 'hello world', App);
+	ReactDOM.render(() => App, document.getElementById(toolBarWrapperId));
 }
 
 module.exports = class SpotifyDiscord {
-	load() {}
+	load() {
+		console.log('loading up');
+	}
 	start() {
-		addSideBar();
-		addToolbar();
-		callback();
+		createDom();
+		render();
 	}
 	stop() {
-		document.getElementById(sidebarId)?.remove();
-		document.getElementById(toolBarId)?.remove();
+		destoryDom();
 	}
 };
