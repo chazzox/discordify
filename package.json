@@ -4,7 +4,7 @@
 	"description": "A plugin for better discord that gives you pause/queue and playback control",
 	"main": "SpotifyDiscord.js",
 	"scripts": {
-		"build": "babel  --presets @babel/preset-react SpotifyDiscord.js --out-file SpotifyDiscord.plugin.js && terser SpotifyDiscord.plugin.js -o SpotifyDiscord.plugin.js --config-file terser.json"
+		"build": "babel --presets @babel/preset-react SpotifyDiscord.js --out-file SpotifyDiscord.plugin.js && terser SpotifyDiscord.plugin.js -o SpotifyDiscord.plugin.js --config-file terser.json"
 	},
 	"homepage": "https://github.com/PINPAL/spotifyDiscord#readme",
 	"devDependencies": {

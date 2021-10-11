@@ -7,7 +7,7 @@
 
 import * as ReactInstance from 'react';
 import * as ReactDOMInstance from 'react-dom';
-import * as _ from 'lodash';
+import _ from 'lodash';
 
 export {};
 
