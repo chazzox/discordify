@@ -1,64 +1,9 @@
 /**
  * @name SpotifyDiscord
- * @author Pinpal and Chazzox
+ * @author PINPAL#5245 and chazzox#1001
  * @description Spotify but inside discord
- * @version 0.0.1q
+ * @version 0.0.1
  * @website https://github.com/PINPAL/spotifyDiscord#readme
  * @source https://github.com/PINPAL/spotifyDiscord
  */
-
-// Now we dont need to to BdApi when accessing react
-const { React, ReactDOM } = BdApi;
-
-// container ids
-const sidebarContainerClass = 'container-2lgZY8';
-const toolbarContainerClass = 'toolbar-1t6TWx';
-
-// wrapper ids
-const sidebarWrapperId = 'discordSpotifySidebar';
-const toolBarWrapperId = 'discordSpotifyToolbar';
-
-const App = () => {
-	const [isHidden, setIsHidden] = React.useState(true);
-	return React.createElement(
-		'button',
-		{
-			onClick: () => {
-				setIsHidden(!isHidden);
-			}
-		},
-		'toggle ',
-		isHidden ? 'hidden' : 'show'
-	);
-};
-
-function createDom() {
-	const toolbarWrapperEl = document.createElement('div');
-	toolbarWrapperEl.id = toolBarWrapperId;
-	document.getElementsByClassName(toolbarContainerClass)[0].append(toolbarWrapperEl);
-
-	const sidebarWrapperEl = document.createElement('div');
-	sidebarWrapperEl.id = sidebarWrapperId;
-	document.getElementsByClassName(sidebarContainerClass)[0].append(sidebarWrapperEl);
-}
-
-function destroyDom() {
-	document.getElementById(sidebarWrapperId).remove();
-	document.getElementById(toolBarWrapperId).remove();
-}
-function render() {
-	ReactDOM.render(App, document.getElementById(toolBarWrapperId));
-}
-
-module.exports = class SpotifyDiscord {
-	load() {
-		console.log('loading up');
-	}
-	start() {
-		createDom();
-		render();
-	}
-	stop() {
-		destroyDom();
-	}
-};
+const{React:e,ReactDOM:t}=BdApi,o=e.createElement("div",null,"fuck you");function n(){const[n,d]=e.useState(!0);return e.createElement(e.Fragment,null,e.createElement("button",{onClick:()=>d(!n)},"toggle"),!n&&t.createPortal(o,document.getElementById("discordSpotifySidebar")))}module.exports=class{load(){console.log("loading up")}start(){!function(){const e=document.createElement("div");e.id="discordSpotifyToolbar";document.getElementsByClassName("toolbar-1t6TWx")[0].append(e);const t=document.createElement("div");t.id="discordSpotifySidebar";document.getElementsByClassName("container-2lgZY8")[0].append(t)}();t.render(e.createElement(n,null),document.getElementById("discordSpotifyToolbar"))}stop(){!function(){document.getElementById("discordSpotifySidebar").remove();document.getElementById("discordSpotifyToolbar").remove()}()}};

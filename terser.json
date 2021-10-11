@@ -1,0 +1,8 @@
+{
+	"module": true,
+	"compress": { "sequences": false },
+	"mangle": {},
+	"parse": {},
+	"rename": {},
+	"format": { "comments": "/@name/" }
+}
