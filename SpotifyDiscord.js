@@ -24,7 +24,7 @@ function Sidebar() {
 			<p>Fuck off</p>
 			<button
 				onClick={() => {
-					window.require('electron').shell.openExternal('http://www.google.com');
+					window.require('electron').shell.openExternal('https://pinpal.github.io/SpotifyDiscord/');
 				}}>
 				Open window
 			</button>
