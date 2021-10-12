@@ -18,14 +18,26 @@ const toolbarContainerClass = 'toolbar-1t6TWx';
 const sidebarWrapperId = 'discordSpotifySidebar';
 const toolBarWrapperId = 'discordSpotifyToolbar';
 
-const Test = React.createElement('div', null, 'fuck you');
+function Sidebar() {
+	return (
+		<div>
+			<p>Fuck off</p>
+			<button
+				onClick={() => {
+					window.require('electron').shell.openExternal('http://www.google.com');
+				}}>
+				Open window
+			</button>
+		</div>
+	);
+}
 
 function App() {
 	const [isHidden, setIsHidden] = React.useState(true);
 	return (
 		<>
 			<button onClick={() => setIsHidden(!isHidden)}>toggle</button>
-			{!isHidden && ReactDOM.createPortal(Test, document.getElementById(sidebarWrapperId))}
+			{!isHidden && ReactDOM.createPortal(<Sidebar />, document.getElementById(sidebarWrapperId))}
 		</>
 	);
 }
