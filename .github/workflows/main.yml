@@ -1,4 +1,4 @@
-name: Deploy Master Branch
+name: Deploy auth-site
 on:
     push:
         branches:
