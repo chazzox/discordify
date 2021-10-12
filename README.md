@@ -1,4 +1,4 @@
-# spotifyDiscord
+# discordify
 
 ## About
 
