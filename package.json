@@ -1,4 +1,6 @@
 {
+	"name": "auth-site",
+	"description": "redirection for authenticating better discord plugin",
 	"scripts": {
 		"start": "snowpack dev",
 		"build": "snowpack build"
