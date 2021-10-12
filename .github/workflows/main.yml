@@ -2,7 +2,7 @@ name: Deploy auth-site
 on:
     push:
         branches:
-            - auth-site
+            - 'auth-site'
 jobs:
     build:
         name: Build Snowpack Site
