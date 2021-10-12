@@ -9,6 +9,6 @@ export default {
 	packageOptions: {},
 	devOptions: {},
 	buildOptions: {
-		baseUrl: '/shortcuts'
+		baseUrl: '/discordify'
 	}
 };
