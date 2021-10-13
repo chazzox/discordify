@@ -1,7 +1,7 @@
 /** @type {import("snowpack").SnowpackUserConfig } */
 export default {
 	mount: { public: '/', src: '/dist' },
-	plugins: [],
+	plugins: ['@snowpack/plugin-sass'],
 	routes: [],
 	optimize: {
 		bundle: true
@@ -10,5 +10,6 @@ export default {
 	devOptions: {},
 	buildOptions: {
 		baseUrl: '/discordify'
-	}
+	},
+	alias: { '@components': './src/components', '@styles': './src/styles' }
 };
