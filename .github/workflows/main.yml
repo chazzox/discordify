@@ -2,7 +2,7 @@ name: Deploy auth-site
 on:
     push:
         branches:
-            - auth-site
+            - 'discordify/auth-site'
     workflow_dispatch:
 
 jobs:
