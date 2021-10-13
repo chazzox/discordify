@@ -1,0 +1,27 @@
+name: Deploy auth-site
+on:
+    push:
+        branches:
+            - 'auth-site'
+    workflow_dispatch:
+
+jobs:
+    build:
+        name: Build Snowpack Site
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  ref: auth-site
+            - name: Installing dependencies
+              uses: pnpm/action-setup@v2.0.1
+              with:
+                  version: 6.17.0
+                  run_install: true
+            - name: Build
+              run: pnpm build
+            - name: Deploy
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                  github_token: ${{ secrets.ACCESS_TOKEN }}
+                  publish_dir: ./build
