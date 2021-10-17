@@ -49,9 +49,7 @@ function Sidebar() {
 
 	React.useEffect(() => {
 		if (accessToken) {
-			getUserInfo(accessToken).then((info) => {
-				setUserInfo(info);
-			});
+			getUserInfo(accessToken).then((info) => setUserInfo(info));
 		}
 	}, [accessToken]);
 
