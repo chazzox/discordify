@@ -1,0 +1,9 @@
+/**
+ * @name discordify
+ * @author PINPAL#5245 and chazzox#1001
+ * @description Spotify but inside discord
+ * @version 0.0.1
+ * @website https://github.com/chazzox/discordify#readme
+ * @source https://github.com/chazzox/discordify
+ */
+const{React:e,ReactDOM:t}=BdApi,o=BdApi.findModuleByProps("getActiveSocketAndDevice"),n=BdApi.findModuleByProps("SpotifyAPI");function c(){const[t,c]=e.useState(""),[d,a]=e.useState({});e.useEffect((()=>{const{socket:{accountId:e}}=o.getActiveSocketAndDevice();n.getAccessToken(e).then((e=>c(e.body.access_token)))}),[]);e.useEffect((()=>{t&&async function(e){const t=await fetch("https://api.spotify.com/v1/me",{headers:{Authorization:"Bearer "+e}});return await t.json()}(t).then((e=>{console.log(e);a(e)}))}),[t]);return e.createElement("div",null,d.display_name&&e.createElement("p",null,"Fuck off ",d.display_name))}function d(){const[o,n]=e.useState(!0);return e.createElement(e.Fragment,null,e.createElement("button",{onClick:()=>n(!o)},"toggle"),!o&&t.createPortal(e.createElement(c,null),document.getElementById("discordSpotifySidebar")))}module.exports=class{load(){console.log("loading up")}start(){!function(){const e=document.createElement("div");e.id="discordSpotifyToolbar";document.getElementsByClassName("toolbar-1t6TWx")[0].append(e);const t=document.createElement("div");t.id="discordSpotifySidebar";document.getElementsByClassName("container-2lgZY8")[0].append(t)}();t.render(e.createElement(d,null),document.getElementById("discordSpotifyToolbar"))}stop(){!function(){document.getElementById("discordSpotifySidebar")?.remove();document.getElementById("discordSpotifyToolbar")?.remove()}()}};
