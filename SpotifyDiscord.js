@@ -7,8 +7,11 @@
  * @source https://github.com/PINPAL/spotifyDiscord
  */
 
-// Now we dont need to to BdApi when accessing react
+// BdApi stuff that we use
 const { React, ReactDOM } = BdApi;
+// discord spotify code :)
+const SpotifyTrackUtils = BdApi.findModuleByProps('getActiveSocketAndDevice');
+const SpotifyTrack = BdApi.findModuleByProps('SpotifyAPI');
 
 // container ids
 const sidebarContainerClass = 'container-2lgZY8';
@@ -22,12 +25,6 @@ function Sidebar() {
 	return (
 		<div>
 			<p>Fuck off</p>
-			<button
-				onClick={() => {
-					window.require('electron').shell.openExternal('https://pinpal.github.io/SpotifyDiscord/');
-				}}>
-				Open window
-			</button>
 		</div>
 	);
 }
