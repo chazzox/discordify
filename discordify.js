@@ -29,17 +29,59 @@ async function getUserInfo(token) {
 	return await result.json();
 }
 
-async function pause() {}
-async function play() {}
-async function forwards() {}
-async function backwards() {}
-async function playlists() {}
-async function queue() {}
+async function togglePlay(token) {
+	const currently_playing = await fetch(' https://api.spotify.com/v1/me/player/currently-playing', {
+		headers: { Authorization: 'Bearer ' + token }
+	});
+	const currently_playing_json = await currently_playing.json();
+	if (currently_playing_json.is_playing) pause(token);
+	else play(token);
+}
+
+async function pause(token) {
+	fetch('https://api.spotify.com/v1/me/player/pause', { method: 'PUT', headers: { Authorization: 'Bearer ' + token } });
+}
+
+async function play(token) {
+	fetch('https://api.spotify.com/v1/me/player/play', { method: 'PUT', headers: { Authorization: 'Bearer ' + token } });
+}
+
+async function next(token) {
+	fetch('https://api.spotify.com/v1/me/player/next', { method: 'POST', headers: { Authorization: 'Bearer ' + token } });
+}
+
+async function previous(token) {
+	fetch('https://api.spotify.com/v1/me/player/previous', {
+		method: 'POST',
+		headers: { Authorization: 'Bearer ' + token }
+	});
+}
+
+async function getPlaylists(token) {
+	const playlists = [];
+	let next = 'https://api.spotify.com/v1/me/playlists?limit=50';
+	while (next) {
+		const res = await fetch(next, {
+			method: 'GET',
+			headers: { Authorization: 'Bearer ' + token }
+		});
+		const jsonResponse = await res.json();
+		playlists.push(...jsonResponse.items);
+		next = jsonResponse.next;
+	}
+
+	return playlists;
+}
+
 async function addSongToQueue() {}
 
-function Sidebar() {
+function App() {
+	const [isHidden, setIsHidden] = React.useState(true);
 	const [accessToken, setAccessToken] = React.useState('');
 	const [userInfo, setUserInfo] = React.useState({});
+	const [playlists, setPlaylists] = React.useState([]);
+	const [showPlaylists, setShowPlaylists] = React.useState(false);
+
 	React.useEffect(() => {
 		const {
 			socket: { accountId }
@@ -50,18 +92,34 @@ function Sidebar() {
 	React.useEffect(() => {
 		if (accessToken) {
 			getUserInfo(accessToken).then((info) => setUserInfo(info));
+			getPlaylists(accessToken).then((res) => setPlaylists(res));
 		}
 	}, [accessToken]);
 
-	return <div>{userInfo.display_name && <p>Fuck off {userInfo.display_name}</p>}</div>;
-}
-
-function App() {
-	const [isHidden, setIsHidden] = React.useState(true);
 	return (
 		<>
-			<button onClick={() => setIsHidden(!isHidden)}>toggle</button>
-			{!isHidden && ReactDOM.createPortal(<Sidebar />, document.getElementById(sidebarWrapperId))}
+			{ReactDOM.createPortal(
+				<button onClick={() => setIsHidden(!isHidden)}>toggle</button>,
+				document.getElementById(toolBarWrapperId)
+			)}
+			{!isHidden && (
+				<div>
+					{userInfo.display_name && <p>Fuck off {userInfo.display_name}</p>}
+					<button onClick={() => previous(accessToken)}>backwards</button>
+					<button onClick={() => togglePlay(accessToken)}>play/pause</button>
+					<button onClick={() => next(accessToken)}>forwards</button>
+					<button onClick={() => setShowPlaylists(!showPlaylists)}>toggle playlists</button>
+					{showPlaylists && (
+						<div
+							id="playlistContainer"
+							style={{ width: '400px', overflowY: 'scroll', userSelect: 'text', height: '400px' }}>
+							{playlists.map((playlist) => (
+								<p>{JSON.stringify(playlist)}</p>
+							))}
+						</div>
+					)}
+				</div>
+			)}
 		</>
 	);
 }
@@ -80,17 +138,13 @@ function destroyDom() {
 	document.getElementById(sidebarWrapperId)?.remove();
 	document.getElementById(toolBarWrapperId)?.remove();
 }
-function render() {
-	ReactDOM.render(<App />, document.getElementById(toolBarWrapperId));
-}
-
 module.exports = class SpotifyDiscord {
 	load() {
 		console.log('loading up');
 	}
 	start() {
 		createDom();
-		render();
+		ReactDOM.render(<App />, document.getElementById(sidebarWrapperId));
 	}
 	stop() {
 		destroyDom();
