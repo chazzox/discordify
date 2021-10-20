@@ -9,6 +9,10 @@
 
 // BdApi stuff that we use
 const { React, ReactDOM } = BdApi;
+
+// link stylesheet
+BdApi.injectCSS('discordify', './discordify.css');
+
 // discord spotify code :)
 const SpotifyTrackUtils = BdApi.findModuleByProps('getActiveSocketAndDevice');
 const SpotifyUtils = BdApi.findModuleByProps('SpotifyAPI');

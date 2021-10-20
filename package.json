@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"description": "A plugin for better discord that gives you pause/queue and playback control",
 	"scripts": {
-		"build": "babel --presets @babel/preset-react discordify.js --out-file discordify.plugin.js && terser discordify.plugin.js -o discordify.plugin.js --config-file terser.json"
+		"build": "babel --presets @babel/preset-react ./src/discordify.js --out-file plugin/discordify.plugin.js && terser ./plugin/discordify.plugin.js -o ./plugin/discordify.plugin.js --config-file terser.json && sass src/discordify.scss plugin/discordify.css --no-source-map"
 	},
 	"homepage": "https://github.com/chazzox/discordify#readme",
 	"devDependencies": {
@@ -11,6 +11,7 @@
 		"@babel/core": "^7.15.8",
 		"@babel/preset-react": "^7.14.5",
 		"@types/bandagedbd__bdapi": "^0.3.2",
+		"sass": "^1.43.2",
 		"terser": "^5.9.0"
 	}
 }
