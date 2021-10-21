@@ -69,7 +69,7 @@ export default defineConfig({
 			mangle: {},
 			parse: {},
 			rename: {},
-			format: {}
+			format: { comments: '/@name/' }
 		})
 	]
 });
