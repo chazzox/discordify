@@ -46,7 +46,9 @@ export default defineConfig({
 		}
 	],
 	plugins: [
+		// imports
 		nodeResolve(),
+		// .scss files to inline BdApi string
 		styles({
 			extensions: ['.scss'],
 			mode: [
@@ -56,9 +58,11 @@ export default defineConfig({
 				}
 			]
 		}),
+		// jsx transformer
 		babel({
 			presets: ['@babel/preset-react']
 		}),
+		// minifier
 		terser({
 			module: true,
 			compress: { sequences: false },

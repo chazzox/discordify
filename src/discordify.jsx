@@ -53,7 +53,8 @@ function App() {
 					{showPlaylists && (
 						<div
 							id="playlistContainer"
-							style={{ width: '400px', overflowY: 'scroll', userSelect: 'text', height: '400px' }}>
+							style={{ width: '400px', overflowY: 'scroll', userSelect: 'text', height: '400px' }}
+						>
 							{playlists.map((playlist) => (
 								<p>{JSON.stringify(playlist)}</p>
 							))}
