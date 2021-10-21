@@ -1,17 +1,8 @@
-/**
- * @name discordify
- * @author PINPAL#5245 and chazzox#1001
- * @description Spotify but inside discord
- * @version 0.0.1
- * @website https://github.com/chazzox/discordify#readme
- * @source https://github.com/chazzox/discordify
- */
+import * as spotifyApi from './spotifyUtils';
+import './discordify.scss';
 
 // BdApi stuff that we use
 const { React, ReactDOM } = BdApi;
-
-// link stylesheet
-BdApi.injectCSS('discordify', './discordify.css');
 
 // discord spotify code :)
 const SpotifyTrackUtils = BdApi.findModuleByProps('getActiveSocketAndDevice');
@@ -24,60 +15,6 @@ const toolbarContainerClass = 'toolbar-1t6TWx';
 // wrapper ids
 const sidebarWrapperId = 'discordSpotifySidebar';
 const toolBarWrapperId = 'discordSpotifyToolbar';
-
-// spotify functions
-async function getUserInfo(token) {
-	const result = await fetch('https://api.spotify.com/v1/me', {
-		headers: { Authorization: 'Bearer ' + token }
-	});
-	return await result.json();
-}
-
-async function togglePlay(token) {
-	const currently_playing = await fetch(' https://api.spotify.com/v1/me/player/currently-playing', {
-		headers: { Authorization: 'Bearer ' + token }
-	});
-	const currently_playing_json = await currently_playing.json();
-	if (currently_playing_json.is_playing) pause(token);
-	else play(token);
-}
-
-async function pause(token) {
-	fetch('https://api.spotify.com/v1/me/player/pause', { method: 'PUT', headers: { Authorization: 'Bearer ' + token } });
-}
-
-async function play(token) {
-	fetch('https://api.spotify.com/v1/me/player/play', { method: 'PUT', headers: { Authorization: 'Bearer ' + token } });
-}
-
-async function next(token) {
-	fetch('https://api.spotify.com/v1/me/player/next', { method: 'POST', headers: { Authorization: 'Bearer ' + token } });
-}
-
-async function previous(token) {
-	fetch('https://api.spotify.com/v1/me/player/previous', {
-		method: 'POST',
-		headers: { Authorization: 'Bearer ' + token }
-	});
-}
-
-async function getPlaylists(token) {
-	const playlists = [];
-	let next = 'https://api.spotify.com/v1/me/playlists?limit=50';
-	while (next) {
-		const res = await fetch(next, {
-			method: 'GET',
-			headers: { Authorization: 'Bearer ' + token }
-		});
-		const jsonResponse = await res.json();
-		playlists.push(...jsonResponse.items);
-		next = jsonResponse.next;
-	}
-
-	return playlists;
-}
-
-async function addSongToQueue() {}
 
 function App() {
 	const [isHidden, setIsHidden] = React.useState(true);
@@ -95,8 +32,8 @@ function App() {
 
 	React.useEffect(() => {
 		if (accessToken) {
-			getUserInfo(accessToken).then((info) => setUserInfo(info));
-			getPlaylists(accessToken).then((res) => setPlaylists(res));
+			spotifyApi.getUserInfo(accessToken).then((info) => setUserInfo(info));
+			spotifyApi.getPlaylists(accessToken).then((res) => setPlaylists(res));
 		}
 	}, [accessToken]);
 
@@ -109,9 +46,9 @@ function App() {
 			{!isHidden && (
 				<div>
 					{userInfo.display_name && <p>Fuck off {userInfo.display_name}</p>}
-					<button onClick={() => previous(accessToken)}>backwards</button>
-					<button onClick={() => togglePlay(accessToken)}>play/pause</button>
-					<button onClick={() => next(accessToken)}>forwards</button>
+					<button onClick={() => spotifyApi.previous(accessToken)}>backwards</button>
+					<button onClick={() => spotifyApi.togglePlay(accessToken)}>play/pause</button>
+					<button onClick={() => spotifyApi.next(accessToken)}>forwards</button>
 					<button onClick={() => setShowPlaylists(!showPlaylists)}>toggle playlists</button>
 					{showPlaylists && (
 						<div
@@ -142,9 +79,10 @@ function destroyDom() {
 	document.getElementById(sidebarWrapperId)?.remove();
 	document.getElementById(toolBarWrapperId)?.remove();
 }
+
 module.exports = class SpotifyDiscord {
 	load() {
-		console.log('loading up');
+		console.log('test');
 	}
 	start() {
 		createDom();
