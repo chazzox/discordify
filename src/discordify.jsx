@@ -37,6 +37,13 @@ function App() {
 		}
 	}, [accessToken]);
 
+	// const HeaderBarContainer = BdApi.findModuleByDisplayName('HeaderBarContainer')?.prototype;
+	// const cancel_patch = BdApi.monkeyPatch(HeaderBarContainer, 'renderLoggedIn', {
+	// 	after: ({ returnValue }) => {
+	// 		returnValue?.props?.toolbar?.props?.children.push(<button>also test</button>);
+	// 	}
+	// });
+
 	return (
 		<>
 			{ReactDOM.createPortal(
