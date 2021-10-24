@@ -1,4 +1,4 @@
-# discordify
+# Discordify
 
 ## About
 
