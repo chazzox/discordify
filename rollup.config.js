@@ -3,7 +3,7 @@ import { babel } from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import styles from 'rollup-plugin-styles';
-import { name } from './package.json';
+import { name, version } from './package.json';
 import os from 'os';
 import path from 'path';
 
@@ -22,10 +22,10 @@ function GetBetterDiscordPath() {
 
 const meta = `
 /**
- * @name discordify
+ * @name ${name}
  * @author PINPAL#5245 and chazzox#1001
  * @description Spotify but inside discord
- * @version 0.0.1
+ * @version ${version}
  * @website https://github.com/chazzox/discordify#readme
  * @source https://github.com/chazzox/discordify
  */

@@ -1,6 +1,6 @@
 {
 	"name": "discordify",
-	"version": "0.0.1",
+	"version": "0.0.5",
 	"description": "A plugin for better discord that gives you pause/queue and playback control",
 	"scripts": {
 		"build": "rollup --config",
