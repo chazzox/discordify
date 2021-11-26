@@ -1,3 +1,6 @@
 #discordSpotifySidebar {
 	background-color: red;
+	& > h1 {
+		font-size: 25px;
+	}
 }
