@@ -11,12 +11,12 @@ function App() {
 	return (
 		<>
 			<button onClick={() => setIsHidden(!isHidden)}>{isHidden ? 'Open' : 'Close'} Discordify</button>
-			<Sidebar isHidden={isHidden} />
+			<SidebarPortal isHidden={isHidden} />
 		</>
 	);
 }
 
-const Sidebar = ({ isHidden }) => {
+const SidebarPortal = ({ isHidden }) => {
 	const container = document.createElement('div');
 	container.id = 'discordSpotifySidebar';
 	React.useEffect(() => {
@@ -28,7 +28,17 @@ const Sidebar = ({ isHidden }) => {
 		};
 	}, [isHidden]);
 
-	return <>{ReactDOM.createPortal(<>{!isHidden && <h1>test</h1>}</>, container)}</>;
+	return <>{ReactDOM.createPortal(<>{!isHidden && <Sidebar />}</>, container)}</>;
+};
+
+const Sidebar = () => {
+	return (
+		<>
+			<h1>test</h1>
+			<p>sadge</p>
+			<p>aslkdja;lskjdf alskdjfals asdfl</p>
+		</>
+	);
 };
 
 module.exports = class SpotifyDiscord {
