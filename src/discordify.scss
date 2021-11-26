@@ -1,6 +1,97 @@
+:root {
+	--discordify-width: 400px;
+
+	--discordify-bg: #212121;
+	--discordify-navbar-bg: #181818;
+
+	--discordify-btn-color: #b3b3b3;
+	--discordify-btn-color-hover: #ffffff;
+	--discordify-btn-color-active: #1db954;
+}
+
 #discordSpotifySidebar {
-	background-color: red;
-	& > h1 {
-		font-size: 25px;
+	width: var(--discordify-width);
+	min-width: var(--discordify-width);
+	box-sizing: border-box;
+	background-color: var(--discordify-bg);
+	padding: 12px;
+	color: white;
+	position: relative;
+
+	* {
+		box-sizing: border-box;
+	}
+
+	#navbar {
+		text-align: center;
+		border-top: solid 1px #404040;
+		background-color: var(--discordify-navbar-bg);
+		position: fixed;
+		bottom: 0;
+		right: 0;
+		width: var(--discordify-width);
+		height: fit-content;
+		padding-top: 25px;
+		padding-bottom: 25px;
+		padding-left: 12px;
+		padding-right: 12px;
+
+		.row {
+			margin-left: 30px;
+			margin-right: 30px;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-evenly;
+			align-items: center;
+			gap: 8px;
+		}
+
+		button {
+			width: 35px;
+			max-width: 35px;
+			height: 35px;
+			max-height: 35px;
+			font-size: 0;
+			background: none;
+
+			svg {
+				width: 15px;
+				height: 15px;
+
+				* {
+					fill: #b3b3b3;
+				}
+			}
+
+			&:hover {
+				svg * {
+					fill: var(--discordify-btn-color-hover);
+				}
+			}
+			&.active {
+				svg * {
+					fill: var(--discordify-btn-color-active);
+				}
+			}
+
+			&#playPause {
+				width: 45px;
+				max-width: 45px;
+				height: 45px;
+				max-height: 45px;
+				border-radius: 50%;
+				transition: transform 0.05s ease;
+				background: var(--discordify-btn-color);
+
+				svg * {
+					fill: var(--discordify-navbar-bg);
+				}
+
+				&:hover {
+					background-color: var(--discordify-btn-color-hover);
+					transform: scale(1.1);
+				}
+			}
+		}
 	}
 }
