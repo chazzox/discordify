@@ -1,6 +1,7 @@
 import { defineConfig } from 'rollup';
 import { babel } from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
+import commonjs from '@rollup/plugin-commonjs';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import styles from 'rollup-plugin-styles';
 import { name, version } from './package.json';
@@ -29,6 +30,7 @@ const meta = `
  * @website https://github.com/chazzox/discordify#readme
  * @source https://github.com/chazzox/discordify
  */
+const { React, ReactDOM } = BdApi;
 `;
 
 export default defineConfig({
@@ -47,7 +49,8 @@ export default defineConfig({
 	],
 	plugins: [
 		// imports
-		nodeResolve(),
+		nodeResolve({ extensions: ['.jsx', '.js'], jsnext: true }),
+		commonjs(),
 		// .scss files to inline BdApi string
 		styles({
 			extensions: ['.scss'],
