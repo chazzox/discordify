@@ -61,7 +61,7 @@ const Sidebar = () => {
 					</button>
 					<button
 						id="loop"
-						className={classNames({ active: isLooping != 0 }, isLooping)}
+						className={classNames({ active: isLooping != 0 }, `mode${isLooping}`)}
 						onClick={() => setIsLooping((prevState) => (prevState + 1) % 3)}
 					>
 						<Loop />
