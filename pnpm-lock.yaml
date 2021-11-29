@@ -5,8 +5,10 @@ specifiers:
   '@babel/core': ^7.15.8
   '@babel/preset-react': ^7.14.5
   '@rollup/plugin-babel': ^5.3.0
+  '@rollup/plugin-commonjs': ^21.0.1
   '@rollup/plugin-node-resolve': ^13.0.6
   '@types/bandagedbd__bdapi': ^0.3.2
+  classnames: ^2.3.1
   prettier: ^2.4.1
   rollup: ^2.58.0
   rollup-plugin-styles: ^3.14.1
@@ -14,11 +16,15 @@ specifiers:
   sass: ^1.43.2
   terser: ^5.9.0
 
+dependencies:
+  classnames: 2.3.1
+
 devDependencies:
   '@babel/cli': 7.16.0_@babel+core@7.16.0
   '@babel/core': 7.16.0
   '@babel/preset-react': 7.16.0_@babel+core@7.16.0
   '@rollup/plugin-babel': 5.3.0_@babel+core@7.16.0+rollup@2.60.1
+  '@rollup/plugin-commonjs': 21.0.1_rollup@2.60.1
   '@rollup/plugin-node-resolve': 13.0.6_rollup@2.60.1
   '@types/bandagedbd__bdapi': 0.3.2
   prettier: 2.5.0
@@ -384,6 +390,22 @@ packages:
       rollup: 2.60.1
     dev: true
 
+  /@rollup/plugin-commonjs/21.0.1_rollup@2.60.1:
+    resolution: {integrity: sha512-EA+g22lbNJ8p5kuZJUYyhhDK7WgJckW5g4pNN7n4mAFUM96VuwUnNT3xr2Db2iCZPI1pJPbGyfT5mS9T1dHfMg==}
+    engines: {node: '>= 8.0.0'}
+    peerDependencies:
+      rollup: ^2.38.3
+    dependencies:
+      '@rollup/pluginutils': 3.1.0_rollup@2.60.1
+      commondir: 1.0.1
+      estree-walker: 2.0.2
+      glob: 7.2.0
+      is-reference: 1.2.1
+      magic-string: 0.25.7
+      resolve: 1.20.0
+      rollup: 2.60.1
+    dev: true
+
   /@rollup/plugin-node-resolve/13.0.6_rollup@2.60.1:
     resolution: {integrity: sha512-sFsPDMPd4gMqnh2gS0uIxELnoRUp5kBl5knxD2EO0778G1oOJv4G1vyT2cpWz75OU2jDVcXhjVUuTAczGyFNKA==}
     engines: {node: '>= 10.0.0'}
@@ -627,6 +649,10 @@ packages:
       fsevents: 2.3.2
     dev: true
 
+  /classnames/2.3.1:
+    resolution: {integrity: sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==}
+    dev: false
+
   /coa/2.0.2:
     resolution: {integrity: sha512-q5/jG+YQnSy4nRTV4F7lPepBJZ8qBNJJDBuJdoejDyLXgmL7IEo+Le2JDZudFTFt7mrCqIRaSjws4ygRCTCAXA==}
     engines: {node: '>= 4.0'}
@@ -667,6 +693,10 @@ packages:
   /commander/4.1.1:
     resolution: {integrity: sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==}
     engines: {node: '>= 6'}
+    dev: true
+
+  /commondir/1.0.1:
+    resolution: {integrity: sha1-3dgA2gxmEnOTzKWVDqloo6rxJTs=}
     dev: true
 
   /concat-map/0.0.1:
@@ -1256,6 +1286,12 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /is-reference/1.2.1:
+    resolution: {integrity: sha512-U82MsXXiFIrjCK4otLT+o2NA2Cd2g5MLoOVXUZjIOhLurrRxpEXzI8O0KZHr3IjLvlAH1kTPYSuqer5T9ZVBKQ==}
+    dependencies:
+      '@types/estree': 0.0.39
+    dev: true
+
   /is-regex/1.1.4:
     resolution: {integrity: sha512-kvRdxDsxZjhzUX07ZnLydzS1TU/TJlTUHHY4YLL87e37oUA49DfkLqgy+VjFocowy29cKvcSiu+kIv728jTTVg==}
     engines: {node: '>= 0.4'}
@@ -1353,6 +1389,12 @@ packages:
 
   /lodash.uniq/4.5.0:
     resolution: {integrity: sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=}
+    dev: true
+
+  /magic-string/0.25.7:
+    resolution: {integrity: sha512-4CrMT5DOHTDk4HYDlzmwu4FVCcIYI8gauveasrdCu2IKIFOJ3f0v/8MDGJCDL9oD2ppz/Av1b0Nj345H9M+XIA==}
+    dependencies:
+      sourcemap-codec: 1.4.8
     dev: true
 
   /make-dir/2.1.0:
@@ -2070,6 +2112,10 @@ packages:
   /source-map/0.7.3:
     resolution: {integrity: sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==}
     engines: {node: '>= 8'}
+    dev: true
+
+  /sourcemap-codec/1.4.8:
+    resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
     dev: true
 
   /split-on-first/1.1.0:
