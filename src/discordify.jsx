@@ -105,9 +105,6 @@ module.exports = class SpotifyDiscord {
 	stop() {
 		this.cancel_patch_header();
 	}
-	onSwitch() {
-		this.patch();
-	}
 	patch() {
 		const HeaderBarContainer = BdApi.findModuleByDisplayName('HeaderBarContainer')?.prototype;
 		if (HeaderBarContainer && !this.patchedHeader) {
