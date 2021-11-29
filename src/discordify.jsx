@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { Pause, Play, Loop, Shuffle, Previous, Next } from './components/navbarIcons';
+import { Pause, Play, Loop, Shuffle, Previous, Next, Mute } from './components/navbarIcons';
 import './discordify.scss';
 
 const sidebarContainerClass = 'container-2lgZY8';
@@ -35,7 +35,11 @@ const Sidebar = () => {
 
 	return (
 		<div id="discordSpotifySidebar">
-			<h1>AYO</h1>
+			<div className="pillRow">
+				<div className="pill">Playlists</div>
+				<div className="pill">Artists</div>
+				<div className="pill">Albums</div>
+			</div>
 			<div id="navbar">
 				<div className="row">
 					<div id="currentArtwork"></div>
@@ -45,6 +49,15 @@ const Sidebar = () => {
 				</div>
 				<div className="row">
 					<p id="currentArtist">The Artist</p>
+				</div>
+				<div id="volumeLevel" className="progressBarRow row">
+					<button id="muteBtn">
+						<Mute />
+					</button>
+					<div className="progressBar">
+						<div className="progressBarInner"></div>
+						<div className="progressKnob"></div>
+					</div>
 				</div>
 				<div className="row">
 					<button id="shuffle" className={isShuffled && 'active'} onClick={() => setIsShuffled(!isShuffled)}>
@@ -67,11 +80,11 @@ const Sidebar = () => {
 						<Loop />
 					</button>
 				</div>
-				<div className="row" id="progressBarRow">
+				<div id="songProgress" className="progressBarRow row">
 					<p>1:43</p>
-					<div id="progressBar">
-						<div id="progressBarInner"></div>
-						<div id="progressKnob"></div>
+					<div className="progressBar">
+						<div className="progressBarInner"></div>
+						<div className="progressKnob"></div>
 					</div>
 					<p>2:38</p>
 				</div>
