@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { Pause, Play, Loop, Shuffle, Previous, Next, Mute } from './components/navbarIcons';
+import { Pause, Play, Loop, Shuffle, Previous, Next, Mute, Spotify } from './components/navbarIcons';
 import './discordify.scss';
 
 const sidebarContainerClass = 'container-2lgZY8';
@@ -9,7 +9,15 @@ function App() {
 
 	return (
 		<>
-			<button onClick={() => setIsHidden(!isHidden)}>{isHidden ? 'Open' : 'Close'} Discordify</button>
+			<button id="discordifyBtn" onClick={() => setIsHidden(!isHidden)}>
+				<div className="iconWrapper-2OrFZ1 clickable-3rdHwn">
+					<Spotify />
+					<div id="discordifyBtnTooltip" class="tooltip-2QfLtc tooltipBottom-3ARrEK tooltipPrimary-1d1ph4">
+						<div class="tooltipPointer-3ZfirK"></div>
+						<div class="tooltipContent-bqVLWK">{isHidden ? 'Open' : 'Close'} Spotify</div>
+					</div>
+				</div>
+			</button>
 			<SidebarPortal isHidden={isHidden} />
 		</>
 	);

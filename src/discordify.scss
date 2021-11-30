@@ -15,11 +15,43 @@
 	--discordify-btn-color-active: #1db954;
 }
 
+#discordifyBtn {
+	background: none;
+	padding: 0;
+	margin: 0;
+	outline: none;
+	position: relative;
+	margin-right: 6px;
+
+	#discordifyBtnTooltip {
+		visibility: hidden;
+		position: absolute;
+		left: 50%;
+		bottom: -8px;
+		transform: translate(-50%, 100%);
+	}
+
+	svg {
+		* {
+			fill: var(--interactive-normal);
+		}
+	}
+
+	&:hover {
+		svg * {
+			fill: var(--interactive-hover);
+		}
+		#discordifyBtnTooltip {
+			visibility: visible;
+		}
+	}
+}
+
 #discordSpotifySidebar {
 	width: var(--discordify-width);
 	min-width: var(--discordify-width);
 	box-sizing: border-box;
-	background: linear-gradient(0deg, var(--discordify-bg) 0%, var(--discordify-bg-alt) 75%);
+	background: linear-gradient(0deg, var(--discordify-bg), var(--discordify-bg-alt));
 	padding: 12px;
 	color: var(--discordify-btn-color);
 	position: relative;
