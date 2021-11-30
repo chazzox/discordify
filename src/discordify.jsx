@@ -43,85 +43,87 @@ const Sidebar = () => {
 
 	return (
 		<div id="discordSpotifySidebar">
-			<div id="navbar">
-				<div className="pillRow">
-					<div className="pill select">Playlists</div>
-					<div className="pill">Artists</div>
-					<div className="pill">Albums</div>
-					<div id="discordifySearch">
-						<Search />
+			<div id="discordSpotifyInner">
+				<div id="navbar">
+					<div className="pillRow">
+						<div className="pill select">Playlists</div>
+						<div className="pill">Artists</div>
+						<div className="pill">Albums</div>
+						<div id="discordifySearch">
+							<Search />
+						</div>
 					</div>
 				</div>
-			</div>
-			<div className="grid">
-				<div className="gridBox wideBox">
-					<div className="playlistArtwork"></div>
-					<h1>Playlist Name</h1>
-					<h2>Description of Playlist</h2>
-				</div>
-				<div className="gridBox">
-					<div className="playlistArtwork"></div>
-					<h1>Playlist Name</h1>
-					<h2>Description of Playlist</h2>
-				</div>
-				<div className="gridBox">
-					<div className="playlistArtwork"></div>
-					<h1>Playlist Name</h1>
-					<h2>Description of Playlist</h2>
-				</div>
-				<div className="gridBox">
-					<div className="playlistArtwork"></div>
-					<h1>Playlist Name</h1>
-					<h2>Description of Playlist</h2>
-				</div>
-			</div>
-			<div id="playbackControls">
-				<div className="row">
-					<div id="currentArtwork"></div>
-				</div>
-				<div className="row">
-					<p id="currentSong">Example Song Name</p>
-				</div>
-				<div className="row">
-					<p id="currentArtist">The Artist</p>
-				</div>
-				<div id="volumeLevel" className="progressBarRow row">
-					<button id="muteBtn">
-						<Mute />
-					</button>
-					<div className="progressBar">
-						<div className="progressBarInner"></div>
-						<div className="progressKnob"></div>
+				<div className="grid">
+					<div className="gridBox wideBox">
+						<div className="playlistArtwork"></div>
+						<h1>Liked Songs</h1>
+						<h2>56 liked songs</h2>
+					</div>
+					<div className="gridBox">
+						<div className="playlistArtwork"></div>
+						<h1>Playlist Name</h1>
+						<h2>Description of Playlist</h2>
+					</div>
+					<div className="gridBox">
+						<div className="playlistArtwork"></div>
+						<h1>Playlist Name</h1>
+						<h2>Super long description of the playlist.</h2>
+					</div>
+					<div className="gridBox">
+						<div className="playlistArtwork"></div>
+						<h1>Playlist Name</h1>
+						<h2>Description of Playlist</h2>
 					</div>
 				</div>
-				<div className="row">
-					<button id="shuffle" className={isShuffled && 'active'} onClick={() => setIsShuffled(!isShuffled)}>
-						<Shuffle />
-					</button>
-					<button id="previous">
-						<Previous />
-					</button>
-					<button id="playPause" onClick={() => setIsPlaying(!isPlaying)}>
-						{isPlaying ? <Play /> : <Pause />}
-					</button>
-					<button id="next">
-						<Next />
-					</button>
-					<button
-						id="loop"
-						className={classNames({ active: isLooping != 0 }, `mode${isLooping}`)}
-						onClick={() => setIsLooping((prevState) => (prevState + 1) % 3)}
-					>
-						<Loop />
-					</button>
-				</div>
-				<div id="songProgress" className="progressBarRow row">
-					<p>1:43</p>
-					<div className="progressBar">
-						<div className="progressBarInner"></div>
-						<div className="progressKnob"></div>
+				<div id="playbackControls">
+					<div className="row">
+						<div id="currentArtwork"></div>
 					</div>
-					<p>2:38</p>
+					<div className="row">
+						<p id="currentSong">Example Song Name</p>
+					</div>
+					<div className="row">
+						<p id="currentArtist">The Artist</p>
+					</div>
+					<div id="volumeLevel" className="progressBarRow row">
+						<button id="muteBtn">
+							<Mute />
+						</button>
+						<div className="progressBar">
+							<div className="progressBarInner"></div>
+							<div className="progressKnob"></div>
+						</div>
+					</div>
+					<div className="row">
+						<button id="shuffle" className={isShuffled && 'active'} onClick={() => setIsShuffled(!isShuffled)}>
+							<Shuffle />
+						</button>
+						<button id="previous">
+							<Previous />
+						</button>
+						<button id="playPause" onClick={() => setIsPlaying(!isPlaying)}>
+							{isPlaying ? <Play /> : <Pause />}
+						</button>
+						<button id="next">
+							<Next />
+						</button>
+						<button
+							id="loop"
+							className={classNames({ active: isLooping != 0 }, `mode${isLooping}`)}
+							onClick={() => setIsLooping((prevState) => (prevState + 1) % 3)}
+						>
+							<Loop />
+						</button>
+					</div>
+					<div id="songProgress" className="progressBarRow row">
+						<p>1:43</p>
+						<div className="progressBar">
+							<div className="progressBarInner"></div>
+							<div className="progressKnob"></div>
+						</div>
+						<p>2:38</p>
+					</div>
 				</div>
 			</div>
 		</div>

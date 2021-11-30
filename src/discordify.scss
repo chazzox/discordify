@@ -51,28 +51,42 @@
 
 #discordSpotifySidebar {
 	width: var(--discordify-width);
-	height: calc(100% - 500px);
 	min-width: var(--discordify-width);
+	height: 100%;
 	box-sizing: border-box;
-	background: linear-gradient(110deg, var(--discordify-bg-alt) 65%, var(--discordify-bg));
-	padding: 12px;
 	color: var(--discordify-btn-color);
 	position: relative;
+
+	#discordSpotifyInner {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		height: 100%;
+	}
 
 	* {
 		box-sizing: border-box;
 	}
 
 	.grid {
+		background: linear-gradient(110deg, var(--discordify-bg-alt), var(--discordify-bg) 75%);
+		padding: 12px;
 		display: flex;
+		flex-shrink: 1;
+		flex-grow: 1;
+		flex-basis: 0;
 		justify-content: center;
 		flex-wrap: wrap;
 		gap: 8px;
+		overflow-y: auto;
 
 		.gridBox {
 			background-color: var(--discordify-navbar-bg);
 			border-radius: 6px;
 			padding: 12px;
+			flex-shrink: 1;
+			flex-grow: 1;
+			max-width: calc(50% - 4px);
 
 			&:hover {
 				background-color: var(--discordify-navbar-bg-alt);
@@ -83,21 +97,38 @@
 			}
 
 			&.wideBox {
+				max-width: 100%;
 				flex-basis: 100%;
 				background: linear-gradient(135deg, #470cf5, #8d8ce5);
+				h1 {
+					font-size: 16pt;
+					font-weight: 600;
+					margin-bottom: 12px;
+				}
+				h2 {
+					color: var(--discordify-font-color);
+				}
 				.playlistArtwork {
 					visibility: hidden;
+					&:after {
+						padding-bottom: 50%;
+					}
 				}
 			}
 
 			.playlistArtwork {
-				width: calc(var(--discordify-width) * 0.4);
-				height: calc(var(--discordify-width) * 0.4);
+				width: 100%;
 				border-radius: 4px;
 				max-width: 180px;
 				max-height: 180px;
 				background: var(--discordify-btn-color);
 				margin-bottom: 16px;
+
+				&:after {
+					content: '';
+					display: block;
+					padding-bottom: 100%;
+				}
 			}
 			h1 {
 				color: var(--discordify-font-color);
@@ -105,11 +136,15 @@
 			}
 			h2 {
 				color: var(--discordify-font-color-alt);
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
 			}
 		}
 	}
 
 	#navbar {
+		padding: 12px;
 		background-color: var(--discordify-bg-alt);
 
 		.pillRow {
@@ -118,7 +153,6 @@
 			align-items: flex-start;
 			gap: 8px;
 			width: 100%;
-			margin-bottom: 24px;
 
 			.pill {
 				padding: 12px;
@@ -167,9 +201,6 @@
 		text-align: center;
 		border-top: solid 1px #404040;
 		background-color: var(--discordify-navbar-bg);
-		position: fixed;
-		bottom: 0;
-		right: 0;
 		width: var(--discordify-width);
 		height: fit-content;
 		padding-top: 25px;
