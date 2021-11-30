@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { Pause, Play, Loop, Shuffle, Previous, Next, Mute, Spotify, Search } from './components/navbarIcons';
+import { Pause, Play, Loop, Shuffle, Previous, Next, Mute, Spotify, Search, Chevron } from './components/navbarIcons';
 import './discordify.scss';
 
 const sidebarContainerClass = 'container-2lgZY8';
@@ -76,15 +76,23 @@ const Sidebar = () => {
 						<h2>Description of Playlist</h2>
 					</div>
 				</div>
+				{/* add class "compact" for smaller #playbackControls */}
 				<div id="playbackControls">
-					<div className="row">
-						<div id="currentArtwork"></div>
-					</div>
-					<div className="row">
-						<p id="currentSong">Example Song Name</p>
-					</div>
-					<div className="row">
-						<p id="currentArtist">The Artist</p>
+					<div id="songInformation">
+						<div className="row">
+							<div id="currentArtwork"></div>
+						</div>
+						<div id="songDetails">
+							<div className="row">
+								<p id="currentSong">Example Song Name</p>
+							</div>
+							<div className="row">
+								<p id="currentArtist">The Artist</p>
+							</div>
+						</div>
+						<button id="compactBtn">
+							<Chevron />
+						</button>
 					</div>
 					<div id="volumeLevel" className="progressBarRow row">
 						<button id="muteBtn">
