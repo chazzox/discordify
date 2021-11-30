@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { Pause, Play, Loop, Shuffle, Previous, Next, Mute, Spotify } from './components/navbarIcons';
+import { Pause, Play, Loop, Shuffle, Previous, Next, Mute, Spotify, Search } from './components/navbarIcons';
 import './discordify.scss';
 
 const sidebarContainerClass = 'container-2lgZY8';
@@ -43,12 +43,39 @@ const Sidebar = () => {
 
 	return (
 		<div id="discordSpotifySidebar">
-			<div className="pillRow">
-				<div className="pill">Playlists</div>
-				<div className="pill">Artists</div>
-				<div className="pill">Albums</div>
-			</div>
 			<div id="navbar">
+				<div className="pillRow">
+					<div className="pill select">Playlists</div>
+					<div className="pill">Artists</div>
+					<div className="pill">Albums</div>
+					<div id="discordifySearch">
+						<Search />
+					</div>
+				</div>
+			</div>
+			<div className="grid">
+				<div className="gridBox wideBox">
+					<div className="playlistArtwork"></div>
+					<h1>Playlist Name</h1>
+					<h2>Description of Playlist</h2>
+				</div>
+				<div className="gridBox">
+					<div className="playlistArtwork"></div>
+					<h1>Playlist Name</h1>
+					<h2>Description of Playlist</h2>
+				</div>
+				<div className="gridBox">
+					<div className="playlistArtwork"></div>
+					<h1>Playlist Name</h1>
+					<h2>Description of Playlist</h2>
+				</div>
+				<div className="gridBox">
+					<div className="playlistArtwork"></div>
+					<h1>Playlist Name</h1>
+					<h2>Description of Playlist</h2>
+				</div>
+			</div>
+			<div id="playbackControls">
 				<div className="row">
 					<div id="currentArtwork"></div>
 				</div>
