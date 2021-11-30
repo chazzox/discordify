@@ -1,3 +1,5 @@
+import { React } from '../utils';
+
 export function Loop() {
 	return (
 		<svg viewBox="0 0 512.43 483.62">

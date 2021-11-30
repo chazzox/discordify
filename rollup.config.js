@@ -1,9 +1,11 @@
 import { defineConfig } from 'rollup';
-import { babel } from '@rollup/plugin-babel';
+import typescript from '@rollup/plugin-typescript';
+
 import { terser } from 'rollup-plugin-terser';
 import commonjs from '@rollup/plugin-commonjs';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import styles from 'rollup-plugin-styles';
+
 import { name, version } from './package.json';
 import os from 'os';
 import path from 'path';
@@ -30,11 +32,10 @@ const meta = `
  * @website https://github.com/chazzox/discordify#readme
  * @source https://github.com/chazzox/discordify
  */
-const { React, ReactDOM } = BdApi;
 `;
 
 export default defineConfig({
-	input: 'src/discordify.jsx',
+	input: 'src/discordify.tsx',
 	output: [
 		{
 			file: 'plugin/discordify.plugin.js',
@@ -49,7 +50,7 @@ export default defineConfig({
 	],
 	plugins: [
 		// imports
-		nodeResolve({ extensions: ['.jsx', '.js'], jsnext: true }),
+		nodeResolve({ extensions: ['.tsx', '.ts'], jsnext: true }),
 		commonjs(),
 		// .scss files to inline BdApi string
 		styles({
@@ -61,10 +62,8 @@ export default defineConfig({
 				}
 			]
 		}),
-		// jsx transformer
-		babel({
-			presets: ['@babel/preset-react']
-		}),
+		// tsx and ts transformer
+		typescript(),
 		// minifier
 		terser({
 			module: true,

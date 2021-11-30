@@ -1,5 +1,7 @@
-import classNames from 'classnames';
-import { Pause, Play, Loop, Shuffle, Previous, Next, Mute, Spotify, Search } from './components/navbarIcons';
+import { React, ReactDOM } from './utils';
+import { Spotify, Search } from './components/navbarIcons';
+
+import PlayBackControls from './components/playbackControls';
 import './discordify.scss';
 
 const sidebarContainerClass = 'container-2lgZY8';
@@ -12,9 +14,9 @@ function App() {
 			<button id="discordifyBtn" onClick={() => setIsHidden(!isHidden)}>
 				<div className="iconWrapper-2OrFZ1 clickable-3rdHwn">
 					<Spotify />
-					<div id="discordifyBtnTooltip" class="tooltip-2QfLtc tooltipBottom-3ARrEK tooltipPrimary-1d1ph4">
-						<div class="tooltipPointer-3ZfirK"></div>
-						<div class="tooltipContent-bqVLWK">{isHidden ? 'Open' : 'Close'} Spotify</div>
+					<div id="discordifyBtnTooltip" className="tooltip-2QfLtc tooltipBottom-3ARrEK tooltipPrimary-1d1ph4">
+						<div className="tooltipPointer-3ZfirK"></div>
+						<div className="tooltipContent-bqVLWK">{isHidden ? 'Open' : 'Close'} Spotify</div>
 					</div>
 				</div>
 			</button>
@@ -37,10 +39,6 @@ const SidebarPortal = ({ isHidden }) => {
 };
 
 const Sidebar = () => {
-	const [isPlaying, setIsPlaying] = React.useState(false);
-	const [isShuffled, setIsShuffled] = React.useState(false);
-	const [isLooping, setIsLooping] = React.useState(0);
-
 	return (
 		<div id="discordSpotifySidebar">
 			<div id="discordSpotifyInner">
@@ -76,55 +74,7 @@ const Sidebar = () => {
 						<h2>Description of Playlist</h2>
 					</div>
 				</div>
-				<div id="playbackControls">
-					<div className="row">
-						<div id="currentArtwork"></div>
-					</div>
-					<div className="row">
-						<p id="currentSong">Example Song Name</p>
-					</div>
-					<div className="row">
-						<p id="currentArtist">The Artist</p>
-					</div>
-					<div id="volumeLevel" className="progressBarRow row">
-						<button id="muteBtn">
-							<Mute />
-						</button>
-						<div className="progressBar">
-							<div className="progressBarInner"></div>
-							<div className="progressKnob"></div>
-						</div>
-					</div>
-					<div className="row">
-						<button id="shuffle" className={isShuffled && 'active'} onClick={() => setIsShuffled(!isShuffled)}>
-							<Shuffle />
-						</button>
-						<button id="previous">
-							<Previous />
-						</button>
-						<button id="playPause" onClick={() => setIsPlaying(!isPlaying)}>
-							{isPlaying ? <Play /> : <Pause />}
-						</button>
-						<button id="next">
-							<Next />
-						</button>
-						<button
-							id="loop"
-							className={classNames({ active: isLooping != 0 }, `mode${isLooping}`)}
-							onClick={() => setIsLooping((prevState) => (prevState + 1) % 3)}
-						>
-							<Loop />
-						</button>
-					</div>
-					<div id="songProgress" className="progressBarRow row">
-						<p>1:43</p>
-						<div className="progressBar">
-							<div className="progressBarInner"></div>
-							<div className="progressKnob"></div>
-						</div>
-						<p>2:38</p>
-					</div>
-				</div>
+				<PlayBackControls />
 			</div>
 		</div>
 	);
