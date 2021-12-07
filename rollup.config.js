@@ -1,10 +1,12 @@
 import { defineConfig } from 'rollup';
+
+import alias from '@rollup/plugin-alias';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 
-import { terser } from 'rollup-plugin-terser';
-import commonjs from '@rollup/plugin-commonjs';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
 import styles from 'rollup-plugin-styles';
+import { terser } from 'rollup-plugin-terser';
 
 import { name, version } from './package.json';
 import os from 'os';
@@ -50,6 +52,9 @@ export default defineConfig({
 	],
 	plugins: [
 		// imports
+		alias({
+			entries: [{ find: 'react', replacement: path.resolve(path.resolve(__dirname), 'src/react.ts') }]
+		}),
 		nodeResolve({ extensions: ['.tsx', '.ts'], jsnext: true }),
 		commonjs(),
 		// .scss files to inline BdApi string

@@ -1,4 +1,4 @@
-import { React } from '../utils';
+import React from 'react';
 
 export function Loop() {
 	return (

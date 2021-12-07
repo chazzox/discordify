@@ -1,5 +1,4 @@
-import { React } from '../utils';
-
+import React from 'react';
 import classNames from 'classnames';
 
 import { Pause, Play, Loop, Shuffle, Previous, Next, Mute } from './navbarIcons';
