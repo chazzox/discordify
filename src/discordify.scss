@@ -224,8 +224,8 @@
 		}
 
 		#currentArtwork {
-			width: calc(var(--discordify-width) - (var(--discordify-width) * 0.333));
-			height: calc(var(--discordify-width) - (var(--discordify-width) * 0.333));
+			width: calc(var(--discordify-width) - (var(--discordify-width) * 0.65));
+			height: calc(var(--discordify-width) - (var(--discordify-width) * 0.65));
 			max-width: 300px;
 			max-height: 300px;
 			background-color: var(--discordify-btn-color);

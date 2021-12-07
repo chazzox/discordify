@@ -4,7 +4,7 @@ import { Spotify, Search } from './components/navbarIcons';
 import PlayBackControls from './components/playbackControls';
 import './discordify.scss';
 
-const sidebarContainerClass = 'container-2lgZY8';
+const sidebarContainerClass = 'content-yTz4x3';
 
 function App() {
 	const [isHidden, setIsHidden] = React.useState(true);
