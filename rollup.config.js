@@ -31,6 +31,7 @@ const meta = `
  * @author PINPAL#5245 and chazzox#1001
  * @description Spotify but inside discord
  * @version ${version}
+ * @donate https://www.paypal.me/chazzox
  * @website https://github.com/chazzox/discordify#readme
  * @source https://github.com/chazzox/discordify
  */
