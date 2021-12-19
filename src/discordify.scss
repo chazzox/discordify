@@ -68,6 +68,10 @@
 		box-sizing: border-box;
 	}
 
+	.round {
+		border-radius: 50% !important;
+	}
+
 	.grid {
 		background: linear-gradient(110deg, var(--discordify-bg-alt), var(--discordify-bg) 75%);
 		padding: 12px;
@@ -87,9 +91,16 @@
 			flex-shrink: 1;
 			flex-grow: 1;
 			max-width: calc(50% - 4px);
+			height: fit-content;
 
 			&:hover {
 				background-color: var(--discordify-navbar-bg-alt);
+
+				.playlistArtwork {
+					&:before {
+						visibility: visible;
+					}
+				}
 			}
 
 			&:last-of-type {
@@ -109,6 +120,8 @@
 					color: var(--discordify-font-color);
 				}
 				.playlistArtwork {
+					max-width: 100%;
+					max-height: 100px;
 					visibility: hidden;
 					&:after {
 						padding-bottom: 50%;
@@ -117,12 +130,31 @@
 			}
 
 			.playlistArtwork {
+				position: relative;
 				width: 100%;
 				border-radius: 4px;
 				max-width: 180px;
 				max-height: 180px;
 				background: var(--discordify-btn-color);
 				margin-bottom: 16px;
+
+				&:before {
+					visibility: hidden;
+					border-radius: 50%;
+					content: '';
+					display: block;
+					position: absolute;
+					width: 25%;
+					height: 25%;
+					min-width: 30px;
+					min-height: 30px;
+					max-width: 45px;
+					max-width: 45px;
+					bottom: 6px;
+					right: 6px;
+					background-color: var(--discordify-btn-color-active);
+					box-shadow: rgba(0, 0, 0, 0.25) 3px 3px 8px, rgba(0, 0, 0, 0.15) 2px 2px 4px;
+				}
 
 				&:after {
 					content: '';

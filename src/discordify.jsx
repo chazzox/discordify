@@ -54,28 +54,6 @@ const Sidebar = () => {
 						</div>
 					</div>
 				</div>
-				<div className="grid">
-					<div className="gridBox wideBox">
-						<div className="playlistArtwork"></div>
-						<h1>Liked Songs</h1>
-						<h2>56 liked songs</h2>
-					</div>
-					<div className="gridBox">
-						<div className="playlistArtwork"></div>
-						<h1>Playlist Name</h1>
-						<h2>Description of Playlist</h2>
-					</div>
-					<div className="gridBox">
-						<div className="playlistArtwork"></div>
-						<h1>Playlist Name</h1>
-						<h2>Super long description of the playlist.</h2>
-					</div>
-					<div className="gridBox">
-						<div className="playlistArtwork"></div>
-						<h1>Playlist Name</h1>
-						<h2>Description of Playlist</h2>
-					</div>
-				</div>
 				{/* add class "compact" for smaller #playbackControls */}
 				<div id="playbackControls">
 					<div id="songInformation">
