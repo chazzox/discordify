@@ -1,9 +1,13 @@
 import { defineConfig } from 'rollup';
-import { babel } from '@rollup/plugin-babel';
-import { terser } from 'rollup-plugin-terser';
-import commonjs from '@rollup/plugin-commonjs';
+
+import alias from '@rollup/plugin-alias';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import typescript from '@rollup/plugin-typescript';
+
 import styles from 'rollup-plugin-styles';
+import { terser } from 'rollup-plugin-terser';
+
 import { name, version } from './package.json';
 import os from 'os';
 import path from 'path';
@@ -27,14 +31,14 @@ const meta = `
  * @author PINPAL#5245 and chazzox#1001
  * @description Spotify but inside discord
  * @version ${version}
+ * @donate https://www.paypal.me/chazzox
  * @website https://github.com/chazzox/discordify#readme
  * @source https://github.com/chazzox/discordify
  */
-const { React, ReactDOM } = BdApi;
 `;
 
 export default defineConfig({
-	input: 'src/discordify.jsx',
+	input: 'src/discordify.tsx',
 	output: [
 		{
 			file: 'plugin/discordify.plugin.js',
@@ -49,7 +53,10 @@ export default defineConfig({
 	],
 	plugins: [
 		// imports
-		nodeResolve({ extensions: ['.jsx', '.js'], jsnext: true }),
+		alias({
+			entries: [{ find: 'react', replacement: path.resolve(path.resolve(__dirname), 'src/react.ts') }]
+		}),
+		nodeResolve({ extensions: ['.tsx', '.ts'], jsnext: true }),
 		commonjs(),
 		// .scss files to inline BdApi string
 		styles({
@@ -61,10 +68,8 @@ export default defineConfig({
 				}
 			]
 		}),
-		// jsx transformer
-		babel({
-			presets: ['@babel/preset-react']
-		}),
+		// tsx and ts transformer
+		typescript(),
 		// minifier
 		terser({
 			module: true,
