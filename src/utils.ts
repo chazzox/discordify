@@ -53,18 +53,34 @@ export function data_log(...output: any): void {
 // Spotify discord internals
 const SpotifyTrackUtils = BdApi.findModuleByProps('getActiveSocketAndDevice');
 const SpotifyUtils = BdApi.findModuleByProps('SpotifyAPI');
+// --------  OTHER SPOTIFY ENDPOINTS  --------
+// const Endpoints =  BdApi.findModuleByProps('SpotifyEndpoints')
 
 /**
  * @description Retrieves access token to spotify song
  * @returns Authorization header
  */
 export async function getAuthHeader(): Promise<string> {
-	const accountId = SpotifyTrackUtils.getActiveSocketAndDevice()?.socket?.accountId;
-	const res = await SpotifyUtils.getAccessToken(accountId);
-	return res.body.access_token;
+	const accessToken = SpotifyTrackUtils.getActiveSocketAndDevice()?.socket?.accessToken;
+	return accessToken;
 }
 
-interface Currently_playing {}
+type SpotifyMediaType = 'album' | 'track';
+
+interface SpotifyItem {}
+interface Currently_playing {
+	actions: { resuming: boolean };
+	context: {
+		external_urls: { spotify: string };
+		type: SpotifyMediaType;
+		uri: string;
+	};
+	is_playing: boolean;
+	item: SpotifyItem;
+
+	progress_ms: number;
+	timestamp: number;
+}
 
 /**
  * @description Get information about users playing data

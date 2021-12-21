@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { Spotify } from '@components/navbarIcons';
 import Sidebar from '@components/sidebar';
 
-const sidebarContainerClass = 'content-yTz4x3';
+const sidebarContainerClass = 'container-2lgZY8';
 
 export default function App() {
 	const [isHidden, setIsHidden] = React.useState(true);
