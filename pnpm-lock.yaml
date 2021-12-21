@@ -14,6 +14,7 @@ specifiers:
   rollup-plugin-terser: ^7.0.2
   sass: ^1.43.2
   terser: ^5.9.0
+  tslib: ^2.3.1
   typescript: ^4.5.2
 
 dependencies:
@@ -24,7 +25,7 @@ devDependencies:
   '@rollup/plugin-alias': 3.1.8_rollup@2.60.1
   '@rollup/plugin-commonjs': 21.0.1_rollup@2.60.1
   '@rollup/plugin-node-resolve': 13.0.6_rollup@2.60.1
-  '@rollup/plugin-typescript': 8.3.0_rollup@2.60.1+typescript@4.5.2
+  '@rollup/plugin-typescript': 8.3.0_b13ef2726f6c50b174fe2dc72f675942
   '@types/bandagedbd__bdapi': 0.3.2
   prettier: 2.5.0
   rollup: 2.60.1
@@ -32,6 +33,7 @@ devDependencies:
   rollup-plugin-terser: 7.0.2_rollup@2.60.1
   sass: 1.43.5
   terser: 5.10.0
+  tslib: 2.3.1
   typescript: 4.5.2
 
 packages:
@@ -121,7 +123,7 @@ packages:
       rollup: 2.60.1
     dev: true
 
-  /@rollup/plugin-typescript/8.3.0_rollup@2.60.1+typescript@4.5.2:
+  /@rollup/plugin-typescript/8.3.0_b13ef2726f6c50b174fe2dc72f675942:
     resolution: {integrity: sha512-I5FpSvLbtAdwJ+naznv+B4sjXZUcIvLLceYpITAn7wAP8W0wqc5noLdGIp9HGVntNhRWXctwPYrSSFQxtl0FPA==}
     engines: {node: '>=8.0.0'}
     peerDependencies:
@@ -132,6 +134,7 @@ packages:
       '@rollup/pluginutils': 3.1.0_rollup@2.60.1
       resolve: 1.20.0
       rollup: 2.60.1
+      tslib: 2.3.1
       typescript: 4.5.2
     dev: true
 

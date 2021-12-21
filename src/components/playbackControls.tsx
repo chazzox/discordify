@@ -3,10 +3,11 @@ import classNames from 'classnames';
 
 import { Pause, Play, Loop, Shuffle, Previous, Next, Mute } from './navbarIcons';
 
-export default function PlayBackControls() {
+const PlayBackControls: React.FC = () => {
 	const [isPlaying, setIsPlaying] = React.useState(false);
 	const [isShuffled, setIsShuffled] = React.useState(false);
 	const [isLooping, setIsLooping] = React.useState(0);
+
 	return (
 		<div id="playbackControls">
 			<div className="row">
@@ -28,7 +29,11 @@ export default function PlayBackControls() {
 				</div>
 			</div>
 			<div className="row">
-				<button id="shuffle" className={isShuffled && 'active'} onClick={() => setIsShuffled(!isShuffled)}>
+				<button
+					id="shuffle"
+					className={isShuffled && 'active'}
+					onClick={() => setIsShuffled(!isShuffled)}
+				>
 					<Shuffle />
 				</button>
 				<button id="previous">
@@ -58,4 +63,5 @@ export default function PlayBackControls() {
 			</div>
 		</div>
 	);
-}
+};
+export default PlayBackControls;

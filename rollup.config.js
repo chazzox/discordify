@@ -37,6 +37,8 @@ const meta = `
  */
 `;
 
+const root = path.resolve(__dirname);
+
 export default defineConfig({
 	input: 'src/discordify.tsx',
 	output: [
@@ -54,7 +56,24 @@ export default defineConfig({
 	plugins: [
 		// imports
 		alias({
-			entries: [{ find: 'react', replacement: path.resolve(path.resolve(__dirname), 'src/react.ts') }]
+			entries: [
+				{
+					find: 'react',
+					replacement: path.resolve(root, 'src/react.ts')
+				},
+				{
+					find: '@components',
+					replacement: path.resolve(root, 'src/components/')
+				},
+				{
+					find: '@routes',
+					replacement: path.resolve(root, 'src/routes/')
+				},
+				{
+					find: '@utils',
+					replacement: path.resolve(root, 'src/utils.ts')
+				}
+			]
 		}),
 		nodeResolve({ extensions: ['.tsx', '.ts'], jsnext: true }),
 		commonjs(),
