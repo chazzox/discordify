@@ -331,13 +331,14 @@
 
 		#songInformation {
 			#currentArtwork {
-				width: calc(var(--discordify-width) - (var(--discordify-width) * 0.333));
-				height: calc(var(--discordify-width) - (var(--discordify-width) * 0.333));
+				width: calc(var(--discordify-width) - (var(--discordify-width) * 0.45));
+				height: calc(var(--discordify-width) - (var(--discordify-width) * 0.45));
 				max-width: 300px;
 				max-height: 300px;
 				background-color: var(--discordify-btn-color);
 				margin-bottom: 8px;
 				border-radius: 8px;
+				background-size: 100%;
 			}
 
 			#compactBtn {
@@ -412,60 +413,10 @@
 					}
 				}
 			}
+
 			#volumeLevel {
 				display: none;
 			}
-		}
-
-		.progressBarRow {
-			padding-top: 8px;
-			padding-bottom: 8px;
-
-			p {
-				margin: 0;
-			}
-
-			.progressBar {
-				position: relative;
-				border-radius: 100px;
-				width: 100%;
-				height: 5px;
-				background-color: var(--discordify-playbackBar-bg);
-
-				.progressKnob {
-					visibility: hidden;
-					border-radius: 50%;
-					background-color: var(--discordify-btn-color-hover);
-					box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-					width: 15px;
-					height: 15px;
-					position: absolute;
-					top: 50%;
-					transform: translateY(-50%);
-					left: 65%;
-				}
-
-				.progressBarInner {
-					border-radius: 100px;
-					height: 100%;
-					width: 65%;
-					background-color: var(--discordify-btn-color);
-				}
-			}
-
-			&:hover {
-				.progressBar {
-					.progressBarInner {
-						background-color: var(--discordify-btn-color-active);
-					}
-					.progressKnob {
-						visibility: visible;
-					}
-				}
-			}
-		}
-		#volumeLevel .progressBar {
-			width: 70%;
 		}
 
 		button {

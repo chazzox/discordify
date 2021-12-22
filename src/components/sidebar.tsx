@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import { getAuthHeader, data_log } from '@utils';
+import { getAuthHeader } from '@utils';
 
 import { Search } from '@components/navbarIcons';
 import NavLink from '@components/navLink';
@@ -15,15 +15,11 @@ import Queue from '@routes/queue';
 const Sidebar = () => {
 	const [accessToken, setAccessToken] = React.useState('');
 
-	useEffect(() => {
+	React.useEffect(() => {
 		getAuthHeader().then((token) => {
 			setAccessToken(`Bearer ${token}`);
 		});
 	}, []);
-
-	useEffect(() => {
-		data_log(accessToken);
-	}, [accessToken]);
 
 	return (
 		<div id="discordSpotifySidebar">

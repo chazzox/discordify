@@ -119,9 +119,9 @@ export function Shuffle() {
 	);
 }
 
-export function Mute() {
+export const Mute = ({ onClick }) => {
 	return (
-		<svg viewBox="0 0 510.65 434.66">
+		<svg viewBox="0 0 510.65 434.66" onClick={onClick}>
 			<path
 				d="M511.91,256.54c-.65,7.76-1.19,15.53-2,23.27-5.36,52.65-26.94,97.85-62.62,136.67-21.37,23.25-46.64,40.87-75.39,
                 53.67-12.32,5.49-23.3,2.1-28-8.44-4.47-10,.47-20.87,12.37-26.27,40.07-18.2,70.65-46.51,92.43-84.8,38.44-67.56,
@@ -150,7 +150,7 @@ export function Mute() {
 			/>
 		</svg>
 	);
-}
+};
 
 export function Spotify() {
 	return (

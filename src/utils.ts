@@ -1,6 +1,23 @@
+// -----------------  MODULES  -----------------
+
+// Subscribe to internal discord events
+export const Dispatcher = BdApi.findModuleByProps('dirtyDispatch');
+
+// Spotify discord internals
+const SpotifyTrackUtils = BdApi.findModuleByProps('getActiveSocketAndDevice');
+const SpotifyUtils = BdApi.findModuleByProps('SpotifyAPI');
+
 // ----------------  CONSTANTS  ----------------
 
 const PAGINATION_LIMIT = '50';
+
+// const Endpoints =  BdApi.findModuleByProps('SpotifyEndpoints')
+
+// Discord Dispatcher Types
+export const { ActionTypes: ACTION_TYPES } = BdApi.findModuleByProps(
+	'ActionTypes',
+	'API_HOST'
+);
 
 /**
  * @description Enum that contains all the spotify endpoints
@@ -50,12 +67,6 @@ export function data_log(...output: any): void {
 
 // ----------------  SPOTIFY  ----------------
 
-// Spotify discord internals
-const SpotifyTrackUtils = BdApi.findModuleByProps('getActiveSocketAndDevice');
-const SpotifyUtils = BdApi.findModuleByProps('SpotifyAPI');
-// --------  OTHER SPOTIFY ENDPOINTS  --------
-// const Endpoints =  BdApi.findModuleByProps('SpotifyEndpoints')
-
 /**
  * @description Retrieves access token to spotify song
  * @returns Authorization header
@@ -67,7 +78,10 @@ export async function getAuthHeader(): Promise<string> {
 
 type SpotifyMediaType = 'album' | 'track';
 
-interface SpotifyItem {}
+interface SpotifyItem {
+	name: string;
+	album: any;
+}
 interface Currently_playing {
 	actions: { resuming: boolean };
 	context: {
