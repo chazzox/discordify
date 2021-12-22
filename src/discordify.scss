@@ -131,12 +131,12 @@
 			}
 
 			&.queueBox {
+				width: 100%;
 				max-width: 100%;
 				background: none;
-				display: flex;
-				flex-direction: row;
+				display: grid;
+				grid-template-columns: [index] 16px [first] 3fr [var1] 2fr [last];
 				align-items: center;
-				justify-content: space-between;
 
 				&:hover {
 					background-color: var(--discordify-highlight);
@@ -150,6 +150,10 @@
 					overflow: hidden;
 					text-overflow: ellipsis;
 					white-space: nowrap;
+				}
+
+				h4 {
+					grid-column: last;
 				}
 
 				.songInfo {
