@@ -10,6 +10,7 @@ import PlayBackControls from '@components/playbackControls';
 import Albums from '@routes/albums';
 import Artists from '@routes/artists';
 import Playlists from '@routes/playlists';
+import Queue from '@routes/queue';
 
 const Sidebar = () => {
 	const [accessToken, setAccessToken] = React.useState('');
@@ -39,6 +40,9 @@ const Sidebar = () => {
 							<NavLink to="/albums" standard="pill" isActive="select">
 								Albums
 							</NavLink>
+							<NavLink to="/queue" standard="pill" isActive="select">
+								Queue
+							</NavLink>
 							<div id="discordifySearch">
 								<Search />
 							</div>
@@ -49,6 +53,7 @@ const Sidebar = () => {
 							<Route path="/" element={<Playlists />} />
 							<Route path="/artists" element={<Artists />} />
 							<Route path="/albums" element={<Albums />} />
+							<Route path="/queue" element={<Queue />} />
 						</Routes>
 					</div>
 					<PlayBackControls token={accessToken} />

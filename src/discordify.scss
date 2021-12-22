@@ -8,6 +8,7 @@
 	--discordify-bg-alt: #111111;
 	--discordify-navbar-bg: #181818;
 	--discordify-navbar-bg-alt: #282828;
+	--discordify-highlight: #2a2a2a;
 
 	--discordify-playbackBar-bg: #535353;
 
@@ -68,18 +69,40 @@
 		box-sizing: border-box;
 	}
 
+	.titleText {
+		color: var(--discordify-font-color);
+		font-size: 24px;
+		font-weight: 700;
+		letter-spacing: -0.04em;
+		line-height: 28px;
+		text-transform: none;
+		text-align: left;
+		width: 100%;
+		height: fit-content;
+	}
+	.headerText {
+		color: var(--discordify-font-color-alt);
+		font-weight: 600;
+		display: block;
+		width: 100%;
+	}
+
 	.round {
 		border-radius: 50% !important;
 	}
 
 	.grid {
-		background: linear-gradient(110deg, var(--discordify-bg-alt), var(--discordify-bg) 75%);
+		background: linear-gradient(
+			110deg,
+			var(--discordify-bg-alt),
+			var(--discordify-bg) 75%
+		);
+		align-items: flex-start;
 		padding: 12px;
 		display: flex;
 		flex-shrink: 1;
 		flex-grow: 1;
 		flex-basis: 0;
-		justify-content: center;
 		flex-wrap: wrap;
 		gap: 8px;
 		overflow-y: auto;
@@ -94,7 +117,7 @@
 			height: fit-content;
 
 			&:hover {
-				background-color: var(--discordify-navbar-bg-alt);
+				background-color: var(--discordify-highlight);
 
 				.playlistArtwork {
 					&:before {
@@ -105,6 +128,52 @@
 
 			&:last-of-type {
 				margin-right: auto;
+			}
+
+			&.queueBox {
+				max-width: 100%;
+				background: none;
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: space-between;
+
+				&:hover {
+					background-color: var(--discordify-highlight);
+				}
+
+				h1,
+				h2,
+				h3,
+				h4 {
+					max-width: calc(var(--discordify-width) / 4);
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+				}
+
+				.songInfo {
+					display: flex;
+					flex-wrap: nowrap;
+					flex-direction: row;
+					line-height: 21px;
+					align-items: center;
+					gap: 12px;
+
+					.songExtraInfo {
+						flex-direction: column;
+					}
+				}
+
+				.playlistArtwork {
+					width: 42px;
+					border-radius: 2px;
+					margin-bottom: 0;
+
+					&::before {
+						visibility: hidden !important;
+					}
+				}
 			}
 
 			&.wideBox {
@@ -153,7 +222,8 @@
 					bottom: 6px;
 					right: 6px;
 					background-color: var(--discordify-btn-color-active);
-					box-shadow: rgba(0, 0, 0, 0.25) 3px 3px 8px, rgba(0, 0, 0, 0.15) 2px 2px 4px;
+					box-shadow: rgba(0, 0, 0, 0.25) 3px 3px 8px,
+						rgba(0, 0, 0, 0.15) 2px 2px 4px;
 				}
 
 				&:after {
