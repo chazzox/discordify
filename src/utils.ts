@@ -1,3 +1,5 @@
+import { createContext } from 'react';
+
 // -----------------  MODULES  -----------------
 
 // Subscribe to internal discord events
@@ -55,7 +57,7 @@ const LOG_STYLES = {
  * @description print with the 'discordify' prefix
  * @param output any object you want to print
  */
-export function data_log(...output: any): void {
+export function debug_log(...output: any): void {
 	console.log(
 		'%cdiscordify',
 		Object.entries(LOG_STYLES)
@@ -136,3 +138,7 @@ export async function getPlaylists(token: string): Promise<Playlists> {
 
 	return playlists;
 }
+
+// ----------------------------------------------
+
+export const SpotifyContext = createContext(null);

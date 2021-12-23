@@ -3,6 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { Spotify } from '@components/navbarIcons';
 import Sidebar from '@components/sidebar';
+import { SpotifyContext } from '@utils';
 
 const sidebarContainerClass = 'container-2lgZY8';
 
@@ -41,5 +42,16 @@ const SidebarPortal = ({ isHidden }) => {
 		};
 	}, [isHidden]);
 
-	return <>{BdApi.ReactDOM.createPortal(<>{!isHidden && <Sidebar />}</>, wrapper)}</>;
+	return (
+		<>
+			{BdApi.ReactDOM.createPortal(
+				!isHidden && (
+					<SpotifyContext.Provider value="test reducer value!!!">
+						<Sidebar />
+					</SpotifyContext.Provider>
+				),
+				wrapper
+			)}
+		</>
+	);
 };

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classNames from 'classnames';
 
-import { Pause, Play, Loop, Shuffle, Previous, Next } from '@components/navbarIcons';
-import { ACTION_TYPES, data_log, Dispatcher, getPlaying } from '@utils';
-import Volume from './volume';
+import { SpotifyContext, getPlaying } from '@utils';
+import { Pause, Play, Loop, Shuffle, Previous, Next, Spotify } from '@components/navbarIcons';
+import Volume from '@components/volume';
 
 const PlayBackControls: React.FC<{ token: string }> = ({ token }) => {
 	const [isPlaying, setIsPlaying] = React.useState(false);
@@ -19,12 +19,6 @@ const PlayBackControls: React.FC<{ token: string }> = ({ token }) => {
 		album: ''
 	});
 
-	const LOGS = [
-		ACTION_TYPES.SPOTIFY_PLAYER_STATE,
-		ACTION_TYPES.SPOTIFY_PLAYER_PLAY,
-		ACTION_TYPES.SPOTIFY_PROFILE_UPDATE
-	];
-
 	React.useEffect(() => {
 		getPlaying(token).then((res) => {
 			setIsPlaying(res.is_playing);
@@ -35,14 +29,6 @@ const PlayBackControls: React.FC<{ token: string }> = ({ token }) => {
 				maker: res.item.album.artists[0].name
 			});
 		});
-
-		// TEMPORORARY LOGS
-		LOGS.forEach((l) => Dispatcher.subscribe(l, data_log));
-
-		return () => {
-			// unsubbing from log on unMount
-			LOGS.forEach((l) => Dispatcher.unsubscribe(l, data_log));
-		};
 	}, []);
 
 	return (

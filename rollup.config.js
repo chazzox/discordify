@@ -96,6 +96,7 @@ export default defineConfig({
 			mangle: {},
 			parse: {},
 			rename: {},
+			// keeps the BD required header comment
 			format: { comments: '/@name/' }
 		})
 	]

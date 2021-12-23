@@ -1,5 +1,5 @@
 import React from 'react';
-import { data_log } from './utils';
+import { debug_log } from './utils';
 import App from './app';
 
 import './discordify.scss';
@@ -8,15 +8,15 @@ module.exports = class SpotifyDiscord {
 	patchedHeader = false;
 	cancel_patch_header() {}
 	load() {
-		data_log('loaded!');
+		debug_log('loaded!');
 		this.patch();
 	}
 	start() {
-		data_log('starting!');
+		debug_log('starting!');
 		this.patch();
 	}
 	stop() {
-		data_log('cya :)');
+		debug_log('cya :)');
 		this.cancel_patch_header();
 	}
 	patch() {

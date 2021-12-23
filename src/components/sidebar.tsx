@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
-
-import { getAuthHeader } from '@utils';
 
 import { Search } from '@components/navbarIcons';
 import NavLink from '@components/navLink';
 import PlayBackControls from '@components/playbackControls';
+import { ACTION_TYPES, debug_log, Dispatcher, getAuthHeader, SpotifyContext } from '@utils';
 
 import Albums from '@routes/albums';
 import Artists from '@routes/artists';
@@ -15,15 +14,33 @@ import Queue from '@routes/queue';
 const Sidebar = () => {
 	const [accessToken, setAccessToken] = React.useState('');
 
+	const Spotify = useContext(SpotifyContext);
+
+	const LOGS = [
+		ACTION_TYPES.SPOTIFY_PLAYER_STATE,
+		ACTION_TYPES.SPOTIFY_PLAYER_PLAY,
+		ACTION_TYPES.SPOTIFY_PROFILE_UPDATE
+	];
+
 	React.useEffect(() => {
-		getAuthHeader().then((token) => {
-			setAccessToken(`Bearer ${token}`);
-		});
+		debug_log(Spotify);
+		getAuthHeader()
+			.then((token) => {
+				if (token) setAccessToken(`Bearer ${token}`);
+			})
+			.catch((err) => debug_log('token request failed', err));
+
+		// @TEMP : Logging discord internal spotify events
+		LOGS.forEach((l) => Dispatcher.subscribe(l, debug_log));
+		return () => {
+			// Unsubbing from log on unMount
+			LOGS.forEach((l) => Dispatcher.unsubscribe(l, debug_log));
+		};
 	}, []);
 
 	return (
 		<div id="discordSpotifySidebar">
-			{accessToken !== '' ? (
+			{accessToken !== '' && (
 				<div id="discordSpotifyInner">
 					<div id="navbar">
 						<div className="pillRow">
@@ -54,8 +71,6 @@ const Sidebar = () => {
 					</div>
 					<PlayBackControls token={accessToken} />
 				</div>
-			) : (
-				<>pls login</>
 			)}
 		</div>
 	);
