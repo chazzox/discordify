@@ -20,29 +20,23 @@ export default function App() {
 
 	return (
 		<MemoryRouter>
-			<button id="discordifyBtn" onClick={() => setIsHidden(!isHidden)}>
-				<div className="iconWrapper-2OrFZ1 clickable-3rdHwn">
-					<Spotify />
-					<div
-						id="discordifyBtnTooltip"
-						className="tooltip-2QfLtc tooltipBottom-3ARrEK tooltipPrimary-1d1ph4"
-					>
-						<div className="tooltipPointer-3ZfirK"></div>
-						<div className="tooltipContent-bqVLWK">
-							{isHidden ? 'Open' : 'Close'} Spotify
+			<SpotifyContext.Provider value="">
+				<button id="discordifyBtn" onClick={() => setIsHidden(!isHidden)}>
+					<div className="iconWrapper-2OrFZ1 clickable-3rdHwn">
+						<Spotify />
+						<div
+							id="discordifyBtnTooltip"
+							className="tooltip-2QfLtc tooltipBottom-3ARrEK tooltipPrimary-1d1ph4"
+						>
+							<div className="tooltipPointer-3ZfirK"></div>
+							<div className="tooltipContent-bqVLWK">
+								{isHidden ? 'Open' : 'Close'} Spotify
+							</div>
 						</div>
 					</div>
-				</div>
-			</button>
-
-			{BdApi.ReactDOM.createPortal(
-				!isHidden && (
-					<SpotifyContext.Provider value="">
-						<Sidebar />
-					</SpotifyContext.Provider>
-				),
-				wrapper
-			)}
+				</button>
+				{BdApi.ReactDOM.createPortal(!isHidden && <Sidebar />, wrapper)}
+			</SpotifyContext.Provider>
 		</MemoryRouter>
 	);
 }

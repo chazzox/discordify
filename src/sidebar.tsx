@@ -12,6 +12,10 @@ import Dashboard from '@components/dashboard';
 const Sidebar = () => {
 	const Spotify = useContext(SpotifyContext);
 
+	React.useEffect(() => {
+		debug_log(`Access token: '${Spotify}'`);
+	}, [Spotify]);
+
 	const LOGS = [
 		ACTION_TYPES.SPOTIFY_PLAYER_STATE,
 		ACTION_TYPES.SPOTIFY_PLAYER_PLAY,
@@ -19,7 +23,7 @@ const Sidebar = () => {
 	];
 
 	React.useEffect(() => {
-		debug_log(`Access token: '${Spotify}'`);
+		if (!Spotify) debug_log('i should fetch token');
 
 		// @TEMP : Logging discord internal spotify events
 		LOGS.forEach((l) => Dispatcher.subscribe(l, debug_log));
@@ -38,7 +42,10 @@ const Sidebar = () => {
 					<Route path="albums" element={<Albums />} />
 					<Route path="queue" element={<Queue />} />
 				</Route>
-				<Route path="/login" element={<>yoyoyoyoyoyoyoyoyoyoyoyoyoyo</>} />
+				<Route
+					path="/login"
+					element={<>Please open a spotify window to use the plugin!</>}
+				/>
 			</Routes>
 		</div>
 	);

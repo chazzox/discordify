@@ -8,15 +8,12 @@ module.exports = class SpotifyDiscord {
 	patchedHeader = false;
 	cancel_patch_header() {}
 	load() {
-		debug_log('loaded!');
 		this.patch();
 	}
 	start() {
-		debug_log('starting!');
 		this.patch();
 	}
 	stop() {
-		debug_log('cya :)');
 		this.cancel_patch_header();
 	}
 	patch() {
