@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 
-import { SpotifyContext, getPlaying } from '@utils';
+import { getPlaying } from '@utils';
 import { Pause, Play, Loop, Shuffle, Previous, Next, Spotify } from '@components/navbarIcons';
 import Volume from '@components/volume';
 

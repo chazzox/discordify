@@ -6,12 +6,14 @@ import { createContext } from 'react';
 export const Dispatcher = BdApi.findModuleByProps('dirtyDispatch');
 
 // Spotify discord internals
-const SpotifyTrackUtils = BdApi.findModuleByProps('getActiveSocketAndDevice');
-const SpotifyUtils = BdApi.findModuleByProps('SpotifyAPI');
+export const SpotifyTrackUtils = BdApi.findModuleByProps('getActiveSocketAndDevice');
+export const SpotifyUtils = BdApi.findModuleByProps('SpotifyAPI');
 
 // ----------------  CONSTANTS  ----------------
 
-const PAGINATION_LIMIT = '50';
+export const PAGINATION_LIMIT = '50';
+
+export const SIDEBAR_CONTAINER_CLASS = 'container-2lgZY8';
 
 // const Endpoints =  BdApi.findModuleByProps('SpotifyEndpoints')
 

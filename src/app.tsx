@@ -1,14 +1,22 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
+import Sidebar from './sidebar';
 import { Spotify } from '@components/navbarIcons';
-import Sidebar from '@components/sidebar';
-import { SpotifyContext } from '@utils';
-
-const sidebarContainerClass = 'container-2lgZY8';
+import { SIDEBAR_CONTAINER_CLASS, SpotifyContext } from '@utils';
 
 export default function App() {
 	const [isHidden, setIsHidden] = React.useState(true);
+
+	const wrapper = document.createElement('div');
+
+	React.useEffect(() => {
+		const container = document.getElementsByClassName(SIDEBAR_CONTAINER_CLASS)[0];
+		container?.appendChild(wrapper);
+		return () => {
+			container?.removeChild(wrapper);
+		};
+	}, [isHidden]);
 
 	return (
 		<MemoryRouter>
@@ -26,24 +34,7 @@ export default function App() {
 					</div>
 				</div>
 			</button>
-			<SidebarPortal isHidden={isHidden} />
-		</MemoryRouter>
-	);
-}
 
-const SidebarPortal = ({ isHidden }) => {
-	const wrapper = document.createElement('div');
-
-	useEffect(() => {
-		const container = document.getElementsByClassName(sidebarContainerClass)[0];
-		container?.appendChild(wrapper);
-		return () => {
-			container?.removeChild(wrapper);
-		};
-	}, [isHidden]);
-
-	return (
-		<>
 			{BdApi.ReactDOM.createPortal(
 				!isHidden && (
 					<SpotifyContext.Provider value="test reducer value!!!">
@@ -52,6 +43,6 @@ const SidebarPortal = ({ isHidden }) => {
 				),
 				wrapper
 			)}
-		</>
+		</MemoryRouter>
 	);
-};
+}
