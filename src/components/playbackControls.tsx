@@ -1,8 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { getPlaying } from '@utils';
-import { Pause, Play, Loop, Shuffle, Previous, Next, Spotify } from '@components/navbarIcons';
+import { Pause, Play, Loop, Shuffle, Previous, Next } from '@components/navbarIcons';
 import Volume from '@components/volume';
 
 const PlayBackControls: React.FC<{ token: string }> = ({ token }) => {
@@ -10,26 +9,12 @@ const PlayBackControls: React.FC<{ token: string }> = ({ token }) => {
 	const [isShuffled, setIsShuffled] = React.useState(false);
 	const [isLooping, setIsLooping] = React.useState(0);
 
-	// maybe trigger a dispatch event to grab stuff from discord?
-	// useReducer typa vibe tbh
 	const [currentlyPlaying, setCurrentInfo] = React.useState({
 		image: '',
 		name: '',
 		maker: '',
 		album: ''
 	});
-
-	React.useEffect(() => {
-		getPlaying(token).then((res) => {
-			setIsPlaying(res.is_playing);
-			setCurrentInfo({
-				image: res.item.album.images[0].url,
-				name: res.item.name,
-				album: res.item.album.name,
-				maker: res.item.album.artists[0].name
-			});
-		});
-	}, []);
 
 	return (
 		<div id="playbackControls">

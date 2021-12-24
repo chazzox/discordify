@@ -37,7 +37,7 @@ export default function App() {
 
 			{BdApi.ReactDOM.createPortal(
 				!isHidden && (
-					<SpotifyContext.Provider value="test reducer value!!!">
+					<SpotifyContext.Provider value="">
 						<Sidebar />
 					</SpotifyContext.Provider>
 				),

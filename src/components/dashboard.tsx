@@ -3,8 +3,14 @@ import React from 'react';
 import { Search } from '@components/navbarIcons';
 import NavLink from '@components/navLink';
 import PlayBackControls from '@components/playbackControls';
+import { useSpotify } from '@utils';
+import { Navigate } from 'react-router-dom';
 
 const Dashboard: React.FC = ({ children }) => {
+	const Spotify = useSpotify();
+
+	if (!Spotify) return <Navigate to="/login" />;
+
 	return (
 		<div id="discordSpotifyInner">
 			<div id="navbar">

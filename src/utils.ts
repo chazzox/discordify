@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
 
 // -----------------  MODULES  -----------------
 
@@ -149,6 +149,10 @@ export async function getPlaylists(token: string): Promise<Playlists> {
 	return playlists;
 }
 
-// ----------------------------------------------
+// --------- Spotify Context Stuff ---------
 
 export const SpotifyContext = createContext(null);
+
+export const useSpotify = () => {
+	return useContext(SpotifyContext);
+};
