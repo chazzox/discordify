@@ -10,11 +10,11 @@ import Queue from '@routes/queue';
 import Dashboard from '@components/dashboard';
 
 const Sidebar = () => {
-	const Spotify = useContext(SpotifyContext);
+	const { accessToken, setAccessToken } = useContext(SpotifyContext);
 
 	React.useEffect(() => {
-		debug_log(`Access token: '${Spotify}'`);
-	}, [Spotify]);
+		debug_log(`Access token: '${accessToken}'`);
+	}, [accessToken]);
 
 	const LOGS = [
 		ACTION_TYPES.SPOTIFY_PLAYER_STATE,
@@ -23,7 +23,10 @@ const Sidebar = () => {
 	];
 
 	React.useEffect(() => {
-		if (!Spotify) debug_log('i should fetch token');
+		if (!accessToken) {
+			debug_log(`i should fetch token: '${accessToken}'`);
+			setAccessToken('hello world');
+		}
 
 		// @TEMP : Logging discord internal spotify events
 		LOGS.forEach((l) => Dispatcher.subscribe(l, debug_log));

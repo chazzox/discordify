@@ -18,9 +18,10 @@ module.exports = class SpotifyDiscord {
 	}
 	patch() {
 		// patches toolbar component with react app
-		// @TODO: replace with patcher
+		// @TODO: replace with Patcher
 		const HeaderBarContainer =
 			BdApi.findModuleByDisplayName('HeaderBarContainer')?.prototype;
+
 		if (HeaderBarContainer && !this.patchedHeader) {
 			this.cancel_patch_header = BdApi.monkeyPatch(
 				HeaderBarContainer,

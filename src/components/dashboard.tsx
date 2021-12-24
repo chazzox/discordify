@@ -7,9 +7,9 @@ import { useSpotify } from '@utils';
 import { Navigate } from 'react-router-dom';
 
 const Dashboard: React.FC = ({ children }) => {
-	const Spotify = useSpotify();
+	const { accessToken } = useSpotify();
 
-	if (!Spotify) return <Navigate to="/login" />;
+	if (!accessToken) return <Navigate to="/login" />;
 
 	return (
 		<div id="discordSpotifyInner">

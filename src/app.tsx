@@ -7,6 +7,7 @@ import { SIDEBAR_CONTAINER_CLASS, SpotifyContext } from '@utils';
 
 export default function App() {
 	const [isHidden, setIsHidden] = React.useState(true);
+	const [accessToken, setAccessToken] = React.useState('');
 
 	const wrapper = document.createElement('div');
 
@@ -20,7 +21,7 @@ export default function App() {
 
 	return (
 		<MemoryRouter>
-			<SpotifyContext.Provider value="">
+			<SpotifyContext.Provider value={{ accessToken, setAccessToken }}>
 				<button id="discordifyBtn" onClick={() => setIsHidden(!isHidden)}>
 					<div className="iconWrapper-2OrFZ1 clickable-3rdHwn">
 						<Spotify />
