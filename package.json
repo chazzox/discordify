@@ -1,6 +1,6 @@
 {
 	"name": "discordify",
-	"version": "0.0.5",
+	"version": "0.5.0",
 	"description": "A plugin for better discord that gives you pause/queue and playback control",
 	"scripts": {
 		"build": "rollup --config",
@@ -25,6 +25,6 @@
 	},
 	"dependencies": {
 		"classnames": "^2.3.1",
-		"react-router-dom": "6"
+		"react-router-dom": "^6.2.1"
 	}
 }

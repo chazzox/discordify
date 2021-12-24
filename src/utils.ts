@@ -18,10 +18,18 @@ export const SIDEBAR_CONTAINER_CLASS = 'container-2lgZY8';
 // const Endpoints =  BdApi.findModuleByProps('SpotifyEndpoints')
 
 // Discord Dispatcher Types
+interface ActionTypes {
+	ActionTypes: {
+		SPOTIFY_PLAYER_PLAY: string;
+		SPOTIFY_PLAYER_STATE: string;
+		SPOTIFY_PROFILE_UPDATE: string;
+	};
+}
+
 export const { ActionTypes: ACTION_TYPES } = BdApi.findModuleByProps(
 	'ActionTypes',
 	'API_HOST'
-);
+) as ActionTypes;
 
 /**
  * @description Enum that contains all the spotify endpoints
