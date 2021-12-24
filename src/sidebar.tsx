@@ -25,7 +25,8 @@ const Sidebar = () => {
 	React.useEffect(() => {
 		if (!accessToken) {
 			debug_log(`i should fetch token: '${accessToken}'`);
-			setAccessToken('hello world');
+			// this causes error smh
+			// setAccessToken('hello world');
 		}
 
 		// @TEMP : Logging discord internal spotify events
