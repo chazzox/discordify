@@ -2,7 +2,7 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 
-import Sidebar from './sidebar';
+import Sidebar from '@components/sidebar';
 import { Spotify } from '@components/navbarIcons';
 import { SIDEBAR_CONTAINER_CLASS, SpotifyContext } from '@utils';
 

@@ -9,7 +9,6 @@ import { useSpotify } from '@utils';
 const Dashboard: React.FC = ({ children }) => {
 	const { accessToken } = useSpotify();
 
-	// this line might cause an error
 	if (!accessToken) return <Navigate to="/login" />;
 
 	return (
