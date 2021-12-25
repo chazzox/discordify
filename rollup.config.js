@@ -59,19 +59,11 @@ export default defineConfig({
 			entries: [
 				{
 					find: 'react',
-					replacement: path.resolve(root, 'src/react.ts')
+					replacement: path.resolve(root, 'src/utils/react.ts')
 				},
 				{
-					find: '@components',
-					replacement: path.resolve(root, 'src/components/')
-				},
-				{
-					find: '@routes',
-					replacement: path.resolve(root, 'src/routes/')
-				},
-				{
-					find: '@utils',
-					replacement: path.resolve(root, 'src/utils.ts')
+					find: 'react-dom',
+					replacement: path.resolve(root, 'src/utils/react-dom.ts')
 				}
 			]
 		}),

@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import { ACTION_TYPES, debug_log, Dispatcher, getAuthHeader, SpotifyContext } from '@utils';
+import { ACTION_TYPES, debug_log, Dispatcher, useSpotify } from '@utils';
 
 import Albums from '@routes/albums';
 import Artists from '@routes/artists';
@@ -10,7 +10,7 @@ import Queue from '@routes/queue';
 import Dashboard from '@components/dashboard';
 
 const Sidebar = () => {
-	const { accessToken, setAccessToken } = useContext(SpotifyContext);
+	const { accessToken, setAccessToken } = useSpotify();
 
 	React.useEffect(() => {
 		debug_log(`Access token: '${accessToken}'`);
@@ -26,7 +26,7 @@ const Sidebar = () => {
 		if (!accessToken) {
 			debug_log(`i should fetch token: '${accessToken}'`);
 			// this causes error smh
-			// setAccessToken('hello world');
+			setAccessToken('hello world');
 		}
 
 		// @TEMP : Logging discord internal spotify events

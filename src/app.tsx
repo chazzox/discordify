@@ -1,5 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import ReactDOM from 'react-dom';
 
 import Sidebar from './sidebar';
 import { Spotify } from '@components/navbarIcons';
@@ -36,7 +37,7 @@ export default function App() {
 						</div>
 					</div>
 				</button>
-				{BdApi.ReactDOM.createPortal(!isHidden && <Sidebar />, wrapper)}
+				{ReactDOM.createPortal(!isHidden && <Sidebar />, wrapper)}
 			</SpotifyContext.Provider>
 		</MemoryRouter>
 	);

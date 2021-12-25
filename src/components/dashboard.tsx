@@ -1,14 +1,15 @@
 import React from 'react';
+import { Navigate } from 'react-router-dom';
 
 import { Search } from '@components/navbarIcons';
 import NavLink from '@components/navLink';
 import PlayBackControls from '@components/playbackControls';
 import { useSpotify } from '@utils';
-import { Navigate } from 'react-router-dom';
 
 const Dashboard: React.FC = ({ children }) => {
 	const { accessToken } = useSpotify();
 
+	// this line might cause an error
 	if (!accessToken) return <Navigate to="/login" />;
 
 	return (
