@@ -10,15 +10,7 @@ export default function App() {
 	const [isHidden, setIsHidden] = React.useState(true);
 	const [accessToken, setAccessToken] = React.useState('');
 
-	const wrapper = document.createElement('div');
-
-	React.useEffect(() => {
-		const container = document.getElementsByClassName(SIDEBAR_CONTAINER_CLASS)[0];
-		container?.appendChild(wrapper);
-		return () => {
-			container?.removeChild(wrapper);
-		};
-	}, [isHidden]);
+	const container = document.querySelector('.container-2lgZY8');
 
 	return (
 		<MemoryRouter>
@@ -37,7 +29,7 @@ export default function App() {
 						</div>
 					</div>
 				</button>
-				{ReactDOM.createPortal(!isHidden && <Sidebar />, wrapper)}
+				{ReactDOM.createPortal(!isHidden && <Sidebar />, container)}
 			</SpotifyContext.Provider>
 		</MemoryRouter>
 	);

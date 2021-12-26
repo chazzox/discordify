@@ -1,16 +1,10 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
 
+import PlayBackControls from '@components/playbackControls';
 import { Search } from '@components/navbarIcons';
 import NavLink from '@components/navLink';
-import PlayBackControls from '@components/playbackControls';
-import { useSpotify } from '@utils';
 
 const Dashboard: React.FC = ({ children }) => {
-	const { accessToken } = useSpotify();
-
-	if (!accessToken) return <Navigate to="/login" />;
-
 	return (
 		<div id="discordSpotifyInner">
 			<div id="navbar">

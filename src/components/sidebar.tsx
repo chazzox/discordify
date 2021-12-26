@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import { ACTION_TYPES, debug_log, Dispatcher, useSpotify } from '@utils';
 
@@ -11,9 +11,12 @@ import Dashboard from '@components/dashboard';
 
 const Sidebar = () => {
 	const { accessToken, setAccessToken } = useSpotify();
+	const navigate = useNavigate();
 
 	React.useEffect(() => {
-		debug_log(`Access token: '${accessToken}'`);
+		debug_log(`access token: '${accessToken}'`);
+		if (!accessToken) navigate('/login');
+		else navigate('/');
 	}, [accessToken]);
 
 	const LOGS = [
@@ -23,16 +26,10 @@ const Sidebar = () => {
 	];
 
 	React.useEffect(() => {
-		if (!accessToken) {
-			debug_log(`i should fetch token: '${accessToken}'`);
-			// this causes error smh
-			setAccessToken('hello world');
-		}
-
-		// @TEMP : Logging discord internal spotify events
+		// @TEMP : Logging discord internal spotify events.
 		LOGS.forEach((l) => Dispatcher.subscribe(l, debug_log));
 		return () => {
-			// Unsubbing from log on unMount
+			// @TEMP : Unsubbing from log on unMount.
 			LOGS.forEach((l) => Dispatcher.unsubscribe(l, debug_log));
 		};
 	}, []);

@@ -1,5 +1,4 @@
 import React from 'react';
-import { debug_log } from './utils';
 import App from './app';
 
 import './discordify.scss';
