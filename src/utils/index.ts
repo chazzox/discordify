@@ -13,7 +13,7 @@ export const SpotifyUtils = BdApi.findModuleByProps('SpotifyAPI');
 
 export const PAGINATION_LIMIT = '50';
 
-export const SIDEBAR_CONTAINER_CLASS = 'container-2lgZY8';
+export const SIDEBAR_CONTAINER_CLASS = '.container-2lgZY8';
 
 // const Endpoints =  BdApi.findModuleByProps('SpotifyEndpoints')
 
@@ -156,3 +156,23 @@ export const SpotifyContext = createContext(null);
 export const useSpotify = () => {
 	return useContext(SpotifyContext);
 };
+
+// --------- Spotify Reducer Stuff ---------
+
+export enum SpotifyActions {
+	SET_ACCESS
+}
+
+export const initialState = {
+	accessToken: '',
+	currentlyPlaying: { album: '', song: '', artist: '' }
+};
+
+export function spotifyReducer(state: any, action: any) {
+	switch (action.type) {
+		case SpotifyActions.SET_ACCESS:
+			return { ...state, accessToken: action.payload };
+		default:
+			throw new Error('No Action with signature');
+	}
+}

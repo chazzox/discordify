@@ -4,18 +4,19 @@ import ReactDOM from 'react-dom';
 
 import Sidebar from '@components/sidebar';
 import { Spotify } from '@components/navbarIcons';
-import { SIDEBAR_CONTAINER_CLASS, SpotifyContext } from '@utils';
+import { initialState, SIDEBAR_CONTAINER_CLASS, SpotifyContext, spotifyReducer } from '@utils';
 
 export default function App() {
 	const [isHidden, setIsHidden] = React.useState(true);
-	const [accessToken, setAccessToken] = React.useState('');
 
-	const container = document.querySelector('.container-2lgZY8');
+	const [state, dispatch] = React.useReducer(spotifyReducer, initialState);
+
+	const container = document.querySelector(SIDEBAR_CONTAINER_CLASS);
 
 	return (
 		<MemoryRouter>
-			<SpotifyContext.Provider value={{ accessToken, setAccessToken }}>
-				<button id="discordifyBtn" onClick={() => setIsHidden(!isHidden)}>
+			<SpotifyContext.Provider value={{ state, dispatch }}>
+				<button id="discordifyBtn" onClick={() => setIsHidden((prev) => !prev)}>
 					<div className="iconWrapper-2OrFZ1 clickable-3rdHwn">
 						<Spotify />
 						<div

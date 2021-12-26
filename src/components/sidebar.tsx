@@ -7,10 +7,14 @@ import Albums from '@routes/albums';
 import Artists from '@routes/artists';
 import Playlists from '@routes/playlists';
 import Queue from '@routes/queue';
+
 import Dashboard from '@components/dashboard';
+import Login from '@components/login';
 
 const Sidebar = () => {
-	const { accessToken, setAccessToken } = useSpotify();
+	const {
+		state: { accessToken }
+	} = useSpotify();
 	const navigate = useNavigate();
 
 	React.useEffect(() => {
@@ -43,10 +47,7 @@ const Sidebar = () => {
 					<Route path="albums" element={<Albums />} />
 					<Route path="queue" element={<Queue />} />
 				</Route>
-				<Route
-					path="/login"
-					element={<>Please open a spotify window to use the plugin!</>}
-				/>
+				<Route path="/login" element={<Login />} />
 			</Routes>
 		</div>
 	);

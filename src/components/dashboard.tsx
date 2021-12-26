@@ -9,18 +9,19 @@ const Dashboard: React.FC = ({ children }) => {
 		<div id="discordSpotifyInner">
 			<div id="navbar">
 				<div className="pillRow">
-					<NavLink to="/" standard="pill" isActive="select">
+					<NavLink to="/" defaultClassName="pill" isActive="select">
 						Playlists
 					</NavLink>
-					<NavLink to="/artists" standard="pill" isActive="select">
+					<NavLink to="/artists" defaultClassName="pill" isActive="select">
 						Artists
 					</NavLink>
-					<NavLink to="/albums" standard="pill" isActive="select">
+					<NavLink to="/albums" defaultClassName="pill" isActive="select">
 						Albums
 					</NavLink>
-					<NavLink to="/queue" standard="pill" isActive="select">
+					<NavLink to="/queue" defaultClassName="pill" isActive="select">
 						Queue
 					</NavLink>
+
 					<div id="discordifySearch">
 						<Search />
 					</div>
