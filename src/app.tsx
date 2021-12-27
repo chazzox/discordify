@@ -8,30 +8,27 @@ import { initialState, SIDEBAR_CONTAINER_CLASS, SpotifyContext, spotifyReducer }
 
 export default function App() {
 	const [isHidden, setIsHidden] = React.useState(true);
-
 	const [state, dispatch] = React.useReducer(spotifyReducer, initialState);
 
 	const container = document.querySelector(SIDEBAR_CONTAINER_CLASS);
 
 	return (
-		<MemoryRouter>
-			<SpotifyContext.Provider value={{ state, dispatch }}>
-				<button id="discordifyBtn" onClick={() => setIsHidden((prev) => !prev)}>
-					<div className="iconWrapper-2OrFZ1 clickable-3rdHwn">
-						<Spotify />
-						<div
-							id="discordifyBtnTooltip"
-							className="tooltip-2QfLtc tooltipBottom-3ARrEK tooltipPrimary-1d1ph4"
-						>
-							<div className="tooltipPointer-3ZfirK"></div>
-							<div className="tooltipContent-bqVLWK">
-								{isHidden ? 'Open' : 'Close'} Spotify
-							</div>
+		<SpotifyContext.Provider value={{ state, dispatch }}>
+			<button id="discordifyBtn" onClick={() => setIsHidden((prev) => !prev)}>
+				<div className="iconWrapper-2OrFZ1 clickable-3rdHwn">
+					<Spotify />
+					<div
+						id="discordifyBtnTooltip"
+						className="tooltip-2QfLtc tooltipBottom-3ARrEK tooltipPrimary-1d1ph4"
+					>
+						<div className="tooltipPointer-3ZfirK"></div>
+						<div className="tooltipContent-bqVLWK">
+							{isHidden ? 'Open' : 'Close'} Spotify
 						</div>
 					</div>
-				</button>
-				{ReactDOM.createPortal(!isHidden && <Sidebar />, container)}
-			</SpotifyContext.Provider>
-		</MemoryRouter>
+				</div>
+			</button>
+			{ReactDOM.createPortal(!isHidden && <Sidebar />, container)}
+		</SpotifyContext.Provider>
 	);
 }
