@@ -1,3 +1,4 @@
+import { State } from '.pnpm/history@5.2.0/node_modules/history';
 import { createContext, useContext } from 'react';
 
 // -----------------  MODULES  -----------------
@@ -77,23 +78,30 @@ export function debug_log(...output: any): void {
 	);
 }
 
-// ----------------  SPOTIFY  ----------------
-
-/**
- * @description Retrieves access token to spotify song
- * @returns Authorization header
- */
-export async function getAuthHeader(): Promise<string> {
-	const accessToken = SpotifyTrackUtils.getActiveSocketAndDevice()?.socket?.accessToken;
-	return accessToken;
-}
+// ---------------  SPOTIFY TYPES  ---------------
 
 type SpotifyMediaType = 'album' | 'track';
+
+interface StateType {
+	accessToken?: string;
+	currentlyPlaying: {
+		album?: string;
+		song?: string;
+		artist?: string;
+		image?: string;
+	};
+	playerState: {
+		isPlaying: boolean;
+		isShuffle: boolean;
+		isLooping: number;
+	};
+}
 
 interface SpotifyItem {
 	name: string;
 	album: any;
 }
+
 interface Currently_playing {
 	actions: { resuming: boolean };
 	context: {
@@ -106,6 +114,37 @@ interface Currently_playing {
 
 	progress_ms: number;
 	timestamp: number;
+}
+
+interface Playlists {}
+
+type ContextType = {
+	state: React.ReducerState<typeof spotifyReducer>;
+	dispatch: React.Dispatch<React.ReducerAction<typeof spotifyReducer>>;
+};
+
+export enum SpotifyActions {
+	SET_ACCESS = 'SET_ACCESS',
+	SET_IS_PLAYING = 'SET_IS_PLAYING',
+	SET_IS_SHUFFLE = 'SET_IS_SHUFFLE',
+	SET_IS_LOOPING = 'SET_IS_LOOPING'
+}
+
+type Actions =
+	| { type: SpotifyActions.SET_ACCESS; payload: string }
+	| { type: SpotifyActions.SET_IS_PLAYING; payload: boolean }
+	| { type: SpotifyActions.SET_IS_SHUFFLE; payload: boolean }
+	| { type: SpotifyActions.SET_IS_LOOPING; payload: number };
+
+// ---------------  SPOTIFY API FUNCTIONS  ---------------
+
+/**
+ * @description Retrieves access token to spotify song
+ * @returns Authorization header
+ */
+export async function getAuthHeader(): Promise<string> {
+	const accessToken = SpotifyTrackUtils.getActiveSocketAndDevice()?.socket?.accessToken;
+	return accessToken;
 }
 
 /**
@@ -121,8 +160,6 @@ export async function getPlaying(token: string): Promise<Currently_playing> {
 
 	return await req.json();
 }
-
-interface Playlists {}
 
 /**
  * @description Get all user playlists
@@ -149,30 +186,31 @@ export async function getPlaylists(token: string): Promise<Playlists> {
 	return playlists;
 }
 
-// --------- Spotify Context Stuff ---------
+// --------- SPOTIFY CONTEXT ---------
 
-export const SpotifyContext = createContext(null);
+export const SpotifyContext = createContext<ContextType>(null);
 
 export const useSpotify = () => {
 	return useContext(SpotifyContext);
 };
 
-// --------- Spotify Reducer Stuff ---------
-
-export enum SpotifyActions {
-	SET_ACCESS
-}
-
-export const initialState = {
-	accessToken: '',
-	currentlyPlaying: { album: '', song: '', artist: '' }
+export const initialState: StateType = {
+	accessToken: null,
+	currentlyPlaying: { album: null, song: null, artist: null, image: null },
+	playerState: { isPlaying: false, isShuffle: false, isLooping: 0 }
 };
 
-export function spotifyReducer(state: any, action: any) {
+export function spotifyReducer(state: StateType, action: Actions): StateType {
 	switch (action.type) {
 		case SpotifyActions.SET_ACCESS:
 			return { ...state, accessToken: action.payload };
+		case SpotifyActions.SET_IS_PLAYING:
+			return { playerState: { isPlaying: action.payload }, ...state };
+		case SpotifyActions.SET_IS_SHUFFLE:
+			return { playerState: { isShuffle: action.payload }, ...state };
+		case SpotifyActions.SET_IS_LOOPING:
+			return { playerState: { isLooping: action.payload }, ...state };
 		default:
-			throw new Error('No Action with signature');
+			throw new Error('No Action with signature' + action);
 	}
 }
