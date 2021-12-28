@@ -19,11 +19,19 @@ export const SIDEBAR_CONTAINER_CLASS = '.container-2lgZY8';
 // const Endpoints =  BdApi.findModuleByProps('SpotifyEndpoints')
 
 // Discord Dispatcher Types
+
+export type AccessTokenEvent = {
+	type: string;
+	accountId: string;
+	accessToken: string;
+};
 interface ActionTypes {
 	ActionTypes: {
 		SPOTIFY_PLAYER_PLAY: string;
+		SPOTIFY_PLAYER_PAUSE: string;
 		SPOTIFY_PLAYER_STATE: string;
-		SPOTIFY_PROFILE_UPDATE: string;
+		SPOTIFY_ACCOUNT_ACCESS_TOKEN: string;
+		SPOTIFY_ACCOUNT_ACCESS_TOKEN_REVOKE: string;
 	};
 }
 

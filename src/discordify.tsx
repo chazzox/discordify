@@ -1,16 +1,11 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { ACTION_TYPES, debug_log, Dispatcher } from '@utils';
+import { initialState, SpotifyContext, spotifyReducer } from '@utils';
 
 import App from './app';
 import './discordify.scss';
 
-const LOGS = [
-	ACTION_TYPES.SPOTIFY_PLAYER_PLAY,
-	ACTION_TYPES.SPOTIFY_PLAYER_STATE,
-	ACTION_TYPES.SPOTIFY_PROFILE_UPDATE
-];
 module.exports = class SpotifyDiscord {
 	patchedHeader = false;
 	cancel_patch_header() {}
@@ -19,10 +14,8 @@ module.exports = class SpotifyDiscord {
 	}
 	start() {
 		this.patch();
-		LOGS.forEach((l) => Dispatcher.subscribe(l, (e: any) => debug_log(l, e)));
 	}
 	stop() {
-		LOGS.forEach((l) => Dispatcher.unsubscribe(l, (e: any) => debug_log(l, e)));
 		this.cancel_patch_header();
 	}
 	patch() {
@@ -38,15 +31,22 @@ module.exports = class SpotifyDiscord {
 				{
 					after: ({ returnValue }) => {
 						// pushes the component to the children prop
-						returnValue?.props?.toolbar?.props?.children.push(
-							<MemoryRouter>
-								<App />
-							</MemoryRouter>
-						);
+						returnValue?.props?.toolbar?.props?.children.push(<MainComponent />);
 					}
 				}
 			);
 			this.patchedHeader = true;
 		}
 	}
+};
+
+const MainComponent = () => {
+	const [state, dispatch] = React.useReducer(spotifyReducer, initialState);
+	return (
+		<SpotifyContext.Provider value={{ state, dispatch }}>
+			<MemoryRouter>
+				<App />
+			</MemoryRouter>
+		</SpotifyContext.Provider>
+	);
 };

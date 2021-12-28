@@ -3,10 +3,10 @@ import classNames from 'classnames';
 
 import { Pause, Play, Loop, Shuffle, Previous, Next } from '@components/navbarIcons';
 import Volume from '@components/volume';
-import { SpotifyActions, useSpotify } from '@utils';
+import { useSpotify } from '@utils';
 
 const PlayBackControls: React.FC<{ token: string }> = ({ token }) => {
-	const { state, dispatch } = useSpotify();
+	const { state } = useSpotify();
 	const { playerState, currentlyPlaying, accessToken } = state;
 
 	React.useEffect(() => {}, []);
