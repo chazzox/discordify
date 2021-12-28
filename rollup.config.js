@@ -1,12 +1,11 @@
 import { defineConfig } from 'rollup';
 
-import alias from '@rollup/plugin-alias';
+import typescript from '@rollup/plugin-typescript';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import typescript from '@rollup/plugin-typescript';
+import alias from '@rollup/plugin-alias';
 
 import styles from 'rollup-plugin-styles';
-import { terser } from 'rollup-plugin-terser';
 
 import { name, version } from './package.json';
 import os from 'os';
@@ -25,8 +24,7 @@ function GetBetterDiscordPath() {
 	}
 }
 
-const meta = `
-/**
+const meta = `/**
  * @name ${name}
  * @author PINPAL#5245 and chazzox#1001
  * @description Spotify but inside discord
@@ -34,27 +32,38 @@ const meta = `
  * @donate https://www.paypal.me/chazzox
  * @website https://github.com/chazzox/discordify#readme
  * @source https://github.com/chazzox/discordify
- */
-`;
+ */`;
+
+const selfInstall = ['', ''];
+
+const selfInstallHeader = '';
+const selfInstallFooter = '';
 
 const root = path.resolve(__dirname);
 
 export default defineConfig({
 	input: 'src/discordify.tsx',
 	output: [
+		// build to local file as well as plugin folder
 		{
 			file: 'plugin/discordify.plugin.js',
-			format: 'cjs',
-			banner: meta
+			format: 'es',
+			banner: meta + selfInstallHeader,
+			footer: selfInstallFooter
 		},
 		{
 			file: path.join(...GetBetterDiscordPath(), 'discordify.plugin.js'),
-			format: 'cjs',
-			banner: meta
+			format: 'es',
+			banner: meta + selfInstallHeader,
+			footer: selfInstallFooter
 		}
 	],
 	plugins: [
-		// imports
+		// importing libraries and converting commonjs files to es6
+		nodeResolve({ extensions: ['.tsx', '.ts'], jsnext: true }),
+		commonjs(),
+
+		// fixing any node_module relying on react/react-dom to use discord internals
 		alias({
 			entries: [
 				{
@@ -67,8 +76,7 @@ export default defineConfig({
 				}
 			]
 		}),
-		nodeResolve({ extensions: ['.tsx', '.ts'], jsnext: true }),
-		commonjs(),
+
 		// .scss files to inline BdApi string
 		styles({
 			extensions: ['.scss'],
@@ -79,17 +87,8 @@ export default defineConfig({
 				}
 			]
 		}),
-		// tsx and ts transformer
-		typescript(),
-		// minifier
-		terser({
-			module: true,
-			compress: { sequences: false },
-			mangle: {},
-			parse: {},
-			rename: {},
-			// keeps the BD required header comment
-			format: { comments: '/@name/' }
-		})
+
+		// transforms ts and tsx to js
+		typescript()
 	]
 });
