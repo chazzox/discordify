@@ -3,6 +3,7 @@
 	"version": "0.5.0",
 	"description": "A plugin for better discord that gives you pause/queue and playback control",
 	"scripts": {
+		"start": "rollup --config -w",
 		"build": "rollup --config",
 		"watch": "rollup --config -w",
 		"format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
