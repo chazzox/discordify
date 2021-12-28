@@ -1243,6 +1243,7 @@ var SpotifyActions;
 })(SpotifyActions || (SpotifyActions = {}));
 // ---------------  SPOTIFY API FUNCTIONS  ---------------
 /**
+ * @todo if first access token does not exist try fetching from user id
  * @description Retrieves access token to spotify song
  * @returns Authorization header
  */
@@ -1252,6 +1253,8 @@ function getAuthHeader() {
         var accessToken;
         return __generator(this, function (_c) {
             accessToken = (_b = (_a = SpotifyTrackUtils.getActiveSocketAndDevice()) === null || _a === void 0 ? void 0 : _a.socket) === null || _b === void 0 ? void 0 : _b.accessToken;
+            if (!accessToken)
+                debug_log('i should try to fetch token through other methods :)');
             return [2 /*return*/, accessToken];
         });
     });
@@ -1616,14 +1619,29 @@ function App() {
             });
         }
     };
+    var handleDeviceUpdate = function (e) {
+        debug_log(ACTION_TYPES.SPOTIFY_SET_DEVICES, e);
+        // if there are no devices clear the token
+        if (e.devices.length === 0)
+            dispatch({ type: SpotifyActions.SET_ACCESS, payload: null });
+        // try to fetch token when a new device is detected and the accessToken is null
+        if (!state.accessToken && e.devices.length > 0)
+            getAuthHeader().then(function (token) {
+                debug_log('token from devices', token);
+                if (token)
+                    dispatch({ type: SpotifyActions.SET_ACCESS, payload: token });
+            });
+    };
     react.useEffect(function () {
         // if the access token is ever updated by discord internals, update the components value
         Dispatcher.subscribe(ACTION_TYPES.SPOTIFY_ACCOUNT_ACCESS_TOKEN, handleTokenUpdate);
         Dispatcher.subscribe(ACTION_TYPES.SPOTIFY_PLAYER_STATE, handleStateUpdate);
+        Dispatcher.subscribe(ACTION_TYPES.SPOTIFY_SET_DEVICES, handleDeviceUpdate);
         LOGS.forEach(function (l) { return Dispatcher.subscribe(l, function (e) { return debug_log(l, e); }); });
         return function () {
             Dispatcher.unsubscribe(ACTION_TYPES.SPOTIFY_ACCOUNT_ACCESS_TOKEN, handleTokenUpdate);
             Dispatcher.unsubscribe(ACTION_TYPES.SPOTIFY_PLAYER_STATE, handleStateUpdate);
+            Dispatcher.subscribe(ACTION_TYPES.SPOTIFY_SET_DEVICES, handleDeviceUpdate);
             LOGS.forEach(function (l) { return Dispatcher.unsubscribe(l, function (e) { return debug_log(l, e); }); });
         };
     }, []);

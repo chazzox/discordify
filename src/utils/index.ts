@@ -32,6 +32,8 @@ interface ActionTypes {
 		SPOTIFY_PLAYER_STATE: string;
 		SPOTIFY_ACCOUNT_ACCESS_TOKEN: string;
 		SPOTIFY_ACCOUNT_ACCESS_TOKEN_REVOKE: string;
+		SPOTIFY_SET_ACTIVE_DEVICE: string;
+		SPOTIFY_SET_DEVICES: string;
 	};
 }
 
@@ -147,11 +149,13 @@ type Actions =
 // ---------------  SPOTIFY API FUNCTIONS  ---------------
 
 /**
+ * @todo if first access token does not exist try fetching from user id
  * @description Retrieves access token to spotify song
  * @returns Authorization header
  */
 export async function getAuthHeader(): Promise<string> {
 	const accessToken = SpotifyTrackUtils.getActiveSocketAndDevice()?.socket?.accessToken;
+	if (!accessToken) debug_log('i should try to fetch token through other methods :)');
 	return accessToken;
 }
 
