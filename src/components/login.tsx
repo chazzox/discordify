@@ -9,7 +9,7 @@ const Login = () => {
 			if (token) dispatch({ type: SpotifyActions.SET_ACCESS, payload: token });
 		});
 	}, []);
-	return <>Please get open a spotify device to use this plugin</>;
+	return <h1>Please get open a spotify device to use this plugin</h1>;
 };
 
 export default Login;

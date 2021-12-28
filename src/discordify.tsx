@@ -1,7 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { initialState, SpotifyContext, spotifyReducer } from '@utils';
+import { debug_log, initialState, SpotifyContext, spotifyReducer } from '@utils';
 
 import App from './app';
 import './discordify.scss';
@@ -9,6 +9,7 @@ import './discordify.scss';
 module.exports = class SpotifyDiscord {
 	load() {}
 	start() {
+		debug_log('started!');
 		const HeaderBarContainer = BdApi.findModuleByDisplayName('HeaderBarContainer')?.prototype;
 		// @ts-expect-error
 		BdApi.Patcher.after('discordify', HeaderBarContainer, 'renderLoggedIn', (_, __, returnValue) => {

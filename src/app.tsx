@@ -8,6 +8,7 @@ import {
 	ACTION_TYPES,
 	debug_log,
 	Dispatcher,
+	getAuthHeader,
 	SIDEBAR_CONTAINER_CLASS,
 	SpotifyActions,
 	useSpotify
@@ -20,7 +21,7 @@ const LOGS = [
 ];
 
 export default function App() {
-	const [isHidden, setIsHidden] = React.useState(true);
+	const [isHidden, setIsHidden] = React.useState(BdApi.loadData('discordify', 'isHidden'));
 	const { state, dispatch } = useSpotify();
 
 	const container = document.querySelector(SIDEBAR_CONTAINER_CLASS);
@@ -32,6 +33,12 @@ export default function App() {
 
 	const handleStateUpdate = (e: any) => {
 		debug_log('state update', e);
+		// if the spotify state has changed and we still dont have an access token
+		if (!state.accessToken) {
+			getAuthHeader().then((token) => {
+				if (token) dispatch({ type: SpotifyActions.SET_ACCESS, payload: token });
+			});
+		}
 	};
 
 	React.useEffect(() => {
@@ -48,7 +55,15 @@ export default function App() {
 
 	return (
 		<>
-			<button id="discordifyBtn" onClick={() => setIsHidden((prev) => !prev)}>
+			<button
+				id="discordifyBtn"
+				onClick={() =>
+					setIsHidden((prev) => {
+						BdApi.saveData('discordify', 'isHidden', !prev);
+						return !prev;
+					})
+				}
+			>
 				<div className="iconWrapper-2OrFZ1 clickable-3rdHwn">
 					<Spotify />
 					<div

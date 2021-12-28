@@ -6,7 +6,7 @@ import NavLink from '@components/navLink';
 
 const Dashboard: React.FC = ({ children }) => {
 	return (
-		<div id="discordSpotifyInner">
+		<>
 			<div id="navbar">
 				<div className="pillRow">
 					<NavLink to="/" defaultClassName="pill" isActive="select">
@@ -21,7 +21,6 @@ const Dashboard: React.FC = ({ children }) => {
 					<NavLink to="/queue" defaultClassName="pill" isActive="select">
 						Queue
 					</NavLink>
-
 					<div id="discordifySearch">
 						<Search />
 					</div>
@@ -29,7 +28,7 @@ const Dashboard: React.FC = ({ children }) => {
 			</div>
 			<div className="grid">{children}</div>
 			<PlayBackControls token={'accessToken'} />
-		</div>
+		</>
 	);
 };
 

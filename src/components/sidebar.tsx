@@ -22,15 +22,17 @@ const Sidebar = () => {
 
 	return (
 		<div id="discordSpotifySidebar">
-			<Routes>
-				<Route path="/" element={<Dashboard />}>
-					<Route index element={<Playlists />} />
-					<Route path="artists" element={<Artists />} />
-					<Route path="albums" element={<Albums />} />
-					<Route path="queue" element={<Queue />} />
-				</Route>
-				<Route path="/login" element={<Login />} />
-			</Routes>
+			<div id="discordSpotifyInner">
+				<Routes>
+					<Route path="/" element={<Dashboard />}>
+						<Route index element={<Playlists />} />
+						<Route path="artists" element={<Artists />} />
+						<Route path="albums" element={<Albums />} />
+						<Route path="queue" element={<Queue />} />
+					</Route>
+					<Route path="/login" element={<Login />} />
+				</Routes>
+			</div>
 		</div>
 	);
 };
