@@ -40,10 +40,7 @@ export default function App() {
 		Dispatcher.subscribe(ACTION_TYPES.SPOTIFY_PLAYER_STATE, handleStateUpdate);
 		LOGS.forEach((l) => Dispatcher.subscribe(l, (e: any) => debug_log(l, e)));
 		return () => {
-			Dispatcher.unsubscribe(
-				ACTION_TYPES.SPOTIFY_ACCOUNT_ACCESS_TOKEN,
-				handleTokenUpdate
-			);
+			Dispatcher.unsubscribe(ACTION_TYPES.SPOTIFY_ACCOUNT_ACCESS_TOKEN, handleTokenUpdate);
 			Dispatcher.unsubscribe(ACTION_TYPES.SPOTIFY_PLAYER_STATE, handleStateUpdate);
 			LOGS.forEach((l) => Dispatcher.unsubscribe(l, (e: any) => debug_log(l, e)));
 		};
@@ -59,9 +56,7 @@ export default function App() {
 						className="tooltip-2QfLtc tooltipBottom-3ARrEK tooltipPrimary-1d1ph4"
 					>
 						<div className="tooltipPointer-3ZfirK"></div>
-						<div className="tooltipContent-bqVLWK">
-							{isHidden ? 'Open' : 'Close'} Spotify
-						</div>
+						<div className="tooltipContent-bqVLWK">{isHidden ? 'Open' : 'Close'} Spotify</div>
 					</div>
 				</div>
 			</button>

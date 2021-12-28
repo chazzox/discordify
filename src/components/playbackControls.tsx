@@ -38,9 +38,7 @@ const PlayBackControls: React.FC<{ token: string }> = ({ token }) => {
 					<button id="previous">
 						<Previous />
 					</button>
-					<button id="playPause">
-						{playerState.isPlaying ? <Play /> : <Pause />}
-					</button>
+					<button id="playPause">{playerState.isPlaying ? <Play /> : <Pause />}</button>
 					<button id="next">
 						<Next />
 					</button>
