@@ -9,6 +9,7 @@ const Volume: React.FC = () => {
 		<div id="volumeLevel" className="progressBarRow row">
 			<button id="muteBtn">
 				<Mute
+					volume={Number.parseInt(volume[0])}
 					onClick={() =>
 						setVolume((prev) => {
 							// @Notice This is fucking rank please refactor soon.

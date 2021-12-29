@@ -1183,7 +1183,7 @@ function __spreadArray(to, from, pack) {
 var Dispatcher = BdApi.findModuleByProps('dirtyDispatch');
 // Spotify discord internals
 var SpotifyTrackUtils = BdApi.findModuleByProps('getActiveSocketAndDevice');
-BdApi.findModuleByProps('SpotifyAPI');
+var SpotifyUtils = BdApi.findModuleByProps('SpotifyAPI');
 var SIDEBAR_CONTAINER_CLASS = '.container-2lgZY8';
 var ACTION_TYPES = BdApi.findModuleByProps('ActionTypes', 'API_HOST').ActionTypes;
 /**
@@ -1245,17 +1245,25 @@ var SpotifyActions;
 /**
  * @todo if first access token does not exist try fetching from user id
  * @description Retrieves access token to spotify song
+ * @param accountId if there is not an internal value for accessToken and we know the users spotify
+ * account id, use getAccessToken to fetch a new one
  * @returns Authorization header
  */
-function getAuthHeader() {
-    var _a, _b;
+function getAuthHeader(accountId) {
+    var _a, _b, _c;
     return __awaiter(this, void 0, void 0, function () {
-        var accessToken;
-        return __generator(this, function (_c) {
-            accessToken = (_b = (_a = SpotifyTrackUtils.getActiveSocketAndDevice()) === null || _a === void 0 ? void 0 : _a.socket) === null || _b === void 0 ? void 0 : _b.accessToken;
-            if (!accessToken)
-                debug_log('i should try to fetch token through other methods :)');
-            return [2 /*return*/, accessToken];
+        var accessToken, req;
+        return __generator(this, function (_d) {
+            switch (_d.label) {
+                case 0:
+                    accessToken = (_b = (_a = SpotifyTrackUtils.getActiveSocketAndDevice()) === null || _a === void 0 ? void 0 : _a.socket) === null || _b === void 0 ? void 0 : _b.accessToken;
+                    if (!(!accessToken && accountId)) return [3 /*break*/, 2];
+                    return [4 /*yield*/, SpotifyUtils.getAccessToken(accountId)];
+                case 1:
+                    req = _d.sent();
+                    return [2 /*return*/, (_c = req === null || req === void 0 ? void 0 : req.body) === null || _c === void 0 ? void 0 : _c.access_token];
+                case 2: return [2 /*return*/, accessToken];
+            }
         });
     });
 }
@@ -1472,12 +1480,12 @@ function Shuffle() {
         react.createElement("path", { d: "M42.25,90.85C52,90.7,65,90.4,77.78,93.55A91.46,91.46,0,0,1,128,125.63q24.41,30,48.84,60c7.92,\r\n                9.75,7.56,20.6-.82,27.39s-19.16,4.75-27-4.86Q124.94,178.65,100.94,\r\n                149c-12.07-14.91-27.45-22.58-46.8-22.22-11.65.23-23.31.14-35,0C7.87,126.71-.55,118.77-.38,108.65S7.89,\r\n                91.06,19,90.87C25.67,90.75,32.35,90.85,42.25,90.85Z", transform: "translate(0.39 -55.03)" })));
 }
 var Mute = function (_a) {
-    var onClick = _a.onClick;
+    var onClick = _a.onClick, volume = _a.volume;
     return (react.createElement("svg", { viewBox: "0 0 510.65 434.66", onClick: onClick },
-        react.createElement("path", { d: "M511.91,256.54c-.65,7.76-1.19,15.53-2,23.27-5.36,52.65-26.94,97.85-62.62,136.67-21.37,23.25-46.64,40.87-75.39,\r\n                53.67-12.32,5.49-23.3,2.1-28-8.44-4.47-10,.47-20.87,12.37-26.27,40.07-18.2,70.65-46.51,92.43-84.8,38.44-67.56,\r\n                31.14-155.91-18.86-218.33a193.24,193.24,0,0,0-72.67-56.25c-16.11-7.22-19.88-23.66-7.76-33.67,6.51-5.38,\r\n                13.74-5.27,21.11-2.07,43.33,18.84,77.57,48.41,103.11,88,23.6,36.6,36.58,76.58,37.26,120.33a38.33,38.33,0,0,0,1,5.86Z", transform: "translate(-1.26 -38.1)" }),
         react.createElement("path", { d: "M236.39,255.8q0,81.51,0,163c0,11.07-4.94,19-13.43,21.64-8,2.51-14.52,0-20.32-5.83-31.67-31.79-63.51-63.42-95.09-95.3a19.14,19.14,0,0,\r\n                0-15-6.13c-22.94.25-45.88.14-68.81.08-14-.05-21.94-6.62-22.13-20.67q-.75-57.08,0-114.16c.19-14.05,8.1-20.62,\r\n                22.13-20.66,23.1-.07,46.22.29,69.3-.29a22.32,22.32,0,0,0,13.86-5.68q47.17-46.26,93.56-93.31c6.85-6.91,\r\n                14.09-11.61,23.84-7.31s12.17,12.56,12.14,22.55C236.31,147.77,236.4,201.78,236.39,255.8Z", transform: "translate(-1.26 -38.1)" }),
-        react.createElement("path", { d: "M432.9,263.43c-3.57,57.53-32.81,106.14-92.41,135-10.84,5.25-22.24,1.69-27.15-7.88-4.82-9.4-1.46-19.9,9.18-25.69,\r\n                18.56-10.08,35.74-21.44,48.67-38.78,43-57.65,24.5-140.77-39.1-174.45-3.68-2-7.34-3.92-10.87-6.1-9.14-5.64-12.35-15.52-8.1-24.52s15.49-14,\r\n                25-9.11c13.22,6.82,26.62,14,38.16,23.24C411.72,163.59,433,210.28,432.9,263.43Z", transform: "translate(-1.26 -38.1)" }),
-        react.createElement("path", { d: "M315.68,255.71c.59-13.58-5.07-24-16.28-31.59a103.72,103.72,0,0,1-12.23-9.38c-7.38-6.82-8.59-15.77-3.65-23.3,5.25-8,\r\n                15.08-10.86,24.16-7,44.83,19.18,60.46,76.29,32,116.18a75.17,75.17,0,0,1-31.13,25.61c-9.41,4.19-19.26,\r\n                1.8-24.77-6.24-5.33-7.77-4.06-16.88,3.79-24.06a104.85,104.85,0,0,1,11.88-9C310.47,279.42,316.16,269.21,315.68,255.71Z", transform: "translate(-1.26 -38.1)" })));
+        volume > 0 && (react.createElement("path", { d: "M315.68,255.71c.59-13.58-5.07-24-16.28-31.59a103.72,103.72,0,0,1-12.23-9.38c-7.38-6.82-8.59-15.77-3.65-23.3,5.25-8,\r\n                15.08-10.86,24.16-7,44.83,19.18,60.46,76.29,32,116.18a75.17,75.17,0,0,1-31.13,25.61c-9.41,4.19-19.26,\r\n                1.8-24.77-6.24-5.33-7.77-4.06-16.88,3.79-24.06a104.85,104.85,0,0,1,11.88-9C310.47,279.42,316.16,269.21,315.68,255.71Z", transform: "translate(-1.26 -38.1)" })),
+        volume > 33 && (react.createElement("path", { d: "M432.9,263.43c-3.57,57.53-32.81,106.14-92.41,135-10.84,5.25-22.24,1.69-27.15-7.88-4.82-9.4-1.46-19.9,9.18-25.69,\r\n                18.56-10.08,35.74-21.44,48.67-38.78,43-57.65,24.5-140.77-39.1-174.45-3.68-2-7.34-3.92-10.87-6.1-9.14-5.64-12.35-15.52-8.1-24.52s15.49-14,\r\n                25-9.11c13.22,6.82,26.62,14,38.16,23.24C411.72,163.59,433,210.28,432.9,263.43Z", transform: "translate(-1.26 -38.1)" })),
+        volume > 66 && (react.createElement("path", { d: "M511.91,256.54c-.65,7.76-1.19,15.53-2,23.27-5.36,52.65-26.94,97.85-62.62,136.67-21.37,23.25-46.64,40.87-75.39,\r\n                53.67-12.32,5.49-23.3,2.1-28-8.44-4.47-10,.47-20.87,12.37-26.27,40.07-18.2,70.65-46.51,92.43-84.8,38.44-67.56,\r\n                31.14-155.91-18.86-218.33a193.24,193.24,0,0,0-72.67-56.25c-16.11-7.22-19.88-23.66-7.76-33.67,6.51-5.38,\r\n                13.74-5.27,21.11-2.07,43.33,18.84,77.57,48.41,103.11,88,23.6,36.6,36.58,76.58,37.26,120.33a38.33,38.33,0,0,0,1,5.86Z", transform: "translate(-1.26 -38.1)" }))));
 };
 function Spotify() {
     return (react.createElement("svg", { viewBox: "0 0 24 24", width: "24", height: "24", className: "icon-22AiRD" },
@@ -1492,7 +1500,7 @@ var Volume = function () {
     var _a = react.useState(['65']), volume = _a[0], setVolume = _a[1];
     return (react.createElement("div", { id: "volumeLevel", className: "progressBarRow row" },
         react.createElement("button", { id: "muteBtn" },
-            react.createElement(Mute, { onClick: function () {
+            react.createElement(Mute, { volume: Number.parseInt(volume[0]), onClick: function () {
                     return setVolume(function (prev) {
                         // @Notice This is fucking rank please refactor soon.
                         return prev[0] == '0' ? [prev[1]] : ['0', prev[0]];
@@ -1596,55 +1604,48 @@ var Sidebar = function () {
                 react.createElement(Route, { path: "/login", element: react.createElement(Login, null) })))));
 };
 
-var LOGS = [
-    ACTION_TYPES.SPOTIFY_PLAYER_PLAY,
-    ACTION_TYPES.SPOTIFY_PLAYER_PAUSE,
-    ACTION_TYPES.SPOTIFY_ACCOUNT_ACCESS_TOKEN_REVOKE
-];
 function App() {
     var _a = react.useState(BdApi.loadData('discordify', 'isHidden')), isHidden = _a[0], setIsHidden = _a[1];
     var _b = useSpotify(), state = _b.state, dispatch = _b.dispatch;
+    var accessToken = state.accessToken;
     var container = document.querySelector(SIDEBAR_CONTAINER_CLASS);
-    var handleTokenUpdate = function (e) {
-        if (state.accessToken !== e.accessToken)
-            dispatch({ type: SpotifyActions.SET_ACCESS, payload: e.accessToken });
-    };
-    var handleStateUpdate = function (e) {
-        debug_log('state update', e);
-        // if the spotify state has changed and we still dont have an access token
-        if (!state.accessToken) {
-            getAuthHeader().then(function (token) {
-                if (token)
-                    dispatch({ type: SpotifyActions.SET_ACCESS, payload: token });
-            });
-        }
-    };
-    var handleDeviceUpdate = function (e) {
-        debug_log(ACTION_TYPES.SPOTIFY_SET_DEVICES, e);
-        // if there are no devices clear the token
-        if (e.devices.length === 0)
-            dispatch({ type: SpotifyActions.SET_ACCESS, payload: null });
-        // try to fetch token when a new device is detected and the accessToken is null
-        if (!state.accessToken && e.devices.length > 0)
-            getAuthHeader().then(function (token) {
-                debug_log('token from devices', token);
-                if (token)
-                    dispatch({ type: SpotifyActions.SET_ACCESS, payload: token });
-            });
-    };
     react.useEffect(function () {
+        var handleTokenUpdate = function (e) {
+            if (accessToken !== e.accessToken)
+                dispatch({ type: SpotifyActions.SET_ACCESS, payload: e.accessToken });
+        };
+        // fires too often
+        var handleStateUpdate = function (e) {
+            // if the spotify state has changed and we still dont have an access token
+            if (!accessToken) {
+                debug_log(accessToken, state);
+                getAuthHeader().then(function (token) {
+                    if (token)
+                        dispatch({ type: SpotifyActions.SET_ACCESS, payload: token });
+                });
+            }
+        };
+        var handleDeviceUpdate = function (e) {
+            // if there are no devices clear the token
+            if (e.devices.length === 0)
+                dispatch({ type: SpotifyActions.SET_ACCESS, payload: null });
+            // try to fetch token when a new device is detected and the accessToken is null
+            if (!accessToken && e.devices.length > 0)
+                getAuthHeader(e.accountId).then(function (token) {
+                    if (token)
+                        dispatch({ type: SpotifyActions.SET_ACCESS, payload: token });
+                });
+        };
         // if the access token is ever updated by discord internals, update the components value
         Dispatcher.subscribe(ACTION_TYPES.SPOTIFY_ACCOUNT_ACCESS_TOKEN, handleTokenUpdate);
         Dispatcher.subscribe(ACTION_TYPES.SPOTIFY_PLAYER_STATE, handleStateUpdate);
         Dispatcher.subscribe(ACTION_TYPES.SPOTIFY_SET_DEVICES, handleDeviceUpdate);
-        LOGS.forEach(function (l) { return Dispatcher.subscribe(l, function (e) { return debug_log(l, e); }); });
         return function () {
             Dispatcher.unsubscribe(ACTION_TYPES.SPOTIFY_ACCOUNT_ACCESS_TOKEN, handleTokenUpdate);
             Dispatcher.unsubscribe(ACTION_TYPES.SPOTIFY_PLAYER_STATE, handleStateUpdate);
-            Dispatcher.subscribe(ACTION_TYPES.SPOTIFY_SET_DEVICES, handleDeviceUpdate);
-            LOGS.forEach(function (l) { return Dispatcher.unsubscribe(l, function (e) { return debug_log(l, e); }); });
+            Dispatcher.unsubscribe(ACTION_TYPES.SPOTIFY_SET_DEVICES, handleDeviceUpdate);
         };
-    }, []);
+    }, [accessToken]);
     return (react.createElement(react.Fragment, null,
         react.createElement("button", { id: "discordifyBtn", onClick: function () {
                 return setIsHidden(function (prev) {
@@ -1665,6 +1666,11 @@ function App() {
 var css = ":root {\n  --discordify-width: 400px;\n  --discordify-font-color: #ffffff;\n  --discordify-font-color-alt: #ababab;\n  --discordify-bg: #212121;\n  --discordify-bg-alt: #111111;\n  --discordify-navbar-bg: #181818;\n  --discordify-navbar-bg-alt: #282828;\n  --discordify-highlight: #2a2a2a;\n  --discordify-playbackBar-bg: #535353;\n  --discordify-btn-color: #b3b3b3;\n  --discordify-btn-color-alt: #333333;\n  --discordify-btn-color-hover: #ffffff;\n  --discordify-btn-color-active: #1db954;\n}\n\n#discordifyBtn {\n  background: none;\n  padding: 0;\n  margin: 0;\n  outline: none;\n  position: relative;\n  margin-right: 6px;\n}\n#discordifyBtn #discordifyBtnTooltip {\n  visibility: hidden;\n  position: absolute;\n  left: 50%;\n  bottom: -8px;\n  transform: translate(-50%, 100%);\n}\n#discordifyBtn svg * {\n  fill: var(--interactive-normal);\n}\n#discordifyBtn:hover svg * {\n  fill: var(--interactive-hover);\n}\n#discordifyBtn:hover #discordifyBtnTooltip {\n  visibility: visible;\n}\n\n#discordSpotifySidebar {\n  width: var(--discordify-width);\n  min-width: var(--discordify-width);\n  height: 100%;\n  box-sizing: border-box;\n  color: var(--discordify-btn-color);\n  position: relative;\n}\n#discordSpotifySidebar #discordSpotifyInner {\n  display: flex;\n  justify-content: center;\n  flex-direction: column;\n  height: 100%;\n}\n#discordSpotifySidebar * {\n  box-sizing: border-box;\n}\n#discordSpotifySidebar .titleText {\n  color: var(--discordify-font-color);\n  font-size: 24px;\n  font-weight: 700;\n  letter-spacing: -0.04em;\n  line-height: 28px;\n  text-transform: none;\n  text-align: left;\n  width: 100%;\n  height: fit-content;\n}\n#discordSpotifySidebar .headerText {\n  color: var(--discordify-font-color-alt);\n  font-weight: 600;\n  display: block;\n  width: 100%;\n}\n#discordSpotifySidebar .round {\n  border-radius: 50% !important;\n}\n#discordSpotifySidebar .grid {\n  background: linear-gradient(110deg, var(--discordify-bg-alt), var(--discordify-bg) 75%);\n  align-items: flex-start;\n  padding: 12px;\n  display: flex;\n  flex-shrink: 1;\n  flex-grow: 1;\n  flex-basis: 0;\n  flex-wrap: wrap;\n  gap: 8px;\n  overflow-y: auto;\n}\n#discordSpotifySidebar .grid .gridBox {\n  background-color: var(--discordify-navbar-bg);\n  border-radius: 6px;\n  padding: 12px;\n  flex-shrink: 1;\n  flex-grow: 1;\n  max-width: calc(50% - 4px);\n  height: fit-content;\n}\n#discordSpotifySidebar .grid .gridBox:hover {\n  background-color: var(--discordify-highlight);\n}\n#discordSpotifySidebar .grid .gridBox:hover .playlistArtwork:before {\n  visibility: visible;\n}\n#discordSpotifySidebar .grid .gridBox:last-of-type {\n  margin-right: auto;\n}\n#discordSpotifySidebar .grid .gridBox.queueBox {\n  width: 100%;\n  max-width: 100%;\n  background: none;\n  display: grid;\n  grid-template-columns: [index] 16px [first] 3fr [var1] 2fr [last];\n  align-items: center;\n}\n#discordSpotifySidebar .grid .gridBox.queueBox:hover {\n  background-color: var(--discordify-highlight);\n}\n#discordSpotifySidebar .grid .gridBox.queueBox h1,\n#discordSpotifySidebar .grid .gridBox.queueBox h2,\n#discordSpotifySidebar .grid .gridBox.queueBox h3,\n#discordSpotifySidebar .grid .gridBox.queueBox h4 {\n  max-width: calc(var(--discordify-width) / 4);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n#discordSpotifySidebar .grid .gridBox.queueBox h4 {\n  grid-column: last;\n}\n#discordSpotifySidebar .grid .gridBox.queueBox .songInfo {\n  display: flex;\n  flex-wrap: nowrap;\n  flex-direction: row;\n  line-height: 21px;\n  align-items: center;\n  gap: 12px;\n}\n#discordSpotifySidebar .grid .gridBox.queueBox .songInfo .songExtraInfo {\n  flex-direction: column;\n}\n#discordSpotifySidebar .grid .gridBox.queueBox .playlistArtwork {\n  width: 42px;\n  border-radius: 2px;\n  margin-bottom: 0;\n}\n#discordSpotifySidebar .grid .gridBox.queueBox .playlistArtwork::before {\n  visibility: hidden !important;\n}\n#discordSpotifySidebar .grid .gridBox.wideBox {\n  max-width: 100%;\n  flex-basis: 100%;\n  background: linear-gradient(135deg, #470cf5, #8d8ce5);\n}\n#discordSpotifySidebar .grid .gridBox.wideBox h1 {\n  font-size: 16pt;\n  font-weight: 600;\n  margin-bottom: 12px;\n}\n#discordSpotifySidebar .grid .gridBox.wideBox h2 {\n  color: var(--discordify-font-color);\n}\n#discordSpotifySidebar .grid .gridBox.wideBox .playlistArtwork {\n  max-width: 100%;\n  max-height: 100px;\n  visibility: hidden;\n}\n#discordSpotifySidebar .grid .gridBox.wideBox .playlistArtwork:after {\n  padding-bottom: 50%;\n}\n#discordSpotifySidebar .grid .gridBox .playlistArtwork {\n  position: relative;\n  width: 100%;\n  border-radius: 4px;\n  max-width: 180px;\n  max-height: 180px;\n  background: var(--discordify-btn-color);\n  margin-bottom: 16px;\n}\n#discordSpotifySidebar .grid .gridBox .playlistArtwork:before {\n  visibility: hidden;\n  border-radius: 50%;\n  content: \"\";\n  display: block;\n  position: absolute;\n  width: 25%;\n  height: 25%;\n  min-width: 30px;\n  min-height: 30px;\n  max-width: 45px;\n  max-width: 45px;\n  bottom: 6px;\n  right: 6px;\n  background-color: var(--discordify-btn-color-active);\n  box-shadow: rgba(0, 0, 0, 0.25) 3px 3px 8px, rgba(0, 0, 0, 0.15) 2px 2px 4px;\n}\n#discordSpotifySidebar .grid .gridBox .playlistArtwork:after {\n  content: \"\";\n  display: block;\n  padding-bottom: 100%;\n}\n#discordSpotifySidebar .grid .gridBox h1 {\n  color: var(--discordify-font-color);\n  margin-bottom: 8px;\n}\n#discordSpotifySidebar .grid .gridBox h2 {\n  color: var(--discordify-font-color-alt);\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#discordSpotifySidebar #navbar {\n  padding: 12px;\n  background-color: var(--discordify-bg-alt);\n}\n#discordSpotifySidebar #navbar .pillRow {\n  display: flex;\n  flex-direction: row;\n  align-items: flex-start;\n  gap: 8px;\n  width: 100%;\n}\n#discordSpotifySidebar #navbar .pillRow .pill {\n  padding: 12px;\n  border-radius: 8px;\n  color: var(--discordify-font-color);\n  font-weight: 500;\n}\n#discordSpotifySidebar #navbar .pillRow .pill.select, #discordSpotifySidebar #navbar .pillRow .pill:hover {\n  cursor: pointer;\n  background-color: var(--discordify-btn-color-alt);\n}\n#discordSpotifySidebar #navbar .pillRow #discordifySearch {\n  width: 40px;\n  height: 40px;\n  align-self: center;\n  border-radius: 50%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  margin-left: auto;\n}\n#discordSpotifySidebar #navbar .pillRow #discordifySearch svg {\n  width: 17px;\n  height: 17px;\n}\n#discordSpotifySidebar #navbar .pillRow #discordifySearch svg * {\n  fill: var(--discordify-font-color-alt);\n}\n#discordSpotifySidebar #navbar .pillRow #discordifySearch:hover {\n  cursor: pointer;\n  background-color: var(--discordify-btn-color-alt);\n}\n#discordSpotifySidebar #navbar .pillRow #discordifySearch:hover svg * {\n  fill: var(--discordify-font-color);\n}\n#discordSpotifySidebar #playbackControls {\n  text-align: center;\n  border-top: solid 1px #404040;\n  background-color: var(--discordify-navbar-bg);\n  width: var(--discordify-width);\n  height: fit-content;\n  padding-top: 25px;\n  padding-bottom: 25px;\n  padding-left: 12px;\n  padding-right: 12px;\n}\n#discordSpotifySidebar #playbackControls .row {\n  margin-bottom: 12px;\n  margin-left: 30px;\n  margin-right: 30px;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-evenly;\n  align-items: center;\n  gap: 8px;\n}\n#discordSpotifySidebar #playbackControls .row:last-of-type {\n  margin-bottom: 0;\n}\n#discordSpotifySidebar #playbackControls #songInformation #currentArtwork {\n  width: calc(var(--discordify-width) - var(--discordify-width) * 0.45);\n  height: calc(var(--discordify-width) - var(--discordify-width) * 0.45);\n  max-width: 300px;\n  max-height: 300px;\n  background-color: var(--discordify-btn-color);\n  margin-bottom: 8px;\n  border-radius: 8px;\n  background-size: 100%;\n}\n#discordSpotifySidebar #playbackControls #songInformation #compactBtn {\n  background-color: var(--discordify-btn-color);\n  border-radius: 50%;\n  display: none;\n}\n#discordSpotifySidebar #playbackControls #songInformation #compactBtn svg * {\n  fill: var(--discordify-navbar-bg);\n}\n#discordSpotifySidebar #playbackControls #songInformation #compactBtn:hover {\n  background-color: var(--discordify-btn-color-hover);\n}\n#discordSpotifySidebar #playbackControls #songInformation #currentArtist,\n#discordSpotifySidebar #playbackControls #songInformation #currentSong {\n  margin: 0;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  max-width: calc(var(--discordify-width) - 48px);\n}\n#discordSpotifySidebar #playbackControls #songInformation #currentSong {\n  color: var(--discordify-btn-color-hover);\n}\n#discordSpotifySidebar #playbackControls #songInformation #currentArtist {\n  margin-bottom: 12px;\n}\n#discordSpotifySidebar #playbackControls.compact #songInformation {\n  display: flex;\n  margin-left: auto;\n  margin-right: auto;\n  width: 85%;\n  margin-bottom: 24px;\n  border-bottom: solid 1px #404040;\n}\n#discordSpotifySidebar #playbackControls.compact #songInformation #compactBtn {\n  margin-left: auto;\n  margin-right: 8px;\n  display: block;\n}\n#discordSpotifySidebar #playbackControls.compact #songInformation #compactBtn svg {\n  transform: rotate(180deg);\n}\n#discordSpotifySidebar #playbackControls.compact #songInformation .row {\n  margin-left: 0;\n  margin-right: 0;\n}\n#discordSpotifySidebar #playbackControls.compact #songInformation #currentArtwork {\n  width: 40px;\n  height: 40px;\n  margin-right: 18px;\n  margin-left: 8px;\n  border-radius: 2px;\n}\n#discordSpotifySidebar #playbackControls.compact #songInformation #songDetails p {\n  max-width: calc(var(--discordify-width) / 2 - 48px);\n}\n#discordSpotifySidebar #playbackControls.compact #songInformation #songDetails .row {\n  display: block;\n  text-align: left;\n}\n#discordSpotifySidebar #playbackControls.compact #volumeLevel {\n  display: none;\n}\n#discordSpotifySidebar #playbackControls button {\n  position: relative;\n  width: 35px;\n  max-width: 35px;\n  height: 35px;\n  max-height: 35px;\n  font-size: 0;\n  background: none;\n}\n#discordSpotifySidebar #playbackControls button svg {\n  width: 15px;\n  height: 15px;\n}\n#discordSpotifySidebar #playbackControls button svg * {\n  fill: #b3b3b3;\n}\n#discordSpotifySidebar #playbackControls button:hover svg * {\n  fill: var(--discordify-btn-color-hover);\n}\n#discordSpotifySidebar #playbackControls button.active svg * {\n  fill: var(--discordify-btn-color-active);\n}\n#discordSpotifySidebar #playbackControls button#shuffle.active::after, #discordSpotifySidebar #playbackControls button#loop.active::after {\n  content: \"\";\n  min-width: 4px;\n  min-height: 4px;\n  border-radius: 50%;\n  position: absolute;\n  bottom: 0;\n  left: 50%;\n  transform: translateX(-50%);\n  background: var(--discordify-btn-color-active);\n}\n#discordSpotifySidebar #playbackControls button#shuffle.active.mode2::before, #discordSpotifySidebar #playbackControls button#loop.active.mode2::before {\n  font-size: 8pt;\n  font-weight: 600;\n  color: var(--discordify-navbar-bg);\n  border: 2px solid var(--discordify-navbar-bg);\n  content: \"1\";\n  min-width: 14px;\n  min-height: 14px;\n  border-radius: 50%;\n  position: absolute;\n  top: 0;\n  right: -5px;\n  transform: translateX(-50%);\n  background: var(--discordify-btn-color-active);\n}\n#discordSpotifySidebar #playbackControls button#muteBtn svg {\n  width: 19px;\n  height: 19px;\n}\n#discordSpotifySidebar #playbackControls button#playPause {\n  width: 45px;\n  max-width: 45px;\n  height: 45px;\n  max-height: 45px;\n  border-radius: 50%;\n  transition: transform 0.05s ease;\n  background: var(--discordify-btn-color);\n}\n#discordSpotifySidebar #playbackControls button#playPause svg * {\n  fill: var(--discordify-navbar-bg);\n}\n#discordSpotifySidebar #playbackControls button#playPause:hover {\n  background-color: var(--discordify-btn-color-hover);\n  transform: scale(1.1);\n}";
 BdApi.injectCSS("discordify-styles",css);
 
+var LOGS = [
+    ACTION_TYPES.SPOTIFY_PLAYER_PLAY,
+    ACTION_TYPES.SPOTIFY_PLAYER_PAUSE,
+    ACTION_TYPES.SPOTIFY_ACCOUNT_ACCESS_TOKEN_REVOKE
+];
 module.exports = /** @class */ (function () {
     function SpotifyDiscord() {
     }
@@ -1678,10 +1684,12 @@ module.exports = /** @class */ (function () {
             var _a, _b, _c;
             (_c = (_b = (_a = returnValue === null || returnValue === void 0 ? void 0 : returnValue.props) === null || _a === void 0 ? void 0 : _a.toolbar) === null || _b === void 0 ? void 0 : _b.props) === null || _c === void 0 ? void 0 : _c.children.push(react.createElement(MainComponent, null));
         });
+        LOGS.forEach(function (l) { return Dispatcher.subscribe(l, function (e) { return debug_log(l, e); }); });
     };
     SpotifyDiscord.prototype.stop = function () {
         // @ts-expect-error
         BdApi.Patcher.unpatchAll('discordify');
+        LOGS.forEach(function (l) { return Dispatcher.unsubscribe(l, function (e) { return debug_log(l, e); }); });
     };
     return SpotifyDiscord;
 }());

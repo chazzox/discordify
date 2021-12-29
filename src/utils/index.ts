@@ -1,4 +1,3 @@
-import { State } from '.pnpm/history@5.2.0/node_modules/history';
 import { createContext, useContext } from 'react';
 
 // -----------------  MODULES  -----------------
@@ -151,11 +150,16 @@ type Actions =
 /**
  * @todo if first access token does not exist try fetching from user id
  * @description Retrieves access token to spotify song
+ * @param accountId if there is not an internal value for accessToken and we know the users spotify
+ * account id, use getAccessToken to fetch a new one
  * @returns Authorization header
  */
-export async function getAuthHeader(): Promise<string> {
+export async function getAuthHeader(accountId?: string): Promise<string> {
 	const accessToken = SpotifyTrackUtils.getActiveSocketAndDevice()?.socket?.accessToken;
-	if (!accessToken) debug_log('i should try to fetch token through other methods :)');
+	if (!accessToken && accountId) {
+		const req = await SpotifyUtils.getAccessToken(accountId);
+		return req?.body?.access_token;
+	}
 	return accessToken;
 }
 
