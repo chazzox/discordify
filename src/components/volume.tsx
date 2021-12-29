@@ -5,6 +5,10 @@ import { Mute } from '@components/navbarIcons';
 const Volume: React.FC = () => {
 	const [volume, setVolume] = React.useState(['65']);
 
+	var widthStyle = {
+		'--progress-bar-percentage': `${Number.parseInt(volume[0])}%`
+	} as React.CSSProperties;
+
 	return (
 		<div id="volumeLevel" className="progressBarRow row">
 			<button id="muteBtn">
@@ -25,6 +29,7 @@ const Volume: React.FC = () => {
 				max="100"
 				value={volume[0]}
 				onChange={(e) => setVolume([e.target.value, volume[0]])}
+				style={widthStyle}
 			/>
 		</div>
 	);

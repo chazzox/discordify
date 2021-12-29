@@ -92,11 +92,7 @@
 	}
 
 	.grid {
-		background: linear-gradient(
-			110deg,
-			var(--discordify-bg-alt),
-			var(--discordify-bg) 75%
-		);
+		background: linear-gradient(110deg, var(--discordify-bg-alt), var(--discordify-bg) 75%);
 		align-items: flex-start;
 		padding: 12px;
 		display: flex;
@@ -226,8 +222,7 @@
 					bottom: 6px;
 					right: 6px;
 					background-color: var(--discordify-btn-color-active);
-					box-shadow: rgba(0, 0, 0, 0.25) 3px 3px 8px,
-						rgba(0, 0, 0, 0.15) 2px 2px 4px;
+					box-shadow: rgba(0, 0, 0, 0.25) 3px 3px 8px, rgba(0, 0, 0, 0.15) 2px 2px 4px;
 				}
 
 				&:after {
@@ -327,6 +322,65 @@
 			&:last-of-type {
 				margin-bottom: 0;
 			}
+		}
+
+		.progressBarRow {
+			padding-top: 8px;
+			padding-bottom: 8px;
+
+			p {
+				margin: 0;
+			}
+			/* Hides the slider so that custom slider can be made */
+			input[type='range'] {
+				--progress-bar-inner: var(--discordify-btn-color);
+				-webkit-appearance: none;
+				width: 100%;
+				height: 15px;
+				overflow: hidden;
+				background: transparent;
+
+				&:focus {
+					outline: none;
+				}
+
+				// Progress bar knob
+				&::-webkit-slider-thumb {
+					-webkit-appearance: none;
+					visibility: hidden;
+					border-radius: 50%;
+					background-color: var(--discordify-btn-color-hover);
+					box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+					width: 15px;
+					height: 15px;
+					cursor: pointer;
+					margin-top: -5px;
+				}
+				// Progress bar track
+				&::-webkit-slider-runnable-track {
+					border-radius: 100px;
+					width: 100%;
+					height: 5px;
+					background: linear-gradient(
+						to right,
+						var(--progress-bar-inner) var(--progress-bar-percentage),
+						var(--discordify-playbackBar-bg) var(--progress-bar-percentage)
+					);
+				}
+			}
+
+			&:hover {
+				input[type='range'] {
+					--progress-bar-inner: var(--discordify-btn-color-active);
+					// Progress bar knob
+					&::-webkit-slider-thumb {
+						visibility: visible;
+					}
+				}
+			}
+		}
+		#volumeLevel .progressBar {
+			width: 70%;
 		}
 
 		#songInformation {
