@@ -17,6 +17,7 @@ import {
 export default function App() {
 	const [isHidden, setIsHidden] = React.useState(BdApi.loadData('discordify', 'isHidden'));
 	const { state, dispatch } = useSpotify();
+
 	const { accessToken } = state;
 
 	const container = document.querySelector(SIDEBAR_CONTAINER_CLASS);
@@ -49,15 +50,17 @@ export default function App() {
 				});
 		};
 
+		const log_pairs = [
+			[ACTION_TYPES.SPOTIFY_ACCOUNT_ACCESS_TOKEN, handleTokenUpdate],
+			[ACTION_TYPES.SPOTIFY_PLAYER_STATE, handleStateUpdate],
+			[ACTION_TYPES.SPOTIFY_SET_DEVICES, handleDeviceUpdate]
+		];
+
 		// if the access token is ever updated by discord internals, update the components value
-		Dispatcher.subscribe(ACTION_TYPES.SPOTIFY_ACCOUNT_ACCESS_TOKEN, handleTokenUpdate);
-		Dispatcher.subscribe(ACTION_TYPES.SPOTIFY_PLAYER_STATE, handleStateUpdate);
-		Dispatcher.subscribe(ACTION_TYPES.SPOTIFY_SET_DEVICES, handleDeviceUpdate);
+		log_pairs.forEach(([action, func]) => Dispatcher.subscribe(action, func));
 
 		return () => {
-			Dispatcher.unsubscribe(ACTION_TYPES.SPOTIFY_ACCOUNT_ACCESS_TOKEN, handleTokenUpdate);
-			Dispatcher.unsubscribe(ACTION_TYPES.SPOTIFY_PLAYER_STATE, handleStateUpdate);
-			Dispatcher.unsubscribe(ACTION_TYPES.SPOTIFY_SET_DEVICES, handleDeviceUpdate);
+			log_pairs.forEach(([action, func]) => Dispatcher.unsubscribe(action, func));
 		};
 	}, [accessToken]);
 

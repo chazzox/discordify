@@ -9,8 +9,6 @@ const PlayBackControls: React.FC<{ token: string }> = ({ token }) => {
 	const { state } = useSpotify();
 	const { playerState, currentlyPlaying, accessToken } = state;
 
-	React.useEffect(() => {}, []);
-
 	return (
 		accessToken && (
 			<div id="playbackControls">

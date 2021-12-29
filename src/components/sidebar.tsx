@@ -12,13 +12,15 @@ import Dashboard from '@components/dashboard';
 import Login from '@components/login';
 
 const Sidebar = () => {
-	const { state } = useSpotify();
 	const navigate = useNavigate();
+	const { state } = useSpotify();
+
+	const { accessToken } = state;
 
 	React.useEffect(() => {
-		if (!state.accessToken) navigate('/login');
+		if (!accessToken) navigate('/login');
 		else navigate('/');
-	}, [state.accessToken]);
+	}, [accessToken]);
 
 	return (
 		<div id="discordSpotifySidebar">

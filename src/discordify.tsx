@@ -12,10 +12,11 @@ const LOGS = [
 	ACTION_TYPES.SPOTIFY_ACCOUNT_ACCESS_TOKEN_REVOKE
 ];
 
-module.exports = class SpotifyDiscord {
+module.exports = class Discordify {
 	load() {}
 	start() {
 		debug_log('started!');
+
 		const HeaderBarContainer = BdApi.findModuleByDisplayName('HeaderBarContainer')?.prototype;
 		// @ts-expect-error
 		BdApi.Patcher.after('discordify', HeaderBarContainer, 'renderLoggedIn', (_, __, returnValue) => {
@@ -27,13 +28,13 @@ module.exports = class SpotifyDiscord {
 	stop() {
 		// @ts-expect-error
 		BdApi.Patcher.unpatchAll('discordify');
-
 		LOGS.forEach((l) => Dispatcher.unsubscribe(l, (e: any) => debug_log(l, e)));
 	}
 };
 
 const MainComponent = () => {
 	const [state, dispatch] = React.useReducer(spotifyReducer, initialState);
+
 	return (
 		<SpotifyContext.Provider value={{ state, dispatch }}>
 			<MemoryRouter>
