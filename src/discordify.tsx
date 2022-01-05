@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { ACTION_TYPES, debug_log, Dispatcher, initialState, SpotifyContext, spotifyReducer } from '@utils';
 
 import App from './app';
-// import './discordify.scss';
+import './discordify.scss';
 
 const LOGS = [
 	ACTION_TYPES.SPOTIFY_PLAYER_PLAY,

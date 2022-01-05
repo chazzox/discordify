@@ -3,6 +3,7 @@ const path = require('path');
 const os = require('os');
 const fs = require('fs');
 const alias = require('esbuild-plugin-alias');
+const sass = require('sass');
 
 const name = 'discordify';
 const version = '0.6.0';
@@ -56,6 +57,18 @@ esbuild
 		write: false,
 		bundle: true,
 		plugins: [
+			{
+				name: 'sass',
+				setup(build) {
+					build.onLoad({ filter: /.scss$/ }, (args) => {
+						const { css } = sass.compile(args.path, { style: 'compressed' });
+						return {
+							contents: `BdApi.injectCSS('${name}-styles', '${css.trim()}')`,
+							loader: 'js'
+						};
+					});
+				}
+			},
 			{
 				name: 'perf',
 				setup(build) {
