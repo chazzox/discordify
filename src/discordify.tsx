@@ -12,10 +12,10 @@ const LOGS = [
 	ACTION_TYPES.SPOTIFY_ACCOUNT_ACCESS_TOKEN_REVOKE
 ];
 
-module.exports = class Discordify {
+export default class Discordify {
 	load() {}
 	start() {
-		debug_log('started!');
+		debug_log('started test!');
 
 		const HeaderBarContainer = BdApi.findModuleByDisplayName('HeaderBarContainer')?.prototype;
 		// @ts-expect-error
@@ -30,7 +30,7 @@ module.exports = class Discordify {
 		BdApi.Patcher.unpatchAll('discordify');
 		LOGS.forEach((l) => Dispatcher.unsubscribe(l, (e: any) => debug_log(l, e)));
 	}
-};
+}
 
 const MainComponent = () => {
 	const [state, dispatch] = React.useReducer(spotifyReducer, initialState);

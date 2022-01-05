@@ -1,7 +1,5 @@
-// There is 100% a better way to do this, i just couldn't figure out how.
-// So here is a very ugly hack :)
-const react = BdApi.React;
-export default react;
+const React = BdApi.React;
+export default React;
 export const {
 	createContext,
 	useRef,
@@ -16,4 +14,4 @@ export const {
 	isValidElement,
 	Fragment,
 	forwardRef
-} = react;
+} = React;
