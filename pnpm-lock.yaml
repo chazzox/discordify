@@ -6,7 +6,7 @@ specifiers:
   esbuild: ^0.14.10
   esbuild-plugin-alias: ^0.2.1
   prettier: ^2.4.1
-  react-router-dom: '6'
+  react-router-dom: ^6.2.1
   sass: ^1.45.2
 
 dependencies:

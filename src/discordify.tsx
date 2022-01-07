@@ -13,7 +13,9 @@ const LOGS = [
 ];
 
 export default class Discordify {
-	load() {}
+	load() {
+		BdApi.setData('discordify', 'isHidden', true);
+	}
 	start() {
 		debug_log('started test!');
 

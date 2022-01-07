@@ -5,7 +5,7 @@ import { Pause, Play, Loop, Shuffle, Previous, Next } from '@components/navbarIc
 import Volume from '@components/volume';
 import { useSpotify } from '@utils';
 
-const PlayBackControls: React.FC<{ token: string }> = ({ token }) => {
+const PlayBackControls: React.FC = () => {
 	const { state } = useSpotify();
 	const { playerState, currentlyPlaying, accessToken } = state;
 

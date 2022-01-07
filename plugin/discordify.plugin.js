@@ -1257,7 +1257,7 @@ var Volume = () => {
 var volume_default = Volume;
 
 // src/components/playbackControls.tsx
-var PlayBackControls = ({ token }) => {
+var PlayBackControls = () => {
   const { state } = useSpotify();
   const { playerState, currentlyPlaying, accessToken } = state;
   return accessToken && /* @__PURE__ */ react_default.createElement("div", {
@@ -1317,6 +1317,10 @@ function NavLink2({ children, to, defaultClassName, isActive }) {
 
 // src/components/dashboard.tsx
 var Dashboard = ({ children }) => {
+  let location = useLocation();
+  react_default.useEffect(() => {
+    debug_log(location, children);
+  }, [location, children]);
   return /* @__PURE__ */ react_default.createElement(react_default.Fragment, null, /* @__PURE__ */ react_default.createElement("div", {
     id: "navbar"
   }, /* @__PURE__ */ react_default.createElement("div", {
@@ -1341,9 +1345,7 @@ var Dashboard = ({ children }) => {
     id: "discordifySearch"
   }, /* @__PURE__ */ react_default.createElement(Search, null)))), /* @__PURE__ */ react_default.createElement("div", {
     className: "grid"
-  }, children), /* @__PURE__ */ react_default.createElement(playbackControls_default, {
-    token: "accessToken"
-  }));
+  }, children), /* @__PURE__ */ react_default.createElement(playbackControls_default, null));
 };
 var dashboard_default = Dashboard;
 
@@ -1376,13 +1378,13 @@ var Sidebar = () => {
   }, /* @__PURE__ */ react_default.createElement("div", {
     id: "discordSpotifyInner"
   }, /* @__PURE__ */ react_default.createElement(Routes, null, /* @__PURE__ */ react_default.createElement(Route, {
-    path: "/",
+    path: "",
     element: /* @__PURE__ */ react_default.createElement(dashboard_default, null)
-  }, /* @__PURE__ */ react_default.createElement(Route, {
+  }, "test", /* @__PURE__ */ react_default.createElement(Route, {
     index: true,
     element: /* @__PURE__ */ react_default.createElement(playlists_default, null)
   }), /* @__PURE__ */ react_default.createElement(Route, {
-    path: "artists",
+    path: "/artists",
     element: /* @__PURE__ */ react_default.createElement(artists_default, null)
   }), /* @__PURE__ */ react_default.createElement(Route, {
     path: "albums",
@@ -1465,6 +1467,7 @@ var LOGS = [
 ];
 var Discordify = class {
   load() {
+    BdApi.setData("discordify", "isHidden", true);
   }
   start() {
     debug_log("started test!");

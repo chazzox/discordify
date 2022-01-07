@@ -3,8 +3,16 @@ import React from 'react';
 import PlayBackControls from '@components/playbackControls';
 import { Search } from '@components/navbarIcons';
 import NavLink from '@components/navLink';
+import { useLocation } from 'react-router-dom';
+import { debug_log } from '@utils';
 
-const Dashboard: React.FC = ({ children }) => {
+const Dashboard: React.FC<{ children?: any }> = ({ children }) => {
+	let location = useLocation();
+
+	React.useEffect(() => {
+		debug_log(location, children);
+	}, [location, children]);
+
 	return (
 		<>
 			<div id="navbar">
@@ -27,7 +35,7 @@ const Dashboard: React.FC = ({ children }) => {
 				</div>
 			</div>
 			<div className="grid">{children}</div>
-			<PlayBackControls token={'accessToken'} />
+			<PlayBackControls />
 		</>
 	);
 };

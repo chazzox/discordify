@@ -26,9 +26,10 @@ const Sidebar = () => {
 		<div id="discordSpotifySidebar">
 			<div id="discordSpotifyInner">
 				<Routes>
-					<Route path="/" element={<Dashboard />}>
+					<Route path="" element={<Dashboard />}>
+						test
 						<Route index element={<Playlists />} />
-						<Route path="artists" element={<Artists />} />
+						<Route path="/artists" element={<Artists />} />
 						<Route path="albums" element={<Albums />} />
 						<Route path="queue" element={<Queue />} />
 					</Route>
