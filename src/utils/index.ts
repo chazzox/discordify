@@ -3,11 +3,11 @@ import { createContext, useContext } from 'react';
 // -----------------  MODULES  -----------------
 
 // Subscribe to internal discord events
-export const Dispatcher = BdApi.findModuleByProps('dirtyDispatch');
+// export const Dispatcher = BdApi.findModuleByProps('dirtyDispatch');
 
 // Spotify discord internals
-export const SpotifyTrackUtils = BdApi.findModuleByProps('getActiveSocketAndDevice');
-export const SpotifyUtils = BdApi.findModuleByProps('SpotifyAPI');
+// export const SpotifyTrackUtils = BdApi.findModuleByProps('getActiveSocketAndDevice');
+// export const SpotifyUtils = BdApi.findModuleByProps('SpotifyAPI');
 
 // ----------------  CONSTANTS  ----------------
 
@@ -35,11 +35,6 @@ interface ActionTypes {
 		SPOTIFY_SET_DEVICES: string;
 	};
 }
-
-export const { ActionTypes: ACTION_TYPES } = BdApi.findModuleByProps(
-	'ActionTypes',
-	'API_HOST'
-) as ActionTypes;
 
 /**
  * @description Enum that contains all the spotify endpoints
@@ -155,12 +150,7 @@ type Actions =
  * @returns Authorization header
  */
 export async function getAuthHeader(accountId?: string): Promise<string> {
-	const accessToken = SpotifyTrackUtils.getActiveSocketAndDevice()?.socket?.accessToken;
-	if (!accessToken && accountId) {
-		const req = await SpotifyUtils.getAccessToken(accountId);
-		return req?.body?.access_token;
-	}
-	return accessToken;
+	return await 'accessToken';
 }
 
 /**

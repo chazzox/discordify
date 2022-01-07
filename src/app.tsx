@@ -7,7 +7,6 @@ import {
 	AccessTokenEvent,
 	ACTION_TYPES,
 	debug_log,
-	Dispatcher,
 	getAuthHeader,
 	SIDEBAR_CONTAINER_CLASS,
 	SpotifyActions,
@@ -15,7 +14,7 @@ import {
 } from '@utils';
 
 export default function App() {
-	const [isHidden, setIsHidden] = React.useState(BdApi.loadData('discordify', 'isHidden'));
+	const [isHidden, setIsHidden] = React.useState(true);
 	const { state, dispatch } = useSpotify();
 
 	const { accessToken } = state;
@@ -49,19 +48,6 @@ export default function App() {
 					if (token) dispatch({ type: SpotifyActions.SET_ACCESS, payload: token });
 				});
 		};
-
-		const log_pairs = [
-			[ACTION_TYPES.SPOTIFY_ACCOUNT_ACCESS_TOKEN, handleTokenUpdate],
-			[ACTION_TYPES.SPOTIFY_PLAYER_STATE, handleStateUpdate],
-			[ACTION_TYPES.SPOTIFY_SET_DEVICES, handleDeviceUpdate]
-		];
-
-		// if the access token is ever updated by discord internals, update the components value
-		log_pairs.forEach(([action, func]) => Dispatcher.subscribe(action, func));
-
-		return () => {
-			log_pairs.forEach(([action, func]) => Dispatcher.unsubscribe(action, func));
-		};
 	}, [accessToken]);
 
 	return (
@@ -70,7 +56,6 @@ export default function App() {
 				id="discordifyBtn"
 				onClick={() =>
 					setIsHidden((prev) => {
-						BdApi.saveData('discordify', 'isHidden', !prev);
 						return !prev;
 					})
 				}
