@@ -30,7 +30,7 @@ const PlayBackControls: React.FC = () => {
 				</div>
 				<Volume />
 				<div className="row">
-					<button id="shuffle" className={playerState.isShuffle && 'active'}>
+					<button id="shuffle" className={classNames({ active: playerState.isShuffle })}>
 						<Shuffle />
 					</button>
 					<button id="previous">

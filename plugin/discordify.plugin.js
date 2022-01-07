@@ -1281,7 +1281,7 @@ var PlayBackControls = () => {
     className: "row"
   }, /* @__PURE__ */ react_default.createElement("button", {
     id: "shuffle",
-    className: playerState.isShuffle && "active"
+    className: (0, import_classnames.default)({ active: playerState.isShuffle })
   }, /* @__PURE__ */ react_default.createElement(Shuffle, null)), /* @__PURE__ */ react_default.createElement("button", {
     id: "previous"
   }, /* @__PURE__ */ react_default.createElement(Previous, null)), /* @__PURE__ */ react_default.createElement("button", {
@@ -1316,11 +1316,7 @@ function NavLink2({ children, to, defaultClassName, isActive }) {
 }
 
 // src/components/dashboard.tsx
-var Dashboard = ({ children }) => {
-  let location = useLocation();
-  react_default.useEffect(() => {
-    debug_log(location, children);
-  }, [location, children]);
+var Dashboard = () => {
   return /* @__PURE__ */ react_default.createElement(react_default.Fragment, null, /* @__PURE__ */ react_default.createElement("div", {
     id: "navbar"
   }, /* @__PURE__ */ react_default.createElement("div", {
@@ -1345,7 +1341,7 @@ var Dashboard = ({ children }) => {
     id: "discordifySearch"
   }, /* @__PURE__ */ react_default.createElement(Search, null)))), /* @__PURE__ */ react_default.createElement("div", {
     className: "grid"
-  }, children), /* @__PURE__ */ react_default.createElement(playbackControls_default, null));
+  }, /* @__PURE__ */ react_default.createElement(Outlet, null)), /* @__PURE__ */ react_default.createElement(playbackControls_default, null));
 };
 var dashboard_default = Dashboard;
 

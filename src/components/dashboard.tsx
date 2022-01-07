@@ -3,16 +3,9 @@ import React from 'react';
 import PlayBackControls from '@components/playbackControls';
 import { Search } from '@components/navbarIcons';
 import NavLink from '@components/navLink';
-import { useLocation } from 'react-router-dom';
-import { debug_log } from '@utils';
+import { Outlet } from 'react-router-dom';
 
-const Dashboard: React.FC<{ children?: any }> = ({ children }) => {
-	let location = useLocation();
-
-	React.useEffect(() => {
-		debug_log(location, children);
-	}, [location, children]);
-
+const Dashboard: React.FC = () => {
 	return (
 		<>
 			<div id="navbar">
@@ -34,7 +27,9 @@ const Dashboard: React.FC<{ children?: any }> = ({ children }) => {
 					</div>
 				</div>
 			</div>
-			<div className="grid">{children}</div>
+			<div className="grid">
+				<Outlet />
+			</div>
 			<PlayBackControls />
 		</>
 	);
