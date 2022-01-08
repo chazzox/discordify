@@ -19,23 +19,6 @@ export const SIDEBAR_CONTAINER_CLASS = '.container-2lgZY8';
 
 // Discord Dispatcher Types
 
-export type AccessTokenEvent = {
-	type: string;
-	accountId: string;
-	accessToken: string;
-};
-interface ActionTypes {
-	ActionTypes: {
-		SPOTIFY_PLAYER_PLAY: string;
-		SPOTIFY_PLAYER_PAUSE: string;
-		SPOTIFY_PLAYER_STATE: string;
-		SPOTIFY_ACCOUNT_ACCESS_TOKEN: string;
-		SPOTIFY_ACCOUNT_ACCESS_TOKEN_REVOKE: string;
-		SPOTIFY_SET_ACTIVE_DEVICE: string;
-		SPOTIFY_SET_DEVICES: string;
-	};
-}
-
 export const { ActionTypes: ACTION_TYPES } = BdApi.findModuleByProps(
 	'ActionTypes',
 	'API_HOST'
@@ -74,8 +57,8 @@ const LOG_STYLES = {
 };
 
 /**
- * @description print with the 'discordify' prefix
- * @param output any object you want to print
+ * @description `console.log` with the 'discordify' prefix
+ * @param output any series of objects you want to log
  */
 export function debug_log(...output: any): void {
 	console.log(
@@ -86,64 +69,6 @@ export function debug_log(...output: any): void {
 		...output
 	);
 }
-
-// ---------------  SPOTIFY TYPES  ---------------
-
-type SpotifyMediaType = 'album' | 'track';
-
-interface StateType {
-	accessToken?: string;
-	currentlyPlaying: {
-		album?: string;
-		song?: string;
-		artist?: string;
-		image?: string;
-	};
-	playerState: {
-		isPlaying: boolean;
-		isShuffle: boolean;
-		isLooping: number;
-	};
-}
-
-interface SpotifyItem {
-	name: string;
-	album: any;
-}
-
-interface Currently_playing {
-	actions: { resuming: boolean };
-	context: {
-		external_urls: { spotify: string };
-		type: SpotifyMediaType;
-		uri: string;
-	};
-	is_playing: boolean;
-	item: SpotifyItem;
-
-	progress_ms: number;
-	timestamp: number;
-}
-
-interface Playlists {}
-
-type ContextType = {
-	state: React.ReducerState<typeof spotifyReducer>;
-	dispatch: React.Dispatch<React.ReducerAction<typeof spotifyReducer>>;
-};
-
-export enum SpotifyActions {
-	SET_ACCESS = 'SET_ACCESS',
-	SET_IS_PLAYING = 'SET_IS_PLAYING',
-	SET_IS_SHUFFLE = 'SET_IS_SHUFFLE',
-	SET_IS_LOOPING = 'SET_IS_LOOPING'
-}
-
-type Actions =
-	| { type: SpotifyActions.SET_ACCESS; payload: string }
-	| { type: SpotifyActions.SET_IS_PLAYING; payload: boolean }
-	| { type: SpotifyActions.SET_IS_SHUFFLE; payload: boolean }
-	| { type: SpotifyActions.SET_IS_LOOPING; payload: number };
 
 // ---------------  SPOTIFY API FUNCTIONS  ---------------
 
@@ -203,6 +128,24 @@ export async function getPlaylists(token: string): Promise<Playlists> {
 }
 
 // --------- SPOTIFY CONTEXT ---------
+
+export enum SpotifyActions {
+	SET_ACCESS = 'SET_ACCESS',
+	SET_IS_PLAYING = 'SET_IS_PLAYING',
+	SET_IS_SHUFFLE = 'SET_IS_SHUFFLE',
+	SET_IS_LOOPING = 'SET_IS_LOOPING'
+}
+
+type Actions =
+	| { type: SpotifyActions.SET_ACCESS; payload: string }
+	| { type: SpotifyActions.SET_IS_PLAYING; payload: boolean }
+	| { type: SpotifyActions.SET_IS_SHUFFLE; payload: boolean }
+	| { type: SpotifyActions.SET_IS_LOOPING; payload: number };
+
+type ContextType = {
+	state: React.ReducerState<typeof spotifyReducer>;
+	dispatch: React.Dispatch<React.ReducerAction<typeof spotifyReducer>>;
+};
 
 export const SpotifyContext = createContext<ContextType>(null);
 

@@ -3,6 +3,7 @@
 		"jsx": "react",
 		"esModuleInterop": true,
 		"baseUrl": ".",
+		"lib": ["ES2017", "DOM"],
 		"paths": {
 			"@components/*": ["src/components/*"],
 			"@routes/*": ["src/routes/*"],

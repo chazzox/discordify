@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import Sidebar from '@components/sidebar';
 import { Spotify } from '@components/navbarIcons';
 import {
-	AccessTokenEvent,
 	ACTION_TYPES,
 	debug_log,
 	Dispatcher,
@@ -29,7 +28,7 @@ export default function App() {
 		};
 
 		// fires too often
-		const handleStateUpdate = (e) => {
+		const handleStateUpdate = (e: StateUpdateEvent) => {
 			// if the spotify state has changed and we still dont have an access token
 			if (!accessToken) {
 				debug_log(accessToken, state);
@@ -39,7 +38,7 @@ export default function App() {
 			}
 		};
 
-		const handleDeviceUpdate = (e) => {
+		const handleDeviceUpdate = (e: DeviceUpdateEvent) => {
 			const filteredDevices = e.devices.filter((d) => d.type === 'Computer');
 			// if there are no devices clear the token
 			if (filteredDevices.length === 0) dispatch({ type: SpotifyActions.SET_ACCESS, payload: null });
