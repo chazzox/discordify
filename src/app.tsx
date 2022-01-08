@@ -29,7 +29,7 @@ export default function App() {
 		};
 
 		// fires too often
-		const handleStateUpdate = (e: any) => {
+		const handleStateUpdate = (e) => {
 			// if the spotify state has changed and we still dont have an access token
 			if (!accessToken) {
 				debug_log(accessToken, state);
@@ -40,11 +40,12 @@ export default function App() {
 		};
 
 		const handleDeviceUpdate = (e) => {
+			const filteredDevices = e.devices.filter((d) => d.type === 'Computer');
 			// if there are no devices clear the token
-			if (e.devices.length === 0) dispatch({ type: SpotifyActions.SET_ACCESS, payload: null });
+			if (filteredDevices.length === 0) dispatch({ type: SpotifyActions.SET_ACCESS, payload: null });
 
 			// try to fetch token when a new device is detected and the accessToken is null
-			if (!accessToken && e.devices.length > 0)
+			if (!accessToken && filteredDevices.length > 0)
 				getAuthHeader(e.accountId).then((token) => {
 					if (token) dispatch({ type: SpotifyActions.SET_ACCESS, payload: token });
 				});

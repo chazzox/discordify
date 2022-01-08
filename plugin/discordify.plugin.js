@@ -1416,9 +1416,10 @@ function App() {
       }
     };
     const handleDeviceUpdate = (e) => {
-      if (e.devices.length === 0)
+      const filteredDevices = e.devices.filter((d) => d.type === "Computer");
+      if (filteredDevices.length === 0)
         dispatch({ type: "SET_ACCESS" /* SET_ACCESS */, payload: null });
-      if (!accessToken && e.devices.length > 0)
+      if (!accessToken && filteredDevices.length > 0)
         getAuthHeader(e.accountId).then((token) => {
           if (token)
             dispatch({ type: "SET_ACCESS" /* SET_ACCESS */, payload: token });
