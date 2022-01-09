@@ -1,5 +1,44 @@
-type StateUpdateEvent = any;
-type DeviceUpdateEvent = any;
+// ----------- Spotify Discord Dispatcher Events -----------
+type SpotifyDevice = {
+	id: string;
+	is_active: boolean;
+	is_private_session: boolean;
+	is_restricted: boolean;
+	name: string;
+	type: SpotifyDeviceType;
+	volume_percent: number;
+};
+
+declare enum SpotifyDeviceType {
+	Speaker = 'Speaker',
+	Computer = 'Computer'
+}
+
+type DeviceUpdateEvent = {
+	accountId: string;
+	devices: SpotifyDevice[];
+	type: string;
+};
+
+type SpotifyTrack = any;
+
+interface StateUpdateEvent {
+	accessToken?: string;
+	context: any;
+	device: SpotifyDevice;
+	is_playing: boolean;
+	isPlaying: boolean;
+	position: number;
+	repeat: boolean;
+	type: string;
+	track: SpotifyTrack;
+}
+
+type AccessTokenEvent = {
+	type: string;
+	accountId: string;
+	accessToken: string;
+};
 
 interface ActionTypes {
 	ActionTypes: {
@@ -12,12 +51,6 @@ interface ActionTypes {
 		SPOTIFY_SET_DEVICES: string;
 	};
 }
-
-type AccessTokenEvent = {
-	type: string;
-	accountId: string;
-	accessToken: string;
-};
 
 type SpotifyMediaType = 'album' | 'track';
 
