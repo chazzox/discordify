@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import Sidebar from '@components/sidebar';
 import { Spotify } from '@components/icons';
+
 import {
 	ACTION_TYPES,
 	debug_log,
@@ -12,14 +13,18 @@ import {
 	SpotifyActions,
 	useSpotify
 } from '@utils';
+import { useLocation } from 'react-router-dom';
 
 export default function App() {
 	const [isHidden, setIsHidden] = React.useState(BdApi.loadData('discordify', 'isHidden'));
 	const { state, dispatch } = useSpotify();
+	const location = useLocation();
 
 	const { accessToken } = state;
 
-	const container = document.querySelector(SIDEBAR_CONTAINER_CLASS);
+	React.useEffect(() => {
+		BdApi.setData('discordify', 'pathname', location.pathname);
+	}, [location]);
 
 	React.useEffect(() => {
 		const handleTokenUpdate = (e: AccessTokenEvent) => {
@@ -89,7 +94,7 @@ export default function App() {
 					</div>
 				</div>
 			</button>
-			{ReactDOM.createPortal(!isHidden && <Sidebar />, container)}
+			{ReactDOM.createPortal(!isHidden && <Sidebar />, document.querySelector(SIDEBAR_CONTAINER_CLASS))}
 		</>
 	);
 }

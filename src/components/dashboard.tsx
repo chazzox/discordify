@@ -1,9 +1,9 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 import PlayBackControls from '@components/playbackControls';
 import { Search } from '@components/icons';
 import NavLink from '@components/navLink';
-import { Outlet } from 'react-router-dom';
 
 const Dashboard: React.FC = () => {
 	return (

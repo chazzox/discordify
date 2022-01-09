@@ -73,7 +73,6 @@ export function debug_log(...output: any): void {
 // ---------------  SPOTIFY API FUNCTIONS  ---------------
 
 /**
- * @todo if first access token does not exist try fetching from user id
  * @description Retrieves access token to spotify song
  * @param accountId if there is not an internal value for accessToken and we know the users spotify
  * account id, use getAccessToken to fetch a new one
@@ -85,7 +84,7 @@ export async function getAuthHeader(accountId?: string): Promise<string> {
 		const req = await SpotifyUtils.getAccessToken(accountId);
 		return req?.body?.access_token;
 	}
-	return accessToken;
+	return `Bearer ${accessToken}`;
 }
 
 /**

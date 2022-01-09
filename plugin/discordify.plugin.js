@@ -317,6 +317,23 @@ function MemoryRouter(_ref) {
     navigator: history
   });
 }
+function Navigate(_ref2) {
+  let {
+    to,
+    replace,
+    state
+  } = _ref2;
+  !useInRouterContext() ? true ? invariant(false, "<Navigate> may be used only in the context of a <Router> component.") : invariant(false) : void 0;
+  true ? warning(!useContext(NavigationContext).static, "<Navigate> must not be used on the initial render in a <StaticRouter>. This is a no-op, but you should modify your code so the <Navigate> is only ever rendered in response to some user interaction or state change.") : void 0;
+  let navigate = useNavigate();
+  useEffect(() => {
+    navigate(to, {
+      replace,
+      state
+    });
+  });
+  return null;
+}
 function Outlet(props) {
   return useOutlet(props.context);
 }
@@ -977,7 +994,14 @@ async function getAuthHeader(accountId) {
     const req = await SpotifyUtils.getAccessToken(accountId);
     return req?.body?.access_token;
   }
-  return accessToken;
+  return `Bearer ${accessToken}`;
+}
+async function getPlaying(token) {
+  const req = await fetch("https://api.spotify.com/v1/me/player/currently-playing" /* CURRENTLY_PLAYING */, {
+    method: "GET" /* GET */,
+    headers: { Authorization: token }
+  });
+  return await req.json();
 }
 var SpotifyContext = createContext(null);
 var useSpotify = () => {
@@ -1347,6 +1371,17 @@ var dashboard_default = Dashboard;
 
 // src/components/login.tsx
 var Login = () => {
+  let navigate = useNavigate();
+  let location = useLocation();
+  const { dispatch } = useSpotify();
+  react_default.useEffect(() => {
+    getAuthHeader().then((header) => {
+      if (header) {
+        dispatch({ type: "SET_ACCESS" /* SET_ACCESS */, payload: header });
+        navigate(location.state?.from?.pathname || "/", { replace: true });
+      }
+    });
+  }, []);
   return /* @__PURE__ */ react_default.createElement("h1", null, "Please get open a spotify device to use this plugin");
 };
 var login_default = Login;
@@ -1357,23 +1392,23 @@ var Sidebar = () => {
   const { state } = useSpotify();
   const { accessToken } = state;
   react_default.useEffect(() => {
-    if (!accessToken)
-      navigate("/login");
-    else
-      navigate("/");
-  }, [accessToken]);
+    if (accessToken) {
+      getPlaying(accessToken).then((e) => debug_log(e));
+    }
+    navigate(BdApi.loadData("discordify", "pathname") || "/");
+  }, []);
   return /* @__PURE__ */ react_default.createElement("div", {
     id: "discordSpotifySidebar"
   }, /* @__PURE__ */ react_default.createElement("div", {
     id: "discordSpotifyInner"
   }, /* @__PURE__ */ react_default.createElement(Routes, null, /* @__PURE__ */ react_default.createElement(Route, {
-    path: "",
-    element: /* @__PURE__ */ react_default.createElement(dashboard_default, null)
-  }, "test", /* @__PURE__ */ react_default.createElement(Route, {
+    path: "/",
+    element: /* @__PURE__ */ react_default.createElement(Protect, null, /* @__PURE__ */ react_default.createElement(dashboard_default, null))
+  }, /* @__PURE__ */ react_default.createElement(Route, {
     index: true,
     element: /* @__PURE__ */ react_default.createElement(playlists_default, null)
   }), /* @__PURE__ */ react_default.createElement(Route, {
-    path: "/artists",
+    path: "artists",
     element: /* @__PURE__ */ react_default.createElement(artists_default, null)
   }), /* @__PURE__ */ react_default.createElement(Route, {
     path: "albums",
@@ -1386,14 +1421,29 @@ var Sidebar = () => {
     element: /* @__PURE__ */ react_default.createElement(login_default, null)
   }))));
 };
+var Protect = ({ children }) => {
+  const { state } = useSpotify();
+  let location = useLocation();
+  if (!state.accessToken) {
+    return /* @__PURE__ */ react_default.createElement(Navigate, {
+      to: "/login",
+      state: { from: location },
+      replace: true
+    });
+  }
+  return children;
+};
 var sidebar_default = Sidebar;
 
 // src/app.tsx
 function App() {
   const [isHidden, setIsHidden] = react_default.useState(BdApi.loadData("discordify", "isHidden"));
   const { state, dispatch } = useSpotify();
+  const location = useLocation();
   const { accessToken } = state;
-  const container = document.querySelector(SIDEBAR_CONTAINER_CLASS);
+  react_default.useEffect(() => {
+    BdApi.setData("discordify", "pathname", location.pathname);
+  }, [location]);
   react_default.useEffect(() => {
     const handleTokenUpdate = (e) => {
       debug_log("token updated", e);
@@ -1446,7 +1496,7 @@ function App() {
     className: "tooltipPointer-3ZfirK"
   }), /* @__PURE__ */ react_default.createElement("div", {
     className: "tooltipContent-bqVLWK"
-  }, isHidden ? "Open" : "Close", " Spotify")))), react_dom_default.createPortal(!isHidden && /* @__PURE__ */ react_default.createElement(sidebar_default, null), container));
+  }, isHidden ? "Open" : "Close", " Spotify")))), react_dom_default.createPortal(!isHidden && /* @__PURE__ */ react_default.createElement(sidebar_default, null), document.querySelector(SIDEBAR_CONTAINER_CLASS)));
 }
 
 // src/discordify.scss

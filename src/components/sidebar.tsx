@@ -1,7 +1,7 @@
 import React from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate, useNavigate } from 'react-router-dom';
 
-import { useSpotify } from '@utils';
+import { debug_log, getPlaying, useSpotify } from '@utils';
 
 import Albums from '@routes/albums';
 import Artists from '@routes/artists';
@@ -18,26 +18,47 @@ const Sidebar = () => {
 	const { accessToken } = state;
 
 	React.useEffect(() => {
-		if (!accessToken) navigate('/login');
-		else navigate('/');
-	}, [accessToken]);
+		if (accessToken) {
+			getPlaying(accessToken).then((e) => debug_log(e));
+		}
+		navigate(BdApi.loadData('discordify', 'pathname') || '/');
+	}, []);
 
 	return (
 		<div id="discordSpotifySidebar">
 			<div id="discordSpotifyInner">
 				<Routes>
-					<Route path="" element={<Dashboard />}>
-						test
+					<Route
+						path="/"
+						element={
+							<Protect>
+								<Dashboard />
+							</Protect>
+						}
+					>
 						<Route index element={<Playlists />} />
-						<Route path="/artists" element={<Artists />} />
+						<Route path="artists" element={<Artists />} />
 						<Route path="albums" element={<Albums />} />
 						<Route path="queue" element={<Queue />} />
+						{/* Listings Album/Playlists */}
+						{/* Search */}
 					</Route>
 					<Route path="/login" element={<Login />} />
 				</Routes>
 			</div>
 		</div>
 	);
+};
+
+const Protect = ({ children }) => {
+	const { state } = useSpotify();
+	let location = useLocation();
+
+	if (!state.accessToken) {
+		return <Navigate to="/login" state={{ from: location }} replace />;
+	}
+
+	return children;
 };
 
 export default Sidebar;
