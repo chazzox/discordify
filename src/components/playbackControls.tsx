@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { Pause, Play, Loop, Shuffle, Previous, Next } from '@components/navbarIcons';
+import { Pause, Play, Loop, Shuffle, Previous, Next } from '@components/icons';
 import Volume from '@components/volume';
 import { useSpotify } from '@utils';
 

@@ -1111,7 +1111,7 @@ var queue_default = Queue;
 // src/components/playbackControls.tsx
 var import_classnames = __toESM(require_classnames());
 
-// src/components/navbarIcons.tsx
+// src/components/icons.tsx
 function Loop() {
   return /* @__PURE__ */ react_default.createElement("svg", {
     viewBox: "0 0 512.43 483.62"
@@ -1347,13 +1347,6 @@ var dashboard_default = Dashboard;
 
 // src/components/login.tsx
 var Login = () => {
-  const { dispatch } = useSpotify();
-  react_default.useEffect(() => {
-    getAuthHeader().then((token) => {
-      if (token)
-        dispatch({ type: "SET_ACCESS" /* SET_ACCESS */, payload: token });
-    });
-  }, []);
   return /* @__PURE__ */ react_default.createElement("h1", null, "Please get open a spotify device to use this plugin");
 };
 var login_default = Login;
@@ -1403,10 +1396,12 @@ function App() {
   const container = document.querySelector(SIDEBAR_CONTAINER_CLASS);
   react_default.useEffect(() => {
     const handleTokenUpdate = (e) => {
+      debug_log("token updated", e);
       if (accessToken !== e.accessToken)
         dispatch({ type: "SET_ACCESS" /* SET_ACCESS */, payload: e.accessToken });
     };
     const handleStateUpdate = (e) => {
+      debug_log("state updated", e);
       if (!accessToken) {
         debug_log(accessToken, state);
         getAuthHeader().then((token) => {
@@ -1416,6 +1411,7 @@ function App() {
       }
     };
     const handleDeviceUpdate = (e) => {
+      debug_log("devices updated", e);
       const filteredDevices = e.devices.filter((d) => d.type === "Computer");
       if (filteredDevices.length === 0)
         dispatch({ type: "SET_ACCESS" /* SET_ACCESS */, payload: null });

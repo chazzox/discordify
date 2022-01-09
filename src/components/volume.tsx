@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Mute } from '@components/navbarIcons';
+import { Mute } from '@components/icons';
 
 const Volume: React.FC = () => {
 	const [volume, setVolume] = React.useState(['65']);

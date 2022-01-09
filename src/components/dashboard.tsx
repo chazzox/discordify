@@ -1,7 +1,7 @@
 import React from 'react';
 
 import PlayBackControls from '@components/playbackControls';
-import { Search } from '@components/navbarIcons';
+import { Search } from '@components/icons';
 import NavLink from '@components/navLink';
 import { Outlet } from 'react-router-dom';
 
