@@ -9,13 +9,6 @@
 		"build-local": "node build.js -l"
 	},
 	"homepage": "https://github.com/chazzox/discordify#readme",
-	"devDependencies": {
-		"@types/bandagedbd__bdapi": "^0.3.2",
-		"esbuild": "^0.14.10",
-		"esbuild-plugin-alias": "^0.2.1",
-		"prettier": "^2.4.1",
-		"sass": "^1.45.2"
-	},
 	"dependencies": {
 		"classnames": "^2.3.1",
 		"react-router-dom": "^6.2.1"
