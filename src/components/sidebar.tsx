@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, useLocation, Navigate, useNavigate } from 'react-router-dom';
 
-import { debug_log, getPlaying, useSpotify } from '@utils';
+import { debug_log, getPlaying, SpotifyActions, useSpotify } from '@utils';
 
 import Albums from '@routes/albums';
 import Artists from '@routes/artists';
@@ -13,13 +13,16 @@ import Login from '@components/login';
 
 const Sidebar = () => {
 	const navigate = useNavigate();
-	const { state } = useSpotify();
+	const { state, dispatch } = useSpotify();
 
 	const { accessToken } = state;
 
 	React.useEffect(() => {
 		if (accessToken) {
-			getPlaying(accessToken).then((e) => debug_log(e));
+			getPlaying(accessToken).then((e) => {
+				debug_log(e);
+				dispatch({ type: SpotifyActions.UPDATE_PLAYER, payload: { isPlaying: e.is_playing } });
+			});
 		}
 		navigate(BdApi.loadData('discordify', 'pathname') || '/');
 	}, []);

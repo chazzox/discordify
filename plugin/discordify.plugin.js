@@ -1,5 +1,5 @@
 /**
- * @name discordify
+ * @name discordify 
  * @author PINPAL#5245 and chazzox#1001
  * @description Spotify but inside discord
  * @version 0.6.0
@@ -7,6 +7,7 @@
  * @website https://github.com/chazzox/discordify#readme
  * @source https://github.com/chazzox/discordify
  */
+
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -94,7 +95,7 @@ __export(discordify_exports, {
   default: () => Discordify
 });
 
-// src/utils/react.ts
+// ../react-inject/react.ts
 var React = BdApi.React;
 var react_default = React;
 var {
@@ -976,7 +977,7 @@ function useLinkClickHandler(to, _temp) {
 var Dispatcher = BdApi.findModuleByProps("dirtyDispatch");
 var SpotifyTrackUtils = BdApi.findModuleByProps("getActiveSocketAndDevice");
 var SpotifyUtils = BdApi.findModuleByProps("SpotifyAPI");
-var SIDEBAR_CONTAINER_CLASS = ".container-2lgZY8";
+var SIDEBAR_CONTAINER_CLASS = ".container-1eFtFS";
 var { ActionTypes: ACTION_TYPES } = BdApi.findModuleByProps("ActionTypes", "API_HOST");
 var LOG_STYLES = {
   color: "white",
@@ -1010,7 +1011,7 @@ var useSpotify = () => {
 var initialState = {
   accessToken: null,
   currentlyPlaying: { album: null, song: null, artist: null, image: null },
-  playerState: { isPlaying: false, isShuffle: false, isLooping: 0 }
+  playerState: { isPlaying: false, isShuffle: false, isLooping: 0, volume: 100 }
 };
 function spotifyReducer(state, action) {
   switch (action.type) {
@@ -1022,12 +1023,14 @@ function spotifyReducer(state, action) {
       return { playerState: { isShuffle: action.payload }, ...state };
     case "SET_IS_LOOPING" /* SET_IS_LOOPING */:
       return { playerState: { isLooping: action.payload }, ...state };
+    case "UPDATE_PLAYER" /* UPDATE_PLAYER */:
+      return { playerState: action.payload, ...state };
     default:
       throw new Error("No Action with signature" + action);
   }
 }
 
-// src/utils/react-dom.ts
+// ../react-inject/react-dom.ts
 var react_dom_default = BdApi.ReactDOM;
 
 // src/routes/albums.tsx
@@ -1389,11 +1392,14 @@ var login_default = Login;
 // src/components/sidebar.tsx
 var Sidebar = () => {
   const navigate = useNavigate();
-  const { state } = useSpotify();
+  const { state, dispatch } = useSpotify();
   const { accessToken } = state;
   react_default.useEffect(() => {
     if (accessToken) {
-      getPlaying(accessToken).then((e) => debug_log(e));
+      getPlaying(accessToken).then((e) => {
+        debug_log(e);
+        dispatch({ type: "UPDATE_PLAYER" /* UPDATE_PLAYER */, payload: { isPlaying: e.is_playing } });
+      });
     }
     navigate(BdApi.loadData("discordify", "pathname") || "/");
   }, []);
@@ -1446,12 +1452,10 @@ function App() {
   }, [location]);
   react_default.useEffect(() => {
     const handleTokenUpdate = (e) => {
-      debug_log("token updated", e);
       if (accessToken !== e.accessToken)
         dispatch({ type: "SET_ACCESS" /* SET_ACCESS */, payload: e.accessToken });
     };
     const handleStateUpdate = (e) => {
-      debug_log("state updated", e);
       if (!accessToken) {
         debug_log(accessToken, state);
         getAuthHeader().then((token) => {
@@ -1461,7 +1465,6 @@ function App() {
       }
     };
     const handleDeviceUpdate = (e) => {
-      debug_log("devices updated", e);
       const filteredDevices = e.devices.filter((d) => d.type === "Computer");
       if (filteredDevices.length === 0)
         dispatch({ type: "SET_ACCESS" /* SET_ACCESS */, payload: null });

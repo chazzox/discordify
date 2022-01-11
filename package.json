@@ -3,14 +3,16 @@
 	"version": "0.6.0",
 	"description": "A plugin for better discord that gives you pause/queue and playback control",
 	"scripts": {
-		"start": "node build.js -w",
-		"watch": "node build.js -w",
-		"build": "node build.js",
-		"build-local": "node build.js -l"
+		"start": "node ../build.js watch ./",
+		"watch": "node ../build.js watch ./",
+		"build": "node ../build.js build ./"
 	},
 	"homepage": "https://github.com/chazzox/discordify#readme",
 	"dependencies": {
 		"classnames": "^2.3.1",
 		"react-router-dom": "^6.2.1"
+	},
+	"devDependencies": {
+		"@types/bandagedbd__bdapi": "^0.3.3"
 	}
 }

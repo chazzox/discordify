@@ -5,11 +5,11 @@ type SpotifyDevice = {
 	is_private_session: boolean;
 	is_restricted: boolean;
 	name: string;
-	type: SpotifyDeviceType;
+	type: SpotifyDeviceTypes;
 	volume_percent: number;
 };
 
-declare enum SpotifyDeviceType {
+declare enum SpotifyDeviceTypes {
 	Speaker = 'Speaker',
 	Computer = 'Computer'
 }
@@ -62,11 +62,14 @@ interface StateType {
 		artist?: string;
 		image?: string;
 	};
-	playerState: {
-		isPlaying: boolean;
-		isShuffle: boolean;
-		isLooping: number;
-	};
+	playerState: PlayerState;
+}
+
+interface PlayerState {
+	isPlaying: boolean;
+	isShuffle: boolean;
+	isLooping: number;
+	volume: number;
 }
 
 interface SpotifyItem {
@@ -86,6 +89,7 @@ interface Currently_playing {
 
 	progress_ms: number;
 	timestamp: number;
+	device: SpotifyDevice;
 }
 
 interface Playlists {}

@@ -28,14 +28,12 @@ export default function App() {
 
 	React.useEffect(() => {
 		const handleTokenUpdate = (e: AccessTokenEvent) => {
-			debug_log('token updated', e);
 			if (accessToken !== e.accessToken)
 				dispatch({ type: SpotifyActions.SET_ACCESS, payload: e.accessToken });
 		};
 
 		// fires too often
 		const handleStateUpdate = (e: StateUpdateEvent) => {
-			debug_log('state updated', e);
 			// if the spotify state has changed and we still dont have an access token
 			if (!accessToken) {
 				debug_log(accessToken, state);
@@ -46,7 +44,6 @@ export default function App() {
 		};
 
 		const handleDeviceUpdate = (e: DeviceUpdateEvent) => {
-			debug_log('devices updated', e);
 			const filteredDevices = e.devices.filter((d) => d.type === 'Computer');
 			// if there are no devices clear the token
 			if (filteredDevices.length === 0) dispatch({ type: SpotifyActions.SET_ACCESS, payload: null });

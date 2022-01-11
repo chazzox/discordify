@@ -13,7 +13,7 @@ export const SpotifyUtils = BdApi.findModuleByProps('SpotifyAPI');
 
 export const PAGINATION_LIMIT = '50';
 
-export const SIDEBAR_CONTAINER_CLASS = '.container-2lgZY8';
+export const SIDEBAR_CONTAINER_CLASS = '.container-1eFtFS';
 
 // const Endpoints =  BdApi.findModuleByProps('SpotifyEndpoints')
 
@@ -132,14 +132,16 @@ export enum SpotifyActions {
 	SET_ACCESS = 'SET_ACCESS',
 	SET_IS_PLAYING = 'SET_IS_PLAYING',
 	SET_IS_SHUFFLE = 'SET_IS_SHUFFLE',
-	SET_IS_LOOPING = 'SET_IS_LOOPING'
+	SET_IS_LOOPING = 'SET_IS_LOOPING',
+	UPDATE_PLAYER = 'UPDATE_PLAYER'
 }
 
 type Actions =
 	| { type: SpotifyActions.SET_ACCESS; payload: string }
 	| { type: SpotifyActions.SET_IS_PLAYING; payload: boolean }
 	| { type: SpotifyActions.SET_IS_SHUFFLE; payload: boolean }
-	| { type: SpotifyActions.SET_IS_LOOPING; payload: number };
+	| { type: SpotifyActions.SET_IS_LOOPING; payload: number }
+	| { type: SpotifyActions.UPDATE_PLAYER; payload: Partial<PlayerState> };
 
 type ContextType = {
 	state: React.ReducerState<typeof spotifyReducer>;
@@ -155,7 +157,7 @@ export const useSpotify = () => {
 export const initialState: StateType = {
 	accessToken: null,
 	currentlyPlaying: { album: null, song: null, artist: null, image: null },
-	playerState: { isPlaying: false, isShuffle: false, isLooping: 0 }
+	playerState: { isPlaying: false, isShuffle: false, isLooping: 0, volume: 100 }
 };
 
 export function spotifyReducer(state: StateType, action: Actions): StateType {
@@ -168,6 +170,8 @@ export function spotifyReducer(state: StateType, action: Actions): StateType {
 			return { playerState: { isShuffle: action.payload }, ...state };
 		case SpotifyActions.SET_IS_LOOPING:
 			return { playerState: { isLooping: action.payload }, ...state };
+		case SpotifyActions.UPDATE_PLAYER:
+			return { playerState: action.payload, ...state };
 		default:
 			throw new Error('No Action with signature' + action);
 	}
