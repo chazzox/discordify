@@ -80,14 +80,14 @@ export default function App() {
 					})
 				}
 			>
-				<div className="iconWrapper-2OrFZ1 clickable-3rdHwn">
+				<div className="iconWrapper-2awDjA clickable-ZD7xvu">
 					<Spotify />
 					<div
 						id="discordifyBtnTooltip"
-						className="tooltip-2QfLtc tooltipBottom-3ARrEK tooltipPrimary-1d1ph4"
+						className="tooltip-14MtrL tooltipBottom-2WzfVx tooltipPrimary-3qLMbS"
 					>
-						<div className="tooltipPointer-3ZfirK"></div>
-						<div className="tooltipContent-bqVLWK">{isHidden ? 'Open' : 'Close'} Spotify</div>
+						<div className="tooltipPointer-3L49xb"></div>
+						<div className="tooltipContent-Nejnvh">{isHidden ? 'Open' : 'Close'} Spotify</div>
 					</div>
 				</div>
 			</button>

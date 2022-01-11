@@ -7,4 +7,4 @@
 ## Running
 
 -   The script used to build is located in [this repo](https://github.com/chazzox/BetterDiscordPlugins).
--   Please clone that if first if you wish to contribute to repo and run `git submodule update --init`
+-   Please clone that if first if you wish to contribute to repo, install dependencies using your node package manager and run `git submodule update --init`

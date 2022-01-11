@@ -1491,14 +1491,14 @@ function App() {
       return !prev;
     })
   }, /* @__PURE__ */ react_default.createElement("div", {
-    className: "iconWrapper-2OrFZ1 clickable-3rdHwn"
+    className: "iconWrapper-2awDjA clickable-ZD7xvu"
   }, /* @__PURE__ */ react_default.createElement(Spotify, null), /* @__PURE__ */ react_default.createElement("div", {
     id: "discordifyBtnTooltip",
-    className: "tooltip-2QfLtc tooltipBottom-3ARrEK tooltipPrimary-1d1ph4"
+    className: "tooltip-14MtrL tooltipBottom-2WzfVx tooltipPrimary-3qLMbS"
   }, /* @__PURE__ */ react_default.createElement("div", {
-    className: "tooltipPointer-3ZfirK"
+    className: "tooltipPointer-3L49xb"
   }), /* @__PURE__ */ react_default.createElement("div", {
-    className: "tooltipContent-bqVLWK"
+    className: "tooltipContent-Nejnvh"
   }, isHidden ? "Open" : "Close", " Spotify")))), react_dom_default.createPortal(!isHidden && /* @__PURE__ */ react_default.createElement(sidebar_default, null), document.querySelector(SIDEBAR_CONTAINER_CLASS)));
 }
 
