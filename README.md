@@ -1,5 +1,7 @@
 # Discordify
 
+### This plugin is not ready for plublic use yet
+
 ## About
 
 -   A plugin for better discord that gives you pause/queue and playback control
