@@ -4,15 +4,7 @@ import ReactDOM from 'react-dom';
 import Sidebar from '@components/sidebar';
 import { Spotify } from '@components/icons';
 
-import {
-	ACTION_TYPES,
-	debug_log,
-	Dispatcher,
-	getAuthHeader,
-	SIDEBAR_CONTAINER_CLASS,
-	SpotifyActions,
-	useSpotify
-} from 'utils';
+import { ACTION_TYPES, log, Dispatcher, getAuthHeader, SIDEBAR_CONTAINER_CLASS, SpotifyActions, useSpotify } from 'utils';
 import { useLocation } from 'react-router-dom';
 
 export default function App() {
@@ -28,15 +20,14 @@ export default function App() {
 
 	React.useEffect(() => {
 		const handleTokenUpdate = (e: AccessTokenEvent) => {
-			if (accessToken !== e.accessToken)
-				dispatch({ type: SpotifyActions.SET_ACCESS, payload: e.accessToken });
+			if (accessToken !== e.accessToken) dispatch({ type: SpotifyActions.SET_ACCESS, payload: e.accessToken });
 		};
 
 		// fires too often
 		const handleStateUpdate = (e: StateUpdateEvent) => {
 			// if the spotify state has changed and we still dont have an access token
 			if (!accessToken) {
-				debug_log(accessToken, state);
+				log(accessToken, state);
 				getAuthHeader().then((token) => {
 					if (token) dispatch({ type: SpotifyActions.SET_ACCESS, payload: token });
 				});
@@ -82,10 +73,7 @@ export default function App() {
 			>
 				<div className="iconWrapper-2awDjA clickable-ZD7xvu">
 					<Spotify />
-					<div
-						id="discordifyBtnTooltip"
-						className="tooltip-14MtrL tooltipBottom-2WzfVx tooltipPrimary-3qLMbS"
-					>
+					<div id="discordifyBtnTooltip" className="tooltip-14MtrL tooltipBottom-2WzfVx tooltipPrimary-3qLMbS">
 						<div className="tooltipPointer-3L49xb"></div>
 						<div className="tooltipContent-Nejnvh">{isHidden ? 'Open' : 'Close'} Spotify</div>
 					</div>

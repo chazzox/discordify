@@ -1,7 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { ACTION_TYPES, debug_log, Dispatcher, initialState, SpotifyContext, spotifyReducer } from 'utils';
+import { ACTION_TYPES, log, Dispatcher, initialState, SpotifyContext, spotifyReducer } from 'utils';
 
 import App from './app';
 import './discordify.scss';
@@ -17,7 +17,7 @@ export default class Discordify {
 		BdApi.setData('discordify', 'isHidden', true);
 	}
 	start() {
-		debug_log('started test!');
+		log('started test!');
 
 		const HeaderBarContainer = BdApi.findModuleByDisplayName('HeaderBarContainer')?.prototype;
 		// @ts-expect-error
@@ -25,12 +25,12 @@ export default class Discordify {
 			returnValue?.props?.toolbar?.props?.children.push(<MainComponent />);
 		});
 
-		LOGS.forEach((l) => Dispatcher.subscribe(l, (e: any) => debug_log(l, e)));
+		LOGS.forEach((l) => Dispatcher.subscribe(l, (e: any) => log(l, e)));
 	}
 	stop() {
 		// @ts-expect-error
 		BdApi.Patcher.unpatchAll('discordify');
-		LOGS.forEach((l) => Dispatcher.unsubscribe(l, (e: any) => debug_log(l, e)));
+		LOGS.forEach((l) => Dispatcher.unsubscribe(l, (e: any) => log(l, e)));
 	}
 }
 

@@ -11,5 +11,5 @@ module.exports = {
  */
 `,
 	entries: ['src/discordify.tsx'],
-	outdir: 'plugin'
+	outDir: 'plugin'
 };

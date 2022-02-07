@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, useLocation, Navigate, useNavigate } from 'react-router-dom';
 
-import { debug_log, getPlaying, SpotifyActions, useSpotify } from 'utils';
+import { log, getPlaying, SpotifyActions, useSpotify } from 'utils';
 
 import Albums from '@routes/albums';
 import Artists from '@routes/artists';
@@ -20,7 +20,7 @@ const Sidebar = () => {
 	React.useEffect(() => {
 		if (accessToken) {
 			getPlaying(accessToken).then((e) => {
-				debug_log(e);
+				log(e);
 				dispatch({ type: SpotifyActions.UPDATE_PLAYER, payload: { isPlaying: e.is_playing } });
 			});
 		}

@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'react';
+import * as Utils from '@BDutils';
 
 // -----------------  MODULES  -----------------
 
@@ -19,10 +20,7 @@ export const SIDEBAR_CONTAINER_CLASS = '.container-1eFtFS';
 
 // Discord Dispatcher Types
 
-export const { ActionTypes: ACTION_TYPES } = BdApi.findModuleByProps(
-	'ActionTypes',
-	'API_HOST'
-) as ActionTypes;
+export const { ActionTypes: ACTION_TYPES } = BdApi.findModuleByProps('ActionTypes', 'API_HOST') as ActionTypes;
 
 /**
  * @description Enum that contains all the spotify endpoints
@@ -60,14 +58,8 @@ const LOG_STYLES = {
  * @description `console.log` with the 'discordify' prefix
  * @param output any series of objects you want to log
  */
-export function debug_log(...output: any): void {
-	console.log(
-		'%cdiscordify',
-		Object.entries(LOG_STYLES)
-			.map(([a, b]) => `${a}:${b};`)
-			.join(''),
-		...output
-	);
+export function log(...output: any): void {
+	Utils.log(LOG_STYLES, 'discordify', output);
 }
 
 // ---------------  SPOTIFY API FUNCTIONS  ---------------
