@@ -10,6 +10,6 @@ module.exports = {
  * @source https://github.com/chazzox/discordify
  */
 `,
-	out: 'plugin/discordify.plugin.js',
-	entries: ['src/discordify.tsx']
+	entries: ['src/discordify.tsx'],
+	outdir: 'plugin'
 };

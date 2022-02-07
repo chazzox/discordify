@@ -12,7 +12,7 @@ import {
 	SIDEBAR_CONTAINER_CLASS,
 	SpotifyActions,
 	useSpotify
-} from '@utils';
+} from 'utils';
 import { useLocation } from 'react-router-dom';
 
 export default function App() {

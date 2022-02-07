@@ -1,7 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { ACTION_TYPES, debug_log, Dispatcher, initialState, SpotifyContext, spotifyReducer } from '@utils';
+import { ACTION_TYPES, debug_log, Dispatcher, initialState, SpotifyContext, spotifyReducer } from 'utils';
 
 import App from './app';
 import './discordify.scss';

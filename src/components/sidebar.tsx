@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, useLocation, Navigate, useNavigate } from 'react-router-dom';
 
-import { debug_log, getPlaying, SpotifyActions, useSpotify } from '@utils';
+import { debug_log, getPlaying, SpotifyActions, useSpotify } from 'utils';
 
 import Albums from '@routes/albums';
 import Artists from '@routes/artists';

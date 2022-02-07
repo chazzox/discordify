@@ -1,4 +1,4 @@
-import { getAuthHeader, SpotifyActions, useSpotify } from '@utils';
+import { getAuthHeader, SpotifyActions, useSpotify } from 'utils';
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
