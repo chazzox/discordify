@@ -61,9 +61,9 @@ var __toCommonJS = /* @__PURE__ */ ((cache) => {
   };
 })(typeof WeakMap !== "undefined" ? /* @__PURE__ */ new WeakMap() : 0);
 
-// node_modules/.pnpm/classnames@2.3.1/node_modules/classnames/index.js
+// discordify/node_modules/.pnpm/classnames@2.3.1/node_modules/classnames/index.js
 var require_classnames = __commonJS({
-  "node_modules/.pnpm/classnames@2.3.1/node_modules/classnames/index.js"(exports, module2) {
+  "discordify/node_modules/.pnpm/classnames@2.3.1/node_modules/classnames/index.js"(exports, module2) {
     (function() {
       "use strict";
       var hasOwn = {}.hasOwnProperty;
@@ -111,13 +111,13 @@ var require_classnames = __commonJS({
   }
 });
 
-// src/discordify.tsx
+// discordify/src/discordify.tsx
 var discordify_exports = {};
 __export(discordify_exports, {
   default: () => Discordify
 });
 
-// ../utils/react.ts
+// utils/react.ts
 var React = BdApi.React;
 var react_default = React;
 var {
@@ -136,7 +136,7 @@ var {
   forwardRef
 } = React;
 
-// node_modules/.pnpm/@babel+runtime@7.16.3/node_modules/@babel/runtime/helpers/esm/extends.js
+// discordify/node_modules/.pnpm/@babel+runtime@7.16.3/node_modules/@babel/runtime/helpers/esm/extends.js
 function _extends() {
   _extends = Object.assign || function(target) {
     for (var i = 1; i < arguments.length; i++) {
@@ -152,7 +152,7 @@ function _extends() {
   return _extends.apply(this, arguments);
 }
 
-// node_modules/.pnpm/history@5.2.0/node_modules/history/index.js
+// discordify/node_modules/.pnpm/history@5.2.0/node_modules/history/index.js
 var r;
 var B = r || (r = {});
 B.Pop = "POP";
@@ -275,7 +275,7 @@ function createMemoryHistory(b) {
   } };
 }
 
-// node_modules/.pnpm/react-router@6.2.1/node_modules/react-router/index.js
+// discordify/node_modules/.pnpm/react-router@6.2.1/node_modules/react-router/index.js
 function invariant(cond, message) {
   if (!cond)
     throw new Error(message);
@@ -842,7 +842,7 @@ var normalizePathname = (pathname) => pathname.replace(/\/+$/, "").replace(/^\/*
 var normalizeSearch = (search) => !search || search === "?" ? "" : search.startsWith("?") ? search : "?" + search;
 var normalizeHash = (hash) => !hash || hash === "#" ? "" : hash.startsWith("#") ? hash : "#" + hash;
 
-// node_modules/.pnpm/react-router-dom@6.2.1/node_modules/react-router-dom/index.js
+// discordify/node_modules/.pnpm/react-router-dom@6.2.1/node_modules/react-router-dom/index.js
 function _extends2() {
   _extends2 = Object.assign || function(target) {
     for (var i = 1; i < arguments.length; i++) {
@@ -995,7 +995,7 @@ function useLinkClickHandler(to, _temp) {
   }, [location, navigate, path, replaceProp, state, target, to]);
 }
 
-// ../utils/bd-utils.ts
+// utils/bd-utils.ts
 var LOG_STYLES = {
   color: "#c3c6fc",
   background: "#2c2c2c",
@@ -1007,7 +1007,7 @@ function log(style = LOG_STYLES, prefix, ...output) {
   console.log(`%c${prefix}`, Object.entries(style).map(([a, b]) => `${a}:${b};`).join(""), ...output);
 }
 
-// src/utils/index.ts
+// discordify/src/utils/index.ts
 var Dispatcher = BdApi.findModuleByProps("dirtyDispatch");
 var SpotifyTrackUtils = BdApi.findModuleByProps("getActiveSocketAndDevice");
 var SpotifyUtils = BdApi.findModuleByProps("SpotifyAPI");
@@ -1021,7 +1021,7 @@ var LOG_STYLES2 = {
   "font-weight": "bold"
 };
 function log2(...output) {
-  log(LOG_STYLES2, "discordify", output);
+  log(LOG_STYLES2, "discordify", ...output);
 }
 async function getAuthHeader(accountId) {
   const accessToken = SpotifyTrackUtils.getActiveSocketAndDevice()?.socket?.accessToken;
@@ -1064,10 +1064,10 @@ function spotifyReducer(state, action) {
   }
 }
 
-// ../utils/react-dom.ts
+// utils/react-dom.ts
 var react_dom_default = BdApi.ReactDOM;
 
-// src/routes/albums.tsx
+// discordify/src/routes/albums.tsx
 var Albums = () => {
   return /* @__PURE__ */ react_default.createElement(react_default.Fragment, null, /* @__PURE__ */ react_default.createElement("div", {
     className: "gridBox"
@@ -1085,7 +1085,7 @@ var Albums = () => {
 };
 var albums_default = Albums;
 
-// src/routes/artists.tsx
+// discordify/src/routes/artists.tsx
 var Artists = () => {
   return /* @__PURE__ */ react_default.createElement(react_default.Fragment, null, /* @__PURE__ */ react_default.createElement("div", {
     className: "gridBox"
@@ -1103,7 +1103,7 @@ var Artists = () => {
 };
 var artists_default = Artists;
 
-// src/routes/playlists.tsx
+// discordify/src/routes/playlists.tsx
 var Playlists = () => {
   return /* @__PURE__ */ react_default.createElement(react_default.Fragment, null, /* @__PURE__ */ react_default.createElement("div", {
     className: "gridBox wideBox"
@@ -1125,7 +1125,7 @@ var Playlists = () => {
 };
 var playlists_default = Playlists;
 
-// src/routes/queue.tsx
+// discordify/src/routes/queue.tsx
 var Queue = () => {
   return /* @__PURE__ */ react_default.createElement(react_default.Fragment, null, /* @__PURE__ */ react_default.createElement("h1", {
     className: "titleText"
@@ -1169,10 +1169,10 @@ var Queue = () => {
 };
 var queue_default = Queue;
 
-// src/components/playbackControls.tsx
+// discordify/src/components/playbackControls.tsx
 var import_classnames = __toESM(require_classnames());
 
-// src/components/icons.tsx
+// discordify/src/components/icons.tsx
 function Loop() {
   return /* @__PURE__ */ react_default.createElement("svg", {
     viewBox: "0 0 512.43 483.62"
@@ -1289,7 +1289,7 @@ function Search() {
   }));
 }
 
-// src/components/volume.tsx
+// discordify/src/components/volume.tsx
 var Volume = () => {
   const [volume, setVolume] = react_default.useState(["65"]);
   var widthStyle = {
@@ -1317,7 +1317,7 @@ var Volume = () => {
 };
 var volume_default = Volume;
 
-// src/components/playbackControls.tsx
+// discordify/src/components/playbackControls.tsx
 var PlayBackControls = () => {
   const { state } = useSpotify();
   const { playerState, currentlyPlaying, accessToken } = state;
@@ -1365,7 +1365,7 @@ var PlayBackControls = () => {
 };
 var playbackControls_default = PlayBackControls;
 
-// src/components/navLink.tsx
+// discordify/src/components/navLink.tsx
 var import_classnames2 = __toESM(require_classnames());
 function NavLink2({ children, to, defaultClassName, isActive }) {
   let resolved = useResolvedPath(to);
@@ -1376,7 +1376,7 @@ function NavLink2({ children, to, defaultClassName, isActive }) {
   }, children);
 }
 
-// src/components/dashboard.tsx
+// discordify/src/components/dashboard.tsx
 var Dashboard = () => {
   return /* @__PURE__ */ react_default.createElement(react_default.Fragment, null, /* @__PURE__ */ react_default.createElement("div", {
     id: "navbar"
@@ -1406,7 +1406,7 @@ var Dashboard = () => {
 };
 var dashboard_default = Dashboard;
 
-// src/components/login.tsx
+// discordify/src/components/login.tsx
 var Login = () => {
   let navigate = useNavigate();
   let location = useLocation();
@@ -1423,7 +1423,7 @@ var Login = () => {
 };
 var login_default = Login;
 
-// src/components/sidebar.tsx
+// discordify/src/components/sidebar.tsx
 var Sidebar = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useSpotify();
@@ -1475,7 +1475,7 @@ var Protect = ({ children }) => {
 };
 var sidebar_default = Sidebar;
 
-// src/app.tsx
+// discordify/src/app.tsx
 function App() {
   const [isHidden, setIsHidden] = react_default.useState(BdApi.loadData("discordify", "isHidden"));
   const { state, dispatch } = useSpotify();
@@ -1536,10 +1536,10 @@ function App() {
   }, isHidden ? "Open" : "Close", " Spotify")))), react_dom_default.createPortal(!isHidden && /* @__PURE__ */ react_default.createElement(sidebar_default, null), document.querySelector(SIDEBAR_CONTAINER_CLASS)));
 }
 
-// src/discordify.scss
+// discordify/src/discordify.scss
 BdApi.injectCSS("discordify-styles", ':root{--discordify-width: 400px;--discordify-font-color: #ffffff;--discordify-font-color-alt: #ababab;--discordify-bg: #212121;--discordify-bg-alt: #111111;--discordify-navbar-bg: #181818;--discordify-navbar-bg-alt: #282828;--discordify-highlight: #2a2a2a;--discordify-playbackBar-bg: #535353;--discordify-btn-color: #b3b3b3;--discordify-btn-color-alt: #333333;--discordify-btn-color-hover: #ffffff;--discordify-btn-color-active: #1db954}#discordifyBtn{background:none;padding:0;margin:0;outline:none;position:relative;margin-right:6px}#discordifyBtn #discordifyBtnTooltip{visibility:hidden;position:absolute;left:50%;bottom:-8px;transform:translate(-50%, 100%)}#discordifyBtn svg *{fill:var(--interactive-normal)}#discordifyBtn:hover svg *{fill:var(--interactive-hover)}#discordifyBtn:hover #discordifyBtnTooltip{visibility:visible}#discordSpotifySidebar{width:var(--discordify-width);min-width:var(--discordify-width);height:100%;box-sizing:border-box;color:var(--discordify-btn-color);position:relative}#discordSpotifySidebar #discordSpotifyInner{display:flex;justify-content:center;flex-direction:column;height:100%}#discordSpotifySidebar *{box-sizing:border-box}#discordSpotifySidebar .titleText{color:var(--discordify-font-color);font-size:24px;font-weight:700;letter-spacing:-0.04em;line-height:28px;text-transform:none;text-align:left;width:100%;height:fit-content}#discordSpotifySidebar .headerText{color:var(--discordify-font-color-alt);font-weight:600;display:block;width:100%}#discordSpotifySidebar .round{border-radius:50% !important}#discordSpotifySidebar .grid{background:linear-gradient(110deg, var(--discordify-bg-alt), var(--discordify-bg) 75%);align-items:flex-start;padding:12px;display:flex;flex-shrink:1;flex-grow:1;flex-basis:0;flex-wrap:wrap;gap:8px;overflow-y:auto}#discordSpotifySidebar .grid .gridBox{background-color:var(--discordify-navbar-bg);border-radius:6px;padding:12px;flex-shrink:1;flex-grow:1;max-width:calc(50% - 4px);height:fit-content}#discordSpotifySidebar .grid .gridBox:hover{background-color:var(--discordify-highlight)}#discordSpotifySidebar .grid .gridBox:hover .playlistArtwork:before{visibility:visible}#discordSpotifySidebar .grid .gridBox:last-of-type{margin-right:auto}#discordSpotifySidebar .grid .gridBox.queueBox{width:100%;max-width:100%;background:none;display:grid;grid-template-columns:[index] 16px [first] 3fr [var1] 2fr [last];align-items:center}#discordSpotifySidebar .grid .gridBox.queueBox:hover{background-color:var(--discordify-highlight)}#discordSpotifySidebar .grid .gridBox.queueBox h1,#discordSpotifySidebar .grid .gridBox.queueBox h2,#discordSpotifySidebar .grid .gridBox.queueBox h3,#discordSpotifySidebar .grid .gridBox.queueBox h4{max-width:calc(var(--discordify-width)/4);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#discordSpotifySidebar .grid .gridBox.queueBox h4{grid-column:last}#discordSpotifySidebar .grid .gridBox.queueBox .songInfo{display:flex;flex-wrap:nowrap;flex-direction:row;line-height:21px;align-items:center;gap:12px}#discordSpotifySidebar .grid .gridBox.queueBox .songInfo .songExtraInfo{flex-direction:column}#discordSpotifySidebar .grid .gridBox.queueBox .playlistArtwork{width:42px;border-radius:2px;margin-bottom:0}#discordSpotifySidebar .grid .gridBox.queueBox .playlistArtwork::before{visibility:hidden !important}#discordSpotifySidebar .grid .gridBox.wideBox{max-width:100%;flex-basis:100%;background:linear-gradient(135deg, #470cf5, #8d8ce5)}#discordSpotifySidebar .grid .gridBox.wideBox h1{font-size:16pt;font-weight:600;margin-bottom:12px}#discordSpotifySidebar .grid .gridBox.wideBox h2{color:var(--discordify-font-color)}#discordSpotifySidebar .grid .gridBox.wideBox .playlistArtwork{max-width:100%;max-height:100px;visibility:hidden}#discordSpotifySidebar .grid .gridBox.wideBox .playlistArtwork:after{padding-bottom:50%}#discordSpotifySidebar .grid .gridBox .playlistArtwork{position:relative;width:100%;border-radius:4px;max-width:180px;max-height:180px;background:var(--discordify-btn-color);margin-bottom:16px}#discordSpotifySidebar .grid .gridBox .playlistArtwork:before{visibility:hidden;border-radius:50%;content:"";display:block;position:absolute;width:25%;height:25%;min-width:30px;min-height:30px;max-width:45px;max-width:45px;bottom:6px;right:6px;background-color:var(--discordify-btn-color-active);box-shadow:rgba(0,0,0,.25) 3px 3px 8px,rgba(0,0,0,.15) 2px 2px 4px}#discordSpotifySidebar .grid .gridBox .playlistArtwork:after{content:"";display:block;padding-bottom:100%}#discordSpotifySidebar .grid .gridBox h1{color:var(--discordify-font-color);margin-bottom:8px}#discordSpotifySidebar .grid .gridBox h2{color:var(--discordify-font-color-alt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#discordSpotifySidebar #navbar{padding:12px;background-color:var(--discordify-bg-alt)}#discordSpotifySidebar #navbar .pillRow{display:flex;flex-direction:row;align-items:flex-start;gap:8px;width:100%}#discordSpotifySidebar #navbar .pillRow .pill{padding:12px;border-radius:8px;color:var(--discordify-font-color);font-weight:500}#discordSpotifySidebar #navbar .pillRow .pill.select,#discordSpotifySidebar #navbar .pillRow .pill:hover{cursor:pointer;background-color:var(--discordify-btn-color-alt)}#discordSpotifySidebar #navbar .pillRow #discordifySearch{width:40px;height:40px;align-self:center;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-left:auto}#discordSpotifySidebar #navbar .pillRow #discordifySearch svg{width:17px;height:17px}#discordSpotifySidebar #navbar .pillRow #discordifySearch svg *{fill:var(--discordify-font-color-alt)}#discordSpotifySidebar #navbar .pillRow #discordifySearch:hover{cursor:pointer;background-color:var(--discordify-btn-color-alt)}#discordSpotifySidebar #navbar .pillRow #discordifySearch:hover svg *{fill:var(--discordify-font-color)}#discordSpotifySidebar #playbackControls{text-align:center;border-top:solid 1px #404040;background-color:var(--discordify-navbar-bg);width:var(--discordify-width);height:fit-content;padding-top:25px;padding-bottom:25px;padding-left:12px;padding-right:12px}#discordSpotifySidebar #playbackControls .row{margin-bottom:12px;margin-left:30px;margin-right:30px;display:flex;flex-direction:row;justify-content:space-evenly;align-items:center;gap:8px}#discordSpotifySidebar #playbackControls .row:last-of-type{margin-bottom:0}#discordSpotifySidebar #playbackControls .progressBarRow{padding-top:8px;padding-bottom:8px}#discordSpotifySidebar #playbackControls .progressBarRow p{margin:0}#discordSpotifySidebar #playbackControls .progressBarRow input[type=range]{--progress-bar-inner: var(--discordify-btn-color);-webkit-appearance:none;width:100%;height:15px;overflow:hidden;background:transparent}#discordSpotifySidebar #playbackControls .progressBarRow input[type=range]:focus{outline:none}#discordSpotifySidebar #playbackControls .progressBarRow input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;visibility:hidden;border-radius:50%;background-color:var(--discordify-btn-color-hover);box-shadow:5px 5px 5px rgba(0,0,0,.5);width:15px;height:15px;cursor:pointer;margin-top:-5px}#discordSpotifySidebar #playbackControls .progressBarRow input[type=range]::-webkit-slider-runnable-track{border-radius:100px;width:100%;height:5px;background:linear-gradient(to right, var(--progress-bar-inner) var(--progress-bar-percentage), var(--discordify-playbackBar-bg) var(--progress-bar-percentage))}#discordSpotifySidebar #playbackControls .progressBarRow:hover input[type=range]{--progress-bar-inner: var(--discordify-btn-color-active)}#discordSpotifySidebar #playbackControls .progressBarRow:hover input[type=range]::-webkit-slider-thumb{visibility:visible}#discordSpotifySidebar #playbackControls #volumeLevel .progressBar{width:70%}#discordSpotifySidebar #playbackControls #songInformation #currentArtwork{width:calc(var(--discordify-width) - var(--discordify-width)*.45);height:calc(var(--discordify-width) - var(--discordify-width)*.45);max-width:300px;max-height:300px;background-color:var(--discordify-btn-color);margin-bottom:8px;border-radius:8px;background-size:100%}#discordSpotifySidebar #playbackControls #songInformation #compactBtn{background-color:var(--discordify-btn-color);border-radius:50%;display:none}#discordSpotifySidebar #playbackControls #songInformation #compactBtn svg *{fill:var(--discordify-navbar-bg)}#discordSpotifySidebar #playbackControls #songInformation #compactBtn:hover{background-color:var(--discordify-btn-color-hover)}#discordSpotifySidebar #playbackControls #songInformation #currentArtist,#discordSpotifySidebar #playbackControls #songInformation #currentSong{margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:calc(var(--discordify-width) - 48px)}#discordSpotifySidebar #playbackControls #songInformation #currentSong{color:var(--discordify-btn-color-hover)}#discordSpotifySidebar #playbackControls #songInformation #currentArtist{margin-bottom:12px}#discordSpotifySidebar #playbackControls.compact #songInformation{display:flex;margin-left:auto;margin-right:auto;width:85%;margin-bottom:24px;border-bottom:solid 1px #404040}#discordSpotifySidebar #playbackControls.compact #songInformation #compactBtn{margin-left:auto;margin-right:8px;display:block}#discordSpotifySidebar #playbackControls.compact #songInformation #compactBtn svg{transform:rotate(180deg)}#discordSpotifySidebar #playbackControls.compact #songInformation .row{margin-left:0;margin-right:0}#discordSpotifySidebar #playbackControls.compact #songInformation #currentArtwork{width:40px;height:40px;margin-right:18px;margin-left:8px;border-radius:2px}#discordSpotifySidebar #playbackControls.compact #songInformation #songDetails p{max-width:calc(var(--discordify-width)/2 - 48px)}#discordSpotifySidebar #playbackControls.compact #songInformation #songDetails .row{display:block;text-align:left}#discordSpotifySidebar #playbackControls.compact #volumeLevel{display:none}#discordSpotifySidebar #playbackControls button{position:relative;width:35px;max-width:35px;height:35px;max-height:35px;font-size:0;background:none}#discordSpotifySidebar #playbackControls button svg{width:15px;height:15px}#discordSpotifySidebar #playbackControls button svg *{fill:#b3b3b3}#discordSpotifySidebar #playbackControls button:hover svg *{fill:var(--discordify-btn-color-hover)}#discordSpotifySidebar #playbackControls button.active svg *{fill:var(--discordify-btn-color-active)}#discordSpotifySidebar #playbackControls button#shuffle.active::after,#discordSpotifySidebar #playbackControls button#loop.active::after{content:"";min-width:4px;min-height:4px;border-radius:50%;position:absolute;bottom:0;left:50%;transform:translateX(-50%);background:var(--discordify-btn-color-active)}#discordSpotifySidebar #playbackControls button#shuffle.active.mode2::before,#discordSpotifySidebar #playbackControls button#loop.active.mode2::before{font-size:8pt;font-weight:600;color:var(--discordify-navbar-bg);border:2px solid var(--discordify-navbar-bg);content:"1";min-width:14px;min-height:14px;border-radius:50%;position:absolute;top:0;right:-5px;transform:translateX(-50%);background:var(--discordify-btn-color-active)}#discordSpotifySidebar #playbackControls button#muteBtn svg{width:19px;height:19px}#discordSpotifySidebar #playbackControls button#playPause{width:45px;max-width:45px;height:45px;max-height:45px;border-radius:50%;transition:transform .05s ease;background:var(--discordify-btn-color)}#discordSpotifySidebar #playbackControls button#playPause svg *{fill:var(--discordify-navbar-bg)}#discordSpotifySidebar #playbackControls button#playPause:hover{background-color:var(--discordify-btn-color-hover);transform:scale(1.1)}');
 
-// src/discordify.tsx
+// discordify/src/discordify.tsx
 var LOGS = [
   ACTION_TYPES.SPOTIFY_PLAYER_PLAY,
   ACTION_TYPES.SPOTIFY_PLAYER_PAUSE,
@@ -1550,7 +1550,7 @@ var Discordify = class {
     BdApi.setData("discordify", "isHidden", true);
   }
   start() {
-    log2("started test!");
+    log2("started!");
     const HeaderBarContainer = BdApi.findModuleByDisplayName("HeaderBarContainer")?.prototype;
     BdApi.Patcher.after("discordify", HeaderBarContainer, "renderLoggedIn", (_, __, returnValue) => {
       returnValue?.props?.toolbar?.props?.children.push(/* @__PURE__ */ react_default.createElement(MainComponent, null));

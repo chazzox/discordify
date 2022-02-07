@@ -17,7 +17,7 @@ export default class Discordify {
 		BdApi.setData('discordify', 'isHidden', true);
 	}
 	start() {
-		log('started test!');
+		log('started!');
 
 		const HeaderBarContainer = BdApi.findModuleByDisplayName('HeaderBarContainer')?.prototype;
 		// @ts-expect-error

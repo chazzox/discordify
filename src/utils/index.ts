@@ -59,7 +59,7 @@ const LOG_STYLES = {
  * @param output any series of objects you want to log
  */
 export function log(...output: any): void {
-	Utils.log(LOG_STYLES, 'discordify', output);
+	Utils.log(LOG_STYLES, 'discordify', ...output);
 }
 
 // ---------------  SPOTIFY API FUNCTIONS  ---------------
